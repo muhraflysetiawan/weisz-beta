@@ -1,0 +1,17 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Baris Bahasa Reset Kata Sandi
+    |--------------------------------------------------------------------------
+    */
+
+    'reset' => 'Kata sandi Anda sudah direset.',
+    'sent' => 'Kami sudah mengirimkan tautan reset kata sandi ke email Anda.',
+    'throttled' => 'Harap tunggu sebelum mencoba kembali.',
+    'token' => 'Token reset kata sandi tidak valid.',
+    'user' => 'Kami tidak dapat menemukan pengguna dengan alamat email tersebut.',
+
+];

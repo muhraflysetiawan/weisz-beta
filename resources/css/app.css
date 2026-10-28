@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    --bg-page: #fff;
+    --bg-secondary: #f8f9fc;
+    --card-surface: #fff;
+    --card-secondary: #f5f6fa;
+    --card-hover: #f1f3f7;
+    --txt-primary: #171717;
+    --txt-secondary: #525252;
+    --txt-tertiary: #737373;
+    --txt-disabled: #a3a3a3;
+    --border-color: #e5e7eb;
+    --border-subtle: #f0f1f3;
+    --brand-main: #252525;
+    --brand-btn: #252525;
+}
+
+html.dark {
+    --bg-page: #171717;
+    --bg-secondary: #1f1f1f;
+    --card-surface: #1f1f1f;
+    --card-secondary: #262626;
+    --card-hover: #2e2e2e;
+    --txt-primary: #f3f4f6;
+    --txt-secondary: #c7c9d1;
+    --txt-tertiary: #9599a6;
+    --txt-disabled: #6b7280;
+    --border-color: #2e2e2e;
+    --border-subtle: #262626;
+    --brand-main: #f3f4f6;
+    --brand-btn: #252525;
+}
+
+body, button, input, select, textarea {
+    font-family: "Poppins", var(--font-sans);
+}
+
+body {
+    background-color: var(--bg-page);
+    color: var(--txt-primary);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.weisz-card {
+    background-color: var(--card-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transition: all 0.2s;
+}
+
+.weisz-card-hover:hover {
+    background-color: var(--card-hover);
+    border-color: var(--brand-main);
+}
+
+.weisz-input {
+    background-color: var(--card-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--txt-primary);
+    border-radius: 12px;
+    outline: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.weisz-input:focus {
+    border-color: var(--brand-main);
+    box-shadow: 0 0 0 2px #2525252e;
+}
+
+html.dark .weisz-input:focus {
+    border-color: var(--brand-main);
+    box-shadow: 0 0 0 2px #f3f4f62e;
+}
+
+.weisz-btn-primary {
+    background-color: var(--brand-btn);
+    color: #fff;
+    border: 1px solid #0000001f;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.15s;
+    display: inline-flex;
+}
+
+.weisz-btn-primary:hover {
+    background-color: #171717;
+}
+
+html.dark .weisz-btn-primary {
+    color: #fff;
+    background-color: #252525;
+    border-color: #4d4d4d;
+}
+
+html.dark .weisz-btn-primary:hover {
+    background-color: #333;
+    border-color: #666;
+}
+
+.weisz-btn-secondary {
+    background-color: var(--card-secondary);
+    color: var(--txt-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.15s;
+    display: inline-flex;
+}
+
+.weisz-btn-secondary:hover {
+    background-color: var(--card-hover);
+}
+
+.weisz-chip {
+    background-color: var(--card-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--txt-secondary);
+    cursor: pointer;
+    border-radius: 9999px;
+    align-items: center;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    display: inline-flex;
+}
+
+.weisz-chip:hover {
+    border-color: var(--brand-main);
+    color: var(--brand-main);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #252525;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #000;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+    background-color: #525252;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 9999px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: #737373;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #252525 transparent;
+}
+
+html.dark {
+    scrollbar-color: #525252 transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+#suggestionChipsContainer::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+.no-scrollbar, #suggestionChipsContainer {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+.corner-aura-pink {
+    background: radial-gradient(circle at 0 0, #fbb6a0a6 0%, #fbb6a047 30%, #fbb6a014 55%, transparent 75%);
+}
+
+html.dark .corner-aura-pink {
+    background: radial-gradient(circle at 0 0, #f48ca066 0%, #e16e872e 30%, #e16e870d 55%, transparent 75%);
+}
+
+.corner-aura-lavender {
+    background: radial-gradient(circle at 100% 0, #ceb2f5a6 0%, #ceb2f547 30%, #ceb2f514 55%, transparent 75%);
+}
+
+html.dark .corner-aura-lavender {
+    background: radial-gradient(circle at 100% 0, #be9bf566 0%, #a078e62e 30%, #a078e60d 55%, transparent 75%);
+}
+
+.corner-aura-blue {
+    background: radial-gradient(circle at 0 100%, #a2dee9a6 0%, #a2dee947 30%, #a2dee914 55%, transparent 75%);
+}
+
+html.dark .corner-aura-blue {
+    background: radial-gradient(circle at 0 100%, #64c3dc66 0%, #41a5c32e 30%, #41a5c30d 55%, transparent 75%);
+}
+
+.corner-aura-blue-br {
+    background: radial-gradient(circle at 100% 100%, #a2dee999 0%, #a2dee940 30%, #a2dee90f 55%, transparent 75%);
+}
+
+html.dark .corner-aura-blue-br {
+    background: radial-gradient(circle at 100% 100%, #64c3dc66 0%, #41a5c32e 30%, #41a5c30d 55%, transparent 75%);
+}
+
+.vn-transcript-collapse {
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: grid;
+}
+
+.vn-transcript-collapse.is-open, .vn-transcript-collapse.grid-rows-\[1fr\] {
+    grid-template-rows: 1fr;
+}
+
+.vn-transcript-collapse > div {
+    overflow: hidden;
+}
+
+.vn-toggle-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vn-toggle-arrow.is-open, .vn-toggle-arrow.rotate-180 {
+    transform: rotate(180deg);
+}
