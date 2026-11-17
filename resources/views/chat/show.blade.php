@@ -313,7 +313,7 @@
                             $durationSec = (int)($msg->metadata['duration'] ?? 0);
                         @endphp
                         <!-- Voice Note Bubble -->
-                        <div data-role="voice-player" data-duration="{{ $durationSec }}" class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white p-3 sm:p-4 shadow-sm space-y-2 select-text">
+                        <div data-role="voice-player" data-duration="{{ $durationSec }}" class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white p-3 sm:p-4 space-y-2 select-text">
                             <div class="flex items-center gap-2.5 sm:gap-3">
                                 <button type="button" class="vn-play-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#252525] dark:bg-white dark:text-[#252525] flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 transition shadow-xs cursor-pointer" data-audio-src="{{ $audioSrc }}" data-duration="{{ $durationSec }}" title="Putar Pesan Suara">
                                     <svg class="vn-icon-play w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -353,7 +353,7 @@
                         </div>
                         @else
                         <!-- Regular Text Bubble -->
-                        <div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm">
+                        <div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">
                             {!! nl2br(e($msg->message)) !!}
                         </div>
                         @endif
@@ -361,7 +361,7 @@
                     @elseif($msg->sender === 'assistant')
                     <!-- Assistant Bubble -->
                     <div class="max-w-[95%] sm:max-w-[85%]">
-                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm">
+                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">
                             {!! nl2br(e($msg->message)) !!}
                         </div>
                     </div>
@@ -375,7 +375,7 @@
                         $isLocked = $checkinAnswered || (!empty($latestCheckinId) && $msg->id < $latestCheckinId);
                     @endphp
                     <div class="max-w-[95%] sm:max-w-[85%] mood-checkin-wrapper" data-msg-id="{{ $msg->id }}" data-answered="{{ $isLocked ? 'true' : 'false' }}">
-                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm space-y-3">
+                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed space-y-3">
                             <p class="text-[15px] sm:text-base leading-relaxed text-[var(--txt-secondary)]">
                                 {{ __('Seiring kita mengurai cerita, suasana perasaanmu bisa berkembang. Bagaimana kondisimu saat ini? Pilih salah satu untuk membantu Weisz menyesuaikan nada bicara dengan hatimu:') }}
                             </p>
@@ -418,7 +418,7 @@
                     <!-- Beda Bubble Chat: Rekomendasi Tenaga Profesional (Slider Card) -->
                     @if(!empty($msg->metadata['recommend_professional']))
                     <div class="max-w-[95%] sm:max-w-[85%]">
-                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm space-y-4 pro-slider-container">
+                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed space-y-4 pro-slider-container">
                             <p class="text-base sm:text-[16.5px] leading-relaxed text-[var(--txt-primary)]">
                                 {{ __('Sistem Weisz mendeteksi beban emosional yang cukup berat dan berkelanjutan. Ceritamu sangat berharga, dan kamu tidak harus menanggung semuanya sendirian. Berkonsultasi dengan psikiater atau psikolog klinis berlisensi dapat membantumu mendapatkan penanganan medis dan evaluasi mendalam yang tepat.') }}
                             </p>
@@ -480,7 +480,7 @@
                     <!-- Beda Bubble Chat: Tombol Buat Percakapan Baru jika Keluar dari Topik -->
                     @if(!empty($msg->metadata['is_off_topic']))
                     <div class="max-w-[95%] sm:max-w-[85%]">
-                        <div class="p-4 sm:p-5 rounded-2xl rounded-tl-sm bg-neutral-50 dark:bg-neutral-900/50 border border-[var(--border-color)] text-[15px] sm:text-base text-[var(--txt-secondary)] space-y-3 shadow-sm">
+                        <div class="p-4 sm:p-5 rounded-2xl rounded-tl-sm bg-neutral-50 dark:bg-neutral-900/50 border border-[var(--border-color)] text-[15px] sm:text-base text-[var(--txt-secondary)] space-y-3">
                             <div class="flex items-center gap-2">
                                 <span class="w-2 h-2 rounded-full bg-[var(--brand-main)] animate-pulse"></span>
                                 <p class="font-bold text-[var(--brand-main)] text-base sm:text-lg">{{ __('Ingin Membahas Topik Lain?') }}</p>
@@ -507,7 +507,7 @@
 
                 <!-- Dynamic AI Typing Indicator -->
                 <div id="typingIndicator" class="hidden max-w-[95%] sm:max-w-[85%]">
-                    <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] px-4 sm:px-5 py-3 sm:py-3.5 inline-flex items-center gap-2.5 sm:gap-3 shadow-xs">
+                    <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] px-4 sm:px-5 py-3 sm:py-3.5 inline-flex items-center gap-2.5 sm:gap-3">
                         <span class="relative flex h-2.5 w-2.5 shrink-0">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--brand-main)] opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--brand-main)]"></span>
@@ -526,12 +526,12 @@
             <div class="w-full max-w-2xl lg:max-w-3xl mx-auto space-y-2">
                 <!-- Contextual Suggestion Chips (Zero scrollbars, mouse wheel & swipe scrollable) -->
                 <div id="suggestionChipsContainer" class="flex items-center gap-1.5 overflow-x-auto overflow-y-hidden no-scrollbar chat-room-scroll py-0.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none cursor-grab active:cursor-grabbing" style="-webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;">
-                    <button type="button" id="stuckHelpBtn" class="weisz-chip text-xs sm:text-[13.5px] py-1 px-3 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800 shrink-0 font-medium">
+                    <button type="button" id="stuckHelpBtn" class="weisz-chip text-xs sm:text-[13.5px] py-1 px-3 bg-white dark:bg-[#1f1f1f] text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800 shrink-0 font-medium">
                         {{ __('Aku bingung mau cerita apa') }}
                     </button>
 
                     @foreach($suggestedChips as $chip)
-                    <button type="button" class="suggestion-chip weisz-chip text-xs sm:text-[13.5px] py-1 px-3 shrink-0 whitespace-nowrap font-medium" data-text="{{ $chip }}">
+                    <button type="button" class="suggestion-chip weisz-chip text-xs sm:text-[13.5px] py-1 px-3 bg-white dark:bg-[#1f1f1f] shrink-0 whitespace-nowrap font-medium" data-text="{{ $chip }}">
                         {{ $chip }}
                     </button>
                     @endforeach
@@ -540,10 +540,10 @@
                 <!-- Composer Form with Clean & Compact Input Box -->
                 <form id="chatForm" method="POST" action="{{ $session ? ('/chat/' . $session->id . '/send') : '/chat' }}" data-session-id="{{ $session?->id ?? '' }}" class="w-full">
                     @csrf
-                    <div id="composerInputPill" class="flex items-center gap-2 p-1.5 sm:p-2 rounded-2xl bg-[var(--card-secondary)]/95 backdrop-blur-md border border-[var(--border-color)] focus-within:border-[var(--brand-main)] focus-within:ring-2 focus-within:ring-[var(--brand-main)]/20 transition-all shadow-xs relative">
+                    <div id="composerInputPill" class="flex items-center gap-2 p-1.5 sm:p-2 rounded-2xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] focus-within:border-[var(--brand-main)] focus-within:ring-2 focus-within:ring-[var(--brand-main)]/20 transition-all relative">
                         <textarea id="messageInput" name="message" rows="1"
                             placeholder="{{ __('Ceritakan apapun...') }}"
-                            class="flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none px-3.5 py-2.5 text-sm sm:text-[15px] text-[var(--txt-primary)] placeholder-[var(--txt-tertiary)] resize-none overflow-y-hidden leading-6 break-words whitespace-pre-wrap m-0 block"
+                            class="flex-1 bg-white dark:bg-[#1f1f1f] border-0 focus:ring-0 focus:outline-none px-3.5 py-2.5 text-sm sm:text-[15px] text-[var(--txt-primary)] placeholder-[var(--txt-tertiary)] resize-none overflow-y-hidden leading-6 break-words whitespace-pre-wrap m-0 block rounded-xl"
                             style="min-height: 44px; height: 44px; max-height: 112px;"></textarea>
 
                         <!-- Voice Note Recording Bar (Ditampilkan saat sedang merekam) -->
@@ -2642,7 +2642,7 @@
                 const safeMsg = cleanRawMsg.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>');
 
                 aiBubble.innerHTML = `
-                    <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm">
+                    <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">
                         <div>${safeMsg}</div>
                     </div>
                 `;
@@ -2841,7 +2841,7 @@
         const stuckBtn = document.createElement('button');
         stuckBtn.type = 'button';
         stuckBtn.id = 'stuckHelpBtn';
-        stuckBtn.className = 'weisz-chip text-xs sm:text-[13.5px] py-1 px-3 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800 shrink-0 font-medium';
+        stuckBtn.className = 'weisz-chip text-xs sm:text-[13.5px] py-1 px-3 bg-white dark:bg-[#1f1f1f] text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800 shrink-0 font-medium';
         stuckBtn.innerHTML = 'Aku bingung mau cerita apa';
         stuckBtn.addEventListener('click', () => {
             messageInput.value = "Aku lagi bingung banget mau cerita apa...";
@@ -2856,7 +2856,7 @@
             if (!cleanText) return;
             const chipBtn = document.createElement('button');
             chipBtn.type = 'button';
-            chipBtn.className = 'suggestion-chip weisz-chip text-xs sm:text-[13.5px] py-1 px-3 shrink-0 whitespace-nowrap transition-all duration-150 hover:border-[var(--brand-main)] font-medium';
+            chipBtn.className = 'suggestion-chip weisz-chip text-xs sm:text-[13.5px] py-1 px-3 bg-white dark:bg-[#1f1f1f] shrink-0 whitespace-nowrap transition-all duration-150 hover:border-[var(--brand-main)] font-medium';
             chipBtn.dataset.text = cleanText;
             chipBtn.textContent = cleanText;
             chipBtn.addEventListener('click', () => {
@@ -3380,7 +3380,7 @@
             : '';
 
         return `
-            <div data-role="voice-player" data-duration="${durSec}" class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white p-3 sm:p-4 shadow-sm space-y-2 select-text">
+            <div data-role="voice-player" data-duration="${durSec}" class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white p-3 sm:p-4 space-y-2 select-text">
                 <div class="flex items-center gap-2.5 sm:gap-3">
                     <button type="button" class="vn-play-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#252525] dark:bg-white dark:text-[#252525] flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 transition shadow-xs cursor-pointer" data-audio-src="${audioUrl}" data-duration="${durSec}" title="Putar Pesan Suara">
                         <svg class="vn-icon-play w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -3668,7 +3668,7 @@
         const errorBubble = document.createElement('div');
         errorBubble.className = 'max-w-[95%] sm:max-w-[85%]';
         errorBubble.innerHTML = `
-            <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm space-y-2.5">
+            <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed space-y-2.5">
                 <p class="text-[var(--txt-secondary)]">${escapeHtml(message)}</p>
                 ${originalText ? `
                     <div class="pt-1">
@@ -3712,7 +3712,7 @@
             const safeMsg = cleanRawMsg.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>');
 
             aiBubble.innerHTML = `
-                <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm">
+                <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">
                     ${safeMsg}
                 </div>
             `;
@@ -3742,7 +3742,7 @@
                     moodBubble.dataset.msgId = (data.assistant_message && data.assistant_message.id) ? data.assistant_message.id : '';
                     moodBubble.dataset.answered = 'false';
                     moodBubble.innerHTML = `
-                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm space-y-3">
+                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed space-y-3">
                             <p class="text-[15px] sm:text-base leading-relaxed text-[var(--txt-secondary)]">
                                 Seiring kita mengurai cerita, suasana perasaanmu bisa berkembang. Bagaimana kondisimu saat ini? Pilih salah satu untuk membantu Weisz menyesuaikan nada bicara dengan hatimu:
                             </p>
@@ -3787,7 +3787,7 @@
                     const offTopicBubble = document.createElement('div');
                     offTopicBubble.className = 'max-w-[95%] sm:max-w-[85%]';
                     offTopicBubble.innerHTML = `
-                        <div class="p-4 sm:p-5 rounded-2xl rounded-tl-sm bg-neutral-50 dark:bg-neutral-900/50 border border-[var(--border-color)] text-[15px] sm:text-base text-[var(--txt-secondary)] space-y-3 shadow-sm">
+                        <div class="p-4 sm:p-5 rounded-2xl rounded-tl-sm bg-neutral-50 dark:bg-neutral-900/50 border border-[var(--border-color)] text-[15px] sm:text-base text-[var(--txt-secondary)] space-y-3">
                             <div class="flex items-center gap-2">
                                 <span class="w-2 h-2 rounded-full bg-[var(--brand-main)] animate-pulse"></span>
                                 <p class="font-bold text-[var(--brand-main)] text-base sm:text-lg">Ingin Membahas Topik Lain?</p>
@@ -3850,7 +3850,7 @@
             // Append user bubble immediately
             const userBubble = document.createElement('div');
             userBubble.className = 'flex justify-end w-full';
-            userBubble.innerHTML = `<div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>')}</div>`;
+            userBubble.innerHTML = `<div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>')}</div>`;
             
             // Insert before typing indicator safely
             if (typingIndicator && typingIndicator.parentNode === chatFeedList) {
@@ -4031,7 +4031,7 @@
         }).join('');
 
         return `
-            <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed shadow-sm space-y-4 pro-slider-container">
+            <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed space-y-4 pro-slider-container">
                 <p class="text-base sm:text-[16.5px] leading-relaxed text-[var(--txt-primary)]">
                     Sistem Weisz mendeteksi beban emosional yang cukup berat dan berkelanjutan. Ceritamu sangat berharga, dan kamu tidak harus menanggung semuanya sendirian. Berkonsultasi dengan psikiater atau psikolog klinis berlisensi dapat membantumu mendapatkan penanganan medis dan evaluasi mendalam yang tepat.
                 </p>
