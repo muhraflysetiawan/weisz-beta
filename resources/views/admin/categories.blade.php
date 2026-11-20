@@ -7,7 +7,7 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight text-[var(--txt-primary)]">
+            <h1 class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
                 {{ __('Manajemen Hirarki Masalah') }}
             </h1>
             <p class="text-xs text-[var(--txt-secondary)] mt-0.5">
@@ -18,10 +18,9 @@
 
     <!-- Quick Add Forms Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <!-- Add Category Form -->
         <div class="weisz-card p-5 space-y-4">
-            <h2 class="text-sm font-bold text-[var(--txt-primary)] flex items-center gap-1.5">
-                <span class="w-5 h-5 rounded-md bg-[var(--brand-main)]/10 text-[var(--brand-main)] flex items-center justify-center text-xs">1</span>
+            <h2 class="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
+                <div class="clay-badge-num w-6 h-6 text-xs">1</div>
                 {{ __('Tambah Kategori Utama') }}
             </h2>
 
@@ -43,10 +42,9 @@
             </form>
         </div>
 
-        <!-- Add Subcategory Form -->
         <div class="weisz-card p-5 space-y-4">
-            <h2 class="text-sm font-bold text-[var(--txt-primary)] flex items-center gap-1.5">
-                <span class="w-5 h-5 rounded-md bg-[var(--brand-main)]/10 text-[var(--brand-main)] flex items-center justify-center text-xs">2</span>
+            <h2 class="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
+                <div class="clay-badge-num w-6 h-6 text-xs">2</div>
                 {{ __('Tambah Subkategori') }}
             </h2>
 
@@ -77,10 +75,9 @@
             </form>
         </div>
 
-        <!-- Add Topic Form -->
         <div class="weisz-card p-5 space-y-4">
-            <h2 class="text-sm font-bold text-[var(--txt-primary)] flex items-center gap-1.5">
-                <span class="w-5 h-5 rounded-md bg-[var(--brand-main)]/10 text-[var(--brand-main)] flex items-center justify-center text-xs">3</span>
+            <h2 class="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
+                <div class="clay-badge-num w-6 h-6 text-xs">3</div>
                 {{ __('Tambah Topik Percakapan') }}
             </h2>
 
@@ -130,51 +127,49 @@
             <div class="weisz-card p-5 space-y-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2.5">
-                        <span class="w-8 h-8 rounded-xl bg-[#252525]/10 dark:bg-white/10 text-[var(--brand-main)] flex items-center justify-center font-bold text-xs">
+                        <div class="clay-badge-num w-8 h-8 text-xs">
                             K
-                        </span>
+                        </div>
                         <div>
-                            <h3 class="font-bold text-base text-[var(--txt-primary)]">{{ $cat->name }}</h3>
-                            <p class="text-xs text-[var(--txt-secondary)]">{{ $cat->description }}</p>
+                            <h3 class="font-bold text-base text-[var(--text-primary)]">{{ $cat->name }}</h3>
+                            <p class="text-xs text-[var(--text-secondary)]">{{ $cat->description }}</p>
                         </div>
                     </div>
 
                     <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" onsubmit="return confirm('{{ __('Hapus kategori ini beserta seluruh subkategori & topiknya?') }}')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-xs text-red-600 dark:text-red-400 hover:underline">
+                        <button type="submit" class="text-xs text-[var(--color-error)] hover:underline">
                             {{ __('Hapus Kategori') }}
                         </button>
                     </form>
                 </div>
 
-                <!-- Subcategories & Topics -->
-                <div class="pl-4 sm:pl-8 space-y-3 border-l-2 border-[var(--border-color)]">
+                <div class="pl-4 sm:pl-8 space-y-3 border-l-2 border-[var(--border-clay)]">
                     @forelse($cat->subcategories as $sub)
-                    <div class="p-3.5 rounded-xl bg-[var(--card-secondary)] border border-[var(--border-color)] space-y-2">
+                    <div class="p-3.5 rounded-[16px] bg-[var(--surface-well)] border border-[var(--border-clay)] shadow-[var(--clay-well)] space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="font-semibold text-xs text-[var(--txt-primary)]">{{ __('Subkategori') }}: {{ $sub->name }}</span>
+                            <p class="font-semibold text-xs text-[var(--text-primary)]">{{ __('Subkategori') }}: {{ $sub->name }}</p>
                             
                             <form method="POST" action="{{ route('admin.subcategories.destroy', $sub->id) }}" onsubmit="return confirm('{{ __('Hapus subkategori ini?') }}')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-[11px] text-red-500 hover:underline">{{ __('Hapus') }}</button>
+                                <button type="submit" class="text-[11px] text-[var(--color-error)] hover:underline">{{ __('Hapus') }}</button>
                             </form>
                         </div>
 
-                        <!-- Topics -->
                         <div class="flex flex-wrap gap-2 pt-1">
                             @forelse($sub->topics as $topic)
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[var(--card-surface)] border border-[var(--border-color)] text-xs">
-                                <span class="font-medium text-[var(--txt-primary)]">{{ $topic->name }}</span>
+                            <div class="clay-pill text-xs">
+                                <p class="font-medium text-[var(--text-primary)]">{{ $topic->name }}</p>
                                 <form method="POST" action="{{ route('admin.topics.destroy', $topic->id) }}" class="inline" onsubmit="return confirm('{{ __('Hapus topik ini?') }}')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-[10px] text-gray-400 hover:text-red-500">&times;</button>
+                                    <button type="submit" class="text-[11px] text-[var(--text-muted)] hover:text-[var(--color-error)]">&times;</button>
                                 </form>
                             </div>
                             @empty
-                            <span class="text-[11px] text-[var(--txt-tertiary)] italic">{{ __('Belum ada topik di subkategori ini.') }}</span>
+                            <p class="text-[11px] text-[var(--text-muted)] italic">{{ __('Belum ada topik di subkategori ini.') }}</p>
                             @endforelse
                         </div>
                     </div>

@@ -7,11 +7,11 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight text-[var(--txt-primary)]">
+            <h1 class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
                 {{ __('Manajemen Data Tenaga Profesional') }}
             </h1>
-            <p class="text-xs text-[var(--txt-secondary)] mt-0.5">
-                {{ __('Kelola data rujukan psikolog dan psikiater berlisensi.') }} <span class="font-semibold text-amber-600 dark:text-amber-400">{{ __('Catatan: Halaman ini bukan akun login untuk profesional.') }}</span>
+            <p class="text-xs text-[var(--text-secondary)] mt-0.5">
+                {{ __('Kelola data rujukan psikolog dan psikiater berlisensi.') }} <strong class="font-semibold text-[var(--color-warning)]">{{ __('Catatan: Halaman ini bukan akun login untuk profesional.') }}</strong>
             </p>
         </div>
     </div>
@@ -84,46 +84,45 @@
         </form>
     </div>
 
-    <!-- Professionals Table -->
     <div class="weisz-card p-6 space-y-4">
-        <h2 class="text-sm font-bold text-[var(--txt-primary)]">{{ __('Data Profesional Terdaftar') }}</h2>
+        <h2 class="text-sm font-semibold text-[var(--text-primary)]">{{ __('Data Profesional Terdaftar') }}</h2>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+            <table class="clay-table">
                 <thead>
-                    <tr class="border-b border-[var(--border-color)] text-[var(--txt-tertiary)]">
-                        <th class="pb-2.5 font-medium">{{ __('Nama & Profesi') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Spesialisasi & Lokasi') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Kontak') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Status') }}</th>
-                        <th class="pb-2.5 font-medium text-right">{{ __('Aksi') }}</th>
+                    <tr>
+                        <th>{{ __('Nama & Profesi') }}</th>
+                        <th>{{ __('Spesialisasi & Lokasi') }}</th>
+                        <th>{{ __('Kontak') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th class="text-right">{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-[var(--border-color)]">
+                <tbody>
                     @forelse($professionals as $pro)
                     <tr>
-                        <td class="py-3">
-                            <p class="font-bold text-[var(--txt-primary)]">{{ $pro->name }}</p>
-                            <p class="text-[11px] text-[var(--brand-main)]">{{ $pro->profession }}</p>
+                        <td class="min-w-[180px]">
+                            <p class="font-semibold text-[var(--text-primary)]">{{ $pro->name }}</p>
+                            <p class="text-[11px] text-[var(--text-accent)] mt-0.5">{{ $pro->profession }}</p>
                         </td>
-                        <td class="py-3 text-[var(--txt-secondary)]">
-                            <p>{{ $pro->specialization ?: '-' }}</p>
-                            <p class="text-[11px] text-[var(--txt-tertiary)]">{{ $pro->location ?: '-' }}</p>
+                        <td class="min-w-[200px] max-w-sm text-[var(--text-secondary)]">
+                            <p class="line-clamp-1" title="{{ $pro->specialization ?: '-' }}">{{ $pro->specialization ?: '-' }}</p>
+                            <p class="text-[11px] text-[var(--text-muted)] mt-0.5">{{ $pro->location ?: '-' }}</p>
                         </td>
-                        <td class="py-3 text-[var(--txt-secondary)]">
+                        <td class="whitespace-nowrap text-[var(--text-secondary)]">
                             <p>{{ $pro->phone ?: '-' }}</p>
-                            <p class="text-[11px] text-[var(--txt-tertiary)]">{{ $pro->email ?: '-' }}</p>
+                            <p class="text-[11px] text-[var(--text-muted)] mt-0.5">{{ $pro->email ?: '-' }}</p>
                         </td>
-                        <td class="py-3">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold {{ $pro->status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-700' }}">
+                        <td class="whitespace-nowrap">
+                            <p class="{{ $pro->status === 'active' ? 'clay-pill-success' : 'clay-pill-well' }}">
                                 {{ $pro->status }}
-                            </span>
+                            </p>
                         </td>
-                        <td class="py-3 text-right">
+                        <td class="text-right whitespace-nowrap">
                             <form method="POST" action="{{ route('admin.professionals.destroy', $pro->id) }}" onsubmit="return confirm('{{ __('Hapus data profesional ini?') }}')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-xs text-red-600 hover:underline">
+                                <button type="submit" class="text-xs font-medium text-[var(--color-error)] hover:underline cursor-pointer">
                                     {{ __('Hapus') }}
                                 </button>
                             </form>
@@ -131,7 +130,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="py-8 text-center text-xs text-[var(--txt-tertiary)]">
+                        <td colspan="5" class="py-8 text-center text-xs text-[var(--text-muted)]">
                             {{ __('Belum ada data profesional.') }}
                         </td>
                     </tr>

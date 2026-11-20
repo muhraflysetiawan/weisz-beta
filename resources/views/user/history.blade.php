@@ -1,26 +1,24 @@
 @extends('layouts.app')
 
-@section('title', '13. ' . __('Riwayat Percakapan') . ' — Weisz')
+@section('title', '13. ' . __('Riwayat Percakapan') . ' | Weisz')
 
 @section('content')
-<div class="max-w-6xl mx-auto py-6 sm:py-8 space-y-6">
-    <!-- Back to Chat -->
+<div class="max-w-5xl mx-auto py-6 sm:py-8 space-y-6">
     <div>
-        <a href="{{ route('chat.index') }}" class="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--txt-secondary)] hover:text-[var(--txt-primary)] transition">
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <a href="{{ route('chat.index') }}" class="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-gentle)] transition">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
             </svg>
             {{ __('Kembali ke Ruang Curhat') }}
         </a>
     </div>
 
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight text-[var(--txt-primary)]">
+            <h1 class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
                 {{ __('Riwayat Sesi Percakapan') }}
             </h1>
-            <p class="text-xs text-[var(--txt-secondary)] mt-0.5">
+            <p class="text-xs sm:text-sm text-[var(--text-secondary)] mt-1">
                 {{ __('Daftar seluruh sesi percakapanmu. Semua riwayat obrolan dapat diakses dan dilanjutkan kembali kapan saja.') }}
             </p>
         </div>
@@ -48,17 +46,17 @@
     <!-- Sessions List -->
     <div class="space-y-4">
         @forelse($sessions as $session)
-        <div class="weisz-card p-5 sm:p-6 space-y-4">
+        <div class="clay-card-static p-5 sm:p-6 space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div class="space-y-1">
+                <div class="space-y-1.5">
                     <div class="flex items-center gap-2 flex-wrap">
-                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#252525]/10 dark:bg-white/10 text-[var(--brand-main)] border border-[var(--border-color)]">
+                        <p class="clay-pill-blue text-[11px]">
                             {{ $session->topic->name }}
-                        </span>
-                        <span class="text-xs text-[var(--txt-tertiary)]">{{ $session->created_at->translatedFormat('d M Y, H:i') }}</span>
+                        </p>
+                        <time class="text-xs text-[var(--text-muted)]">{{ $session->created_at->translatedFormat('d M Y, H:i') }}</time>
                     </div>
 
-                    <h2 class="text-base font-bold text-[var(--txt-primary)]">
+                    <h2 class="text-base font-semibold text-[var(--text-primary)]">
                         {{ $session->title ?: $session->topic->name }}
                     </h2>
                 </div>
@@ -71,26 +69,35 @@
                     @endif
 
                     <a href="{{ route('chat.show', $session->id) }}" class="weisz-btn-primary text-xs py-1.5 px-3.5 inline-flex items-center gap-1 font-semibold">
-                        <span>{{ __('Lanjutkan Obrolan') }}</span>
-                        <span class="text-xs">&rarr;</span>
+                        {{ __('Lanjutkan Obrolan') }} &rarr;
                     </a>
                 </div>
             </div>
 
-            <div class="pt-3 border-t border-[var(--border-color)] flex items-center justify-between text-xs text-[var(--txt-secondary)]">
-                <div>
-                    {{ __('Konteks') }}: <span class="font-medium text-[var(--txt-primary)]">{{ $session->category->name }}</span> &bull; {{ $session->subcategory->name }} &bull; <span class="text-[var(--brand-main)]">{{ $session->topic->name }}</span>
-                </div>
-                <span>{{ $session->messages()->count() }} {{ __('pesan') }}</span>
+            <div class="pt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs text-[var(--text-secondary)]">
+                <p>
+                    {{ __('Konteks') }}: <strong class="font-medium text-[var(--text-primary)]">{{ $session->category->name }}</strong> &bull; {{ $session->subcategory->name }} &bull; <strong class="font-medium text-[var(--text-accent)]">{{ $session->topic->name }}</strong>
+                </p>
+                <p class="clay-pill-well text-[11px]">{{ $session->messages()->count() }} {{ __('pesan') }}</p>
             </div>
         </div>
         @empty
-        <div class="weisz-card p-12 text-center space-y-3">
-            <p class="text-sm font-semibold text-[var(--txt-primary)]">{{ __('Belum ada riwayat percakapan yang cocok') }}</p>
-            <p class="text-xs text-[var(--txt-secondary)]">{{ __('Mulai sesi baru untuk membicarakan kondisi pikiranmu hari ini.') }}</p>
-            <a href="{{ route('explore.categories') }}" class="weisz-btn-primary text-xs py-2 px-4 inline-flex">
-                {{ __('Mulai Sesi Sekarang') }}
+        <div class="weisz-card p-10 sm:p-12 text-center space-y-4">
+            @if(request('search'))
+            <p class="text-sm sm:text-base text-[var(--text-secondary)]">
+                {{ __('Tidak ada sesi yang cocok dengan pencarianmu.') }}
+            </p>
+            <a href="{{ route('history') }}" class="weisz-btn-secondary text-xs sm:text-sm py-2 px-4 inline-flex">
+                {{ __('Reset Pencarian') }}
             </a>
+            @else
+            <p class="text-sm sm:text-base text-[var(--text-secondary)]">
+                {{ __('Belum ada refleksi. Mulai dari topik yang terasa berat sekarang.') }}
+            </p>
+            <a href="{{ route('explore.categories') }}" class="weisz-btn-primary text-xs sm:text-sm py-2.5 px-5 inline-flex">
+                {{ __('Lihat Topik Refleksi') }}
+            </a>
+            @endif
         </div>
         @endforelse
     </div>

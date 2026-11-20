@@ -12,6 +12,7 @@ class MoodExpertService
      *
      * @return array<string, array{
      *     key: string,
+     *     score: int,
      *     emoji: string,
      *     label: string,
      *     desc: string,
@@ -24,6 +25,7 @@ class MoodExpertService
         return [
             'overwhelmed' => [
                 'key' => 'overwhelmed',
+                'score' => 1,
                 'emoji' => '😭',
                 'label' => 'Hancur & Terpuruk',
                 'desc' => 'Beban terasa sangat berat dan melelahkan',
@@ -32,6 +34,7 @@ class MoodExpertService
             ],
             'anxious' => [
                 'key' => 'anxious',
+                'score' => 2,
                 'emoji' => '😰',
                 'label' => 'Cemas & Gelisah',
                 'desc' => 'Pikiran berputar cepat dan overthinking',
@@ -40,6 +43,7 @@ class MoodExpertService
             ],
             'sad' => [
                 'key' => 'sad',
+                'score' => 3,
                 'emoji' => '😞',
                 'label' => 'Sedih & Murung',
                 'desc' => 'Merasa down, kecewa, atau kehilangan energi',
@@ -48,6 +52,7 @@ class MoodExpertService
             ],
             'numb' => [
                 'key' => 'numb',
+                'score' => 4,
                 'emoji' => '😐',
                 'label' => 'Hampa & Bingung',
                 'desc' => 'Mati rasa, kosong, atau bingung arah',
@@ -56,6 +61,7 @@ class MoodExpertService
             ],
             'calm' => [
                 'key' => 'calm',
+                'score' => 5,
                 'emoji' => '😌',
                 'label' => 'Butuh Ruang Cerita',
                 'desc' => 'Ingin refleksi terarah dengan tenang',
@@ -68,7 +74,7 @@ class MoodExpertService
     /**
      * Get specific mood metadata by key.
      *
-     * @return array{key: string, emoji: string, label: string, desc: string, tone_guidance: string, keywords: list<string>}|null
+     * @return array{key: string, score: int, emoji: string, label: string, desc: string, tone_guidance: string, keywords: list<string>}|null
      */
     public static function getMood(?string $key): ?array
     {
@@ -77,6 +83,14 @@ class MoodExpertService
         }
 
         return self::getMoods()[$key] ?? null;
+    }
+
+    /**
+     * Get numeric mood score (1-5) for a given mood key.
+     */
+    public static function getScore(?string $key): ?int
+    {
+        return self::getMood($key)['score'] ?? null;
     }
 
     /**

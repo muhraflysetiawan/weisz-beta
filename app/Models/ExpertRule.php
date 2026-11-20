@@ -16,6 +16,7 @@ class ExpertRule extends Model
         'name',
         'description',
         'priority',
+        'confidence_factor',
         'is_active',
     ];
 
@@ -23,6 +24,7 @@ class ExpertRule extends Model
     {
         return [
             'priority' => 'integer',
+            'confidence_factor' => 'float',
             'is_active' => 'boolean',
         ];
     }

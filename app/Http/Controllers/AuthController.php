@@ -140,6 +140,20 @@ class AuthController extends Controller
         return back()->with('success', 'Nama akun berhasil diperbarui.');
     }
 
+    public function acknowledgeOnboarding(Request $request): RedirectResponse|JsonResponse
+    {
+        $user = Auth::user();
+        if ($user && $user->onboarding_shown_at === null) {
+            $user->update(['onboarding_shown_at' => now()]);
+        }
+
+        if ($request->expectsJson() || $request->wantsJson()) {
+            return response()->json(['success' => true]);
+        }
+
+        return back();
+    }
+
     public function updateLocale(Request $request): JsonResponse|RedirectResponse
     {
         $validated = $request->validate([

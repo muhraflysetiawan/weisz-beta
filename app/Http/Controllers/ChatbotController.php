@@ -537,6 +537,7 @@ class ChatbotController extends Controller
             'metadata' => [
                 'state' => $expertContext['conversation_state'],
                 'signals' => $expertContext['signals'],
+                'confidence_factor' => $expertContext['confidence_factor'] ?? 0.0,
                 'recommend_professional' => $isRecommendProfessional,
                 'suggested_chips' => $updatedChips,
                 'is_off_topic' => $isOffTopic,
@@ -551,6 +552,7 @@ class ChatbotController extends Controller
                 'assistant_message' => $assistantMsg,
                 'safety_alert' => false,
                 'state' => $expertContext['conversation_state'],
+                'confidence_factor' => $expertContext['confidence_factor'] ?? 0.0,
                 'suggested_chips' => $updatedChips,
                 'recommend_professional' => $isRecommendProfessional,
                 'professionals' => $isRecommendProfessional ? Professional::where('status', 'active')->get() : [],
@@ -621,9 +623,15 @@ class ChatbotController extends Controller
 
         $moodInfo = MoodExpertService::getMood($moodKey);
 
+        $session->update([
+            'mood_score' => $moodInfo['score'],
+            'mood_label' => $moodKey,
+        ]);
+
         return response()->json([
             'success' => true,
             'mood' => $moodKey,
+            'mood_score' => $moodInfo['score'],
             'mood_info' => $moodInfo,
             'message' => "Kondisi emosi berhasil diperbarui menjadi {$moodInfo['label']}.",
         ]);

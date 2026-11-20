@@ -22,15 +22,22 @@ class HomeController extends Controller
             return redirect()->route('chat.index');
         }
 
+        $totalCategoriesCount = ProblemCategory::where('is_active', true)->count();
+
         $categories = ProblemCategory::where('is_active', true)
             ->withCount('subcategories')
+            ->with(['subcategories' => function ($q) {
+                $q->where('is_active', true)->orderBy('sort_order');
+            }])
             ->orderBy('sort_order')
+            ->take(8)
             ->get();
 
         $professionalsCount = Professional::where('status', 'active')->count();
 
         return view('user.landing', [
             'categories' => $categories,
+            'totalCategoriesCount' => $totalCategoriesCount,
             'professionalsCount' => $professionalsCount,
         ]);
     }

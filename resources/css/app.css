@@ -1,159 +1,573 @@
 @import "tailwindcss";
 
+@theme {
+    --font-serif: "Nunito", sans-serif;
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-display: "Nunito", sans-serif;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-    --bg-page: #fff;
-    --bg-secondary: #f8f9fc;
-    --card-surface: #fff;
-    --card-secondary: #f5f6fa;
-    --card-hover: #f1f3f7;
-    --txt-primary: #171717;
-    --txt-secondary: #525252;
-    --txt-tertiary: #737373;
-    --txt-disabled: #a3a3a3;
-    --border-color: #e5e7eb;
-    --border-subtle: #f0f1f3;
-    --brand-main: #252525;
-    --brand-btn: #252525;
+    --font-serif: "Nunito", sans-serif;
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+    /* Soft Blue Clay Scale */
+    --sky-50: #f3f7fb;
+    --sky-100: #e6f2fc;
+    --sky-200: #cfe6fa;
+    --sky-300: #a6d4f7;
+    --sky-400: #8dc5f2;
+    --sky-500: #86bce8;
+    --sky-600: #2b74ae;
+    --sky-700: #226194;
+    --sky-800: #1e5c8e;
+    --sky-900: #182433;
+
+    /* Light Mode: Airy Cloud */
+    --bg-page: #f3f7fb;
+    --bg-subtle: #e9f1f9;
+    --surface-clay: #ffffff;
+    --surface-clay-blue: #e6f2fc;
+    --surface-clay-hover: #f7fbff;
+    --surface-well: #edf4fa;
+
+    --text-primary: #182433;
+    --text-secondary: #475a6e;
+    --text-muted: #5b7085;
+    --text-accent: #1e5c8e;
+
+    --border-clay: #d6e6f5;
+    --border-focus: #2b74ae;
+
+    /* Clay Depth Recipes */
+    --clay-well: inset 0 2px 5px rgba(24, 36, 51, 0.08), inset 0 -1px 2px rgba(255, 255, 255, 0.9);
+    --clay-rest: 0 10px 24px -6px rgba(43, 116, 174, 0.13), inset 0 2px 4px rgba(255, 255, 255, 0.95), inset 0 -4px 8px rgba(134, 188, 232, 0.2);
+    --clay-lift: 0 18px 34px -8px rgba(43, 116, 174, 0.2), inset 0 2px 5px #ffffff, inset 0 -5px 10px rgba(134, 188, 232, 0.26);
+    --clay-press: 0 4px 10px -2px rgba(43, 116, 174, 0.14), inset 0 3px 7px rgba(43, 116, 174, 0.16), inset 0 -1px 3px rgba(255, 255, 255, 0.8);
+    --clay-btn-primary: 0 8px 18px -4px rgba(43, 116, 174, 0.34), inset 0 2px 3px rgba(255, 255, 255, 0.32), inset 0 -3px 6px rgba(18, 48, 74, 0.24);
+
+    /* Backwards-compatible aliases */
+    --surface: var(--surface-clay);
+    --surface-hover: var(--surface-clay-hover);
+    --surface-gentle: var(--surface-clay-blue);
+    --text-gentle: var(--text-accent);
+    --border: var(--border-clay);
+    --border-gentle: #bfd9f0;
+    --bg-secondary: var(--bg-subtle);
+    --card-surface: var(--surface-clay);
+    --card-secondary: var(--surface-well);
+    --card-hover: var(--surface-clay-hover);
+    --txt-primary: var(--text-primary);
+    --txt-secondary: var(--text-secondary);
+    --txt-tertiary: var(--text-muted);
+    --txt-disabled: #94a6b8;
+    --border-color: var(--border-clay);
+    --border-subtle: #e1eef9;
+    --brand-main: var(--sky-700);
+    --brand-btn: var(--sky-600);
+
+    /* Semantics */
+    --color-success: #1e6b4b;
+    --color-success-bg: #ebf7f1;
+    --color-success-border: #bce3d0;
+    --color-warning: #8c4f16;
+    --color-warning-bg: #fdf5eb;
+    --color-warning-border: #f2d2ad;
+    --color-error: #b2333b;
+    --color-error-bg: #fdf1f2;
+    --color-error-border: #f2c4c7;
+    --color-info: var(--sky-800);
+    --color-info-bg: var(--sky-100);
+    --color-info-border: var(--sky-200);
+
+    /* Radii & Motion */
+    --radius-well: 14px;
+    --radius-btn: 18px;
+    --radius-card: 24px;
+    --radius-hero: 28px;
+    --radius-full: 9999px;
+    --ease-clay: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html.dark {
-    --bg-page: #171717;
-    --bg-secondary: #1f1f1f;
-    --card-surface: #1f1f1f;
-    --card-secondary: #262626;
-    --card-hover: #2e2e2e;
-    --txt-primary: #f3f4f6;
-    --txt-secondary: #c7c9d1;
-    --txt-tertiary: #9599a6;
-    --txt-disabled: #6b7280;
-    --border-color: #2e2e2e;
-    --border-subtle: #262626;
-    --brand-main: #f3f4f6;
-    --brand-btn: #252525;
+    /* Dark Mode: Night Cloud */
+    --bg-page: #121821;
+    --bg-subtle: #18202c;
+    --surface-clay: #1e2836;
+    --surface-clay-blue: #1b2d40;
+    --surface-clay-hover: #243142;
+    --surface-well: #151c26;
+
+    --text-primary: #eff5fb;
+    --text-secondary: #bfd0e2;
+    --text-muted: #8ea5bc;
+    --text-accent: #8dc5f2;
+
+    --border-clay: #2b3b4e;
+    --border-focus: #8dc5f2;
+
+    --clay-well: inset 0 3px 6px rgba(0, 0, 0, 0.45), inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+    --clay-rest: 0 12px 26px -6px rgba(0, 0, 0, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.08), inset 0 -4px 8px rgba(0, 0, 0, 0.35);
+    --clay-lift: 0 18px 36px -8px rgba(0, 0, 0, 0.58), inset 0 2px 4px rgba(141, 197, 242, 0.14), inset 0 -5px 10px rgba(0, 0, 0, 0.4);
+    --clay-press: 0 4px 10px -2px rgba(0, 0, 0, 0.4), inset 0 3px 7px rgba(0, 0, 0, 0.48), inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+    --clay-btn-primary: 0 8px 20px -4px rgba(0, 0, 0, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(34, 97, 148, 0.3);
+
+    --surface: var(--surface-clay);
+    --surface-hover: var(--surface-clay-hover);
+    --surface-gentle: var(--surface-clay-blue);
+    --text-gentle: var(--text-accent);
+    --border: var(--border-clay);
+    --border-gentle: #2d4864;
+    --bg-secondary: var(--bg-subtle);
+    --card-surface: var(--surface-clay);
+    --card-secondary: var(--surface-well);
+    --card-hover: var(--surface-clay-hover);
+    --txt-primary: var(--text-primary);
+    --txt-secondary: var(--text-secondary);
+    --txt-tertiary: var(--text-muted);
+    --txt-disabled: #64768a;
+    --border-color: var(--border-clay);
+    --border-subtle: #233040;
+    --brand-main: var(--sky-400);
+    --brand-btn: var(--sky-600);
+
+    --color-success: #7ad4ac;
+    --color-success-bg: #162a24;
+    --color-success-border: #254a3e;
+    --color-warning: #f2be7a;
+    --color-warning-bg: #2b2217;
+    --color-warning-border: #4d3a24;
+    --color-error: #f5959b;
+    --color-error-bg: #2e1b1f;
+    --color-error-border: #542c33;
+    --color-info: var(--sky-400);
+    --color-info-bg: var(--surface-clay-blue);
+    --color-info-border: var(--border-gentle);
 }
 
 body, button, input, select, textarea {
-    font-family: "Poppins", var(--font-sans);
+    font-family: var(--font-sans);
+}
+
+.font-display,
+.font-serif-display {
+    font-family: var(--font-serif);
 }
 
 body {
     background-color: var(--bg-page);
-    color: var(--txt-primary);
+    color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.18s ease, color 0.18s ease;
 }
 
+/* Soft Cloud Clay Cards */
+.clay-card-static,
 .weisz-card {
-    background-color: var(--card-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    transition: all 0.2s;
+    background-color: var(--surface-clay);
+    border: 1px solid var(--border-clay);
+    border-radius: var(--radius-card);
+    box-shadow: var(--clay-rest);
+    transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.clay-card-blue,
+.weisz-card-gentle {
+    background-color: var(--surface-clay-blue);
+    border: 1px solid var(--border-clay);
+    border-radius: var(--radius-card);
+    box-shadow: var(--clay-rest);
+    transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.clay-card-interactive {
+    background-color: var(--surface-clay);
+    border: 1px solid var(--border-clay);
+    border-radius: var(--radius-card);
+    box-shadow: var(--clay-rest);
+    cursor: pointer;
+    will-change: transform;
+    transition: transform 220ms var(--ease-clay), box-shadow 220ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.clay-card-interactive:hover,
+.clay-card-interactive:focus-visible {
+    background-color: var(--surface-clay-hover);
+    border-color: var(--sky-500);
+    box-shadow: var(--clay-lift);
+    transform: translateY(-4px) scale(1.01);
+}
+
+.clay-card-interactive:active {
+    box-shadow: var(--clay-press);
+    transform: translateY(1px) scale(0.985);
+}
+
+.clay-icon-pill,
+.clay-arrow-cue {
+    transition: transform 220ms var(--ease-clay);
+}
+
+.clay-card-interactive:hover .clay-icon-pill,
+.clay-card-interactive:focus-visible .clay-icon-pill {
+    transform: scale(1.06) rotate(-3deg);
+}
+
+.clay-card-interactive:hover .clay-arrow-cue,
+.clay-card-interactive:focus-visible .clay-arrow-cue {
+    transform: translateX(3px);
 }
 
 .weisz-card-hover:hover {
-    background-color: var(--card-hover);
-    border-color: var(--brand-main);
+    background-color: var(--surface-clay-hover);
+    border-color: var(--sky-500);
+    box-shadow: var(--clay-lift);
 }
 
-.weisz-input {
-    background-color: var(--card-secondary);
-    border: 1px solid var(--border-color);
-    color: var(--txt-primary);
-    border-radius: 12px;
+/* 3D Book Animation (Uiverse.io by eslam-hany adapted for Soft Cloud Clay) */
+.book,
+.clay-book {
+    position: relative;
+    border-radius: var(--radius-card);
+    width: 100%;
+    min-height: 290px;
+    background-color: var(--surface-well);
+    border: 1px solid var(--border-clay);
+    box-shadow: var(--clay-well);
+    transform-style: preserve-3d;
+    perspective: 2000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: box-shadow 0.4s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    isolation: isolate;
+}
+
+.book:hover,
+.clay-book:hover,
+.book:focus-visible,
+.clay-book:focus-visible {
     outline: none;
+    box-shadow: var(--clay-rest), 0 16px 30px -8px rgba(43, 116, 174, 0.16);
+    border-color: var(--sky-500);
+}
+
+html.dark .book,
+html.dark .clay-book {
+    background-color: var(--surface-well);
+    box-shadow: var(--clay-well);
+}
+
+html.dark .book:hover,
+html.dark .clay-book:hover,
+html.dark .book:focus-visible,
+html.dark .clay-book:focus-visible {
+    box-shadow: var(--clay-rest), 0 16px 32px -8px rgba(0, 0, 0, 0.5);
+    border-color: var(--sky-400);
+}
+
+.cover,
+.clay-book-cover {
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: var(--surface-clay);
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    cursor: pointer;
+    transform-origin: 0% 50%;
+    border: 1px solid var(--border-clay);
+    border-left: 5px solid var(--sky-600);
+    box-shadow: var(--clay-rest);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+    z-index: 5;
+    padding: 22px;
+}
+
+html.dark .cover,
+html.dark .clay-book-cover {
+    background-color: var(--surface-clay);
+    border-color: var(--border-clay);
+    border-left-color: var(--sky-400);
+    box-shadow: var(--clay-rest);
+}
+
+.book:hover .cover,
+.clay-book:hover .clay-book-cover,
+.book:focus-visible .cover,
+.clay-book:focus-visible .clay-book-cover {
+    transform: rotateY(-80deg);
+    box-shadow: -8px 12px 24px -4px rgba(43, 116, 174, 0.22);
+}
+
+html.dark .book:hover .cover,
+html.dark .clay-book:hover .clay-book-cover,
+html.dark .book:focus-visible .cover,
+html.dark .clay-book:focus-visible .clay-book-cover {
+    box-shadow: -8px 12px 28px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* Recessed Clay Inputs */
+.clay-well-input,
+.weisz-input {
+    background-color: var(--surface-well);
+    border: 1px solid var(--border-clay);
+    box-shadow: var(--clay-well);
+    color: var(--text-primary);
+    border-radius: var(--radius-well);
+    min-height: 44px;
     padding: 10px 16px;
     font-size: 14px;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
+.clay-well-input:focus,
 .weisz-input:focus {
-    border-color: var(--brand-main);
-    box-shadow: 0 0 0 2px #2525252e;
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: var(--clay-well), 0 0 0 3px rgba(43, 116, 174, 0.18);
 }
 
+html.dark .clay-well-input:focus,
 html.dark .weisz-input:focus {
-    border-color: var(--brand-main);
-    box-shadow: 0 0 0 2px #f3f4f62e;
+    border-color: var(--border-focus);
+    box-shadow: var(--clay-well), 0 0 0 3px rgba(141, 197, 242, 0.24);
 }
 
+/* Tactile Clay Buttons */
 .weisz-btn-primary {
-    background-color: var(--brand-btn);
-    color: #fff;
-    border: 1px solid #0000001f;
-    border-radius: 12px;
+    background-color: var(--sky-600);
+    color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: var(--radius-btn);
+    box-shadow: var(--clay-btn-primary);
+    min-height: 42px;
     justify-content: center;
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
     font-size: 14px;
     font-weight: 600;
-    transition: all 0.15s;
+    cursor: pointer;
+    transition: transform 200ms var(--ease-clay), background-color 180ms ease, box-shadow 200ms ease, opacity 150ms ease;
     display: inline-flex;
 }
 
 .weisz-btn-primary:hover {
-    background-color: #171717;
+    background-color: var(--sky-700);
+    transform: translateY(-2px);
+}
+
+.weisz-btn-primary:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: var(--clay-press);
+}
+
+.weisz-btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
 }
 
 html.dark .weisz-btn-primary {
-    color: #fff;
-    background-color: #252525;
-    border-color: #4d4d4d;
+    background-color: var(--sky-400);
+    color: #121821;
+    border-color: transparent;
 }
 
 html.dark .weisz-btn-primary:hover {
-    background-color: #333;
-    border-color: #666;
+    background-color: var(--sky-300);
 }
 
 .weisz-btn-secondary {
-    background-color: var(--card-secondary);
-    color: var(--txt-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    background-color: var(--surface-clay);
+    color: var(--text-primary);
+    border: 1px solid var(--border-clay);
+    border-radius: var(--radius-btn);
+    box-shadow: var(--clay-rest);
+    min-height: 42px;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    padding: 10px 18px;
+    padding: 10px 20px;
     font-size: 14px;
     font-weight: 600;
-    transition: all 0.15s;
+    cursor: pointer;
+    transition: transform 200ms var(--ease-clay), background-color 180ms ease, border-color 180ms ease, box-shadow 200ms ease;
     display: inline-flex;
 }
 
 .weisz-btn-secondary:hover {
-    background-color: var(--card-hover);
+    background-color: var(--surface-clay-hover);
+    border-color: var(--sky-500);
+    box-shadow: var(--clay-lift);
+    transform: translateY(-2px);
 }
 
+.weisz-btn-secondary:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: var(--clay-press);
+}
+
+/* Tactile Clay Chips */
 .weisz-chip {
-    background-color: #fff;
-    border: 1px solid var(--border-color);
-    color: var(--txt-secondary);
+    background-color: var(--surface-clay);
+    border: 1px solid var(--border-clay);
+    box-shadow: var(--clay-rest);
+    color: var(--text-secondary);
     cursor: pointer;
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
+    min-height: 38px;
     align-items: center;
     padding: 6px 14px;
     font-size: 13px;
     font-weight: 500;
-    transition: all 0.15s;
+    transition: transform 200ms var(--ease-clay), background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 200ms ease;
     display: inline-flex;
 }
 
-html.dark .weisz-chip {
-    background-color: #1f1f1f;
+.weisz-chip:hover {
+    background-color: var(--surface-clay-blue);
+    border-color: var(--sky-500);
+    color: var(--text-accent);
+    transform: translateY(-2px);
 }
 
-.weisz-chip:hover {
-    border-color: var(--brand-main);
-    color: var(--brand-main);
+.weisz-chip:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--clay-press);
+}
+
+/* Claymorphism Semantic Hierarchy Primitives (replaces generic <span> tags) */
+.clay-pill,
+.clay-pill-blue,
+.clay-pill-well,
+.clay-pill-success,
+.clay-pill-warning,
+.clay-pill-error {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: var(--radius-well);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.clay-pill {
+    background-color: var(--surface-clay);
+    border: 1px solid var(--border-clay);
+    box-shadow: var(--clay-rest);
+    color: var(--text-secondary);
+}
+
+.clay-pill-blue {
+    background-color: var(--surface-clay-blue);
+    border: 1px solid var(--border-clay);
+    box-shadow: var(--clay-rest);
+    color: var(--text-accent);
+}
+
+.clay-pill-well {
+    background-color: var(--surface-well);
+    border: 1px solid var(--border-clay);
+    box-shadow: var(--clay-well);
+    color: var(--text-secondary);
+}
+
+.clay-pill-success {
+    background-color: var(--color-success-bg);
+    border: 1px solid var(--color-success-border);
+    box-shadow: var(--clay-well);
+    color: var(--color-success);
+    font-size: 11px;
+}
+
+.clay-pill-warning {
+    background-color: var(--color-warning-bg);
+    border: 1px solid var(--color-warning-border);
+    box-shadow: var(--clay-well);
+    color: var(--color-warning);
+    font-size: 11px;
+}
+
+.clay-pill-error {
+    background-color: var(--color-error-bg);
+    border: 1px solid var(--color-error-border);
+    box-shadow: var(--clay-well);
+    color: var(--color-error);
+    font-size: 11px;
+}
+
+.clay-badge-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-well);
+    background-color: var(--surface-clay-blue);
+    border: 1px solid var(--border-clay);
+    box-shadow: var(--clay-rest);
+    color: var(--text-accent);
+    font-weight: 700;
+}
+
+/* Admin Clay Tables */
+.clay-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.clay-table thead th {
+    padding: 0 14px 12px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-clay);
+}
+
+.clay-table tbody td {
+    padding: 14px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-clay);
+}
+
+.clay-table thead th:first-child,
+.clay-table tbody td:first-child {
+    padding-left: 0;
+}
+
+.clay-table thead th:last-child,
+.clay-table tbody td:last-child {
+    padding-right: 0;
+}
+
+.clay-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.clay-table tbody tr {
+    transition: background-color 150ms ease;
+}
+
+.clay-table tbody tr:hover {
+    background-color: var(--surface-clay-hover);
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -161,92 +575,54 @@ html.dark .weisz-chip {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #252525;
+    background-color: #c2d7ec;
     background-clip: padding-box;
     border: 2px solid transparent;
     border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #000;
+    background-color: #93b7db;
 }
 
 html.dark ::-webkit-scrollbar-thumb {
-    background-color: #525252;
-    background-clip: padding-box;
-    border: 2px solid transparent;
-    border-radius: 9999px;
+    background-color: #324459;
 }
 
 html.dark ::-webkit-scrollbar-thumb:hover {
-    background-color: #737373;
+    background-color: #49607a;
 }
 
 html {
     scrollbar-width: thin;
-    scrollbar-color: #252525 transparent;
+    scrollbar-color: #c2d7ec transparent;
 }
 
 html.dark {
-    scrollbar-color: #525252 transparent;
+    scrollbar-color: #324459 transparent;
 }
 
-.no-scrollbar::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-    display: none !important;
-}
-
+.no-scrollbar::-webkit-scrollbar,
 #suggestionChipsContainer::-webkit-scrollbar {
     width: 0 !important;
     height: 0 !important;
     display: none !important;
 }
 
-.no-scrollbar, #suggestionChipsContainer {
+.no-scrollbar,
+#suggestionChipsContainer {
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
 }
 
-.corner-aura-pink {
-    background: radial-gradient(circle at 0 0, #fbb6a0a6 0%, #fbb6a047 30%, #fbb6a014 55%, transparent 75%);
-}
-
-html.dark .corner-aura-pink {
-    background: radial-gradient(circle at 0 0, #f48ca066 0%, #e16e872e 30%, #e16e870d 55%, transparent 75%);
-}
-
-.corner-aura-lavender {
-    background: radial-gradient(circle at 100% 0, #ceb2f5a6 0%, #ceb2f547 30%, #ceb2f514 55%, transparent 75%);
-}
-
-html.dark .corner-aura-lavender {
-    background: radial-gradient(circle at 100% 0, #be9bf566 0%, #a078e62e 30%, #a078e60d 55%, transparent 75%);
-}
-
-.corner-aura-blue {
-    background: radial-gradient(circle at 0 100%, #a2dee9a6 0%, #a2dee947 30%, #a2dee914 55%, transparent 75%);
-}
-
-html.dark .corner-aura-blue {
-    background: radial-gradient(circle at 0 100%, #64c3dc66 0%, #41a5c32e 30%, #41a5c30d 55%, transparent 75%);
-}
-
-.corner-aura-blue-br {
-    background: radial-gradient(circle at 100% 100%, #a2dee999 0%, #a2dee940 30%, #a2dee90f 55%, transparent 75%);
-}
-
-html.dark .corner-aura-blue-br {
-    background: radial-gradient(circle at 100% 100%, #64c3dc66 0%, #41a5c32e 30%, #41a5c30d 55%, transparent 75%);
-}
-
 .vn-transcript-collapse {
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     display: grid;
 }
 
-.vn-transcript-collapse.is-open, .vn-transcript-collapse.grid-rows-\[1fr\] {
+.vn-transcript-collapse.is-open,
+.vn-transcript-collapse.grid-rows-\[1fr\] {
     grid-template-rows: 1fr;
 }
 
@@ -255,9 +631,138 @@ html.dark .corner-aura-blue-br {
 }
 
 .vn-toggle-arrow {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.vn-toggle-arrow.is-open, .vn-toggle-arrow.rotate-180 {
+.vn-toggle-arrow.is-open,
+.vn-toggle-arrow.rotate-180 {
     transform: rotate(180deg);
+}
+
+:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 3px;
+}
+
+.skip-to-content {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.625rem 1rem;
+    background-color: var(--sky-600);
+    color: #ffffff;
+    border-radius: var(--radius-well);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: top 0.15s ease;
+}
+
+.skip-to-content:focus {
+    top: 1rem;
+}
+
+.weisz-input-error {
+    border-color: var(--color-error) !important;
+    box-shadow: var(--clay-well), 0 0 0 2px rgba(178, 51, 59, 0.18) !important;
+}
+
+.weisz-field-error {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--color-error);
+    margin-top: 6px;
+}
+
+.weisz-toast-container {
+    position: fixed;
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem));
+    right: 1.25rem;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    pointer-events: none;
+    max-width: 380px;
+    width: calc(100% - 2.5rem);
+}
+
+.weisz-toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-btn);
+    background-color: var(--surface-clay);
+    border: 1px solid var(--border-clay);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    box-shadow: var(--clay-rest);
+    transition: opacity 0.18s ease, transform 0.18s var(--ease-clay);
+}
+
+.weisz-toast-info {
+    border-color: var(--color-info-border);
+    background-color: var(--color-info-bg);
+    color: var(--color-info);
+}
+
+.weisz-toast-success {
+    border-color: var(--color-success-border);
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.weisz-toast-warning {
+    border-color: var(--color-warning-border);
+    background-color: var(--color-warning-bg);
+    color: var(--color-warning);
+}
+
+.weisz-toast-error {
+    border-color: var(--color-error-border);
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}
+
+.pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .clay-card-interactive,
+    .clay-card-interactive:hover,
+    .clay-card-interactive:focus-visible,
+    .clay-card-interactive:active,
+    .book,
+    .clay-book,
+    .book:hover,
+    .clay-book:hover,
+    .book:focus-visible,
+    .clay-book:focus-visible,
+    .cover,
+    .clay-book-cover,
+    .book:hover .cover,
+    .clay-book:hover .clay-book-cover,
+    .book:focus-visible .cover,
+    .clay-book:focus-visible .clay-book-cover,
+    .clay-icon-pill,
+    .clay-arrow-cue,
+    .weisz-btn-primary:hover,
+    .weisz-btn-primary:active,
+    .weisz-btn-secondary:hover,
+    .weisz-btn-secondary:active,
+    .weisz-chip:hover,
+    .weisz-chip:active {
+        transform: none !important;
+    }
 }

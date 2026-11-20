@@ -20,6 +20,8 @@ class ChatSession extends Model
         'topic_id',
         'title',
         'status',
+        'mood_score',
+        'mood_label',
         'started_at',
         'ended_at',
     ];
@@ -27,6 +29,7 @@ class ChatSession extends Model
     protected function casts(): array
     {
         return [
+            'mood_score' => 'integer',
             'started_at' => 'datetime',
             'ended_at' => 'datetime',
         ];

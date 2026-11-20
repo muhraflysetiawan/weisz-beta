@@ -292,9 +292,9 @@ class WeiszFlowTest extends TestCase
         $response = $this->actingAs($user)->get(route('chat.show', $session->id));
         $response->assertStatus(200);
 
-        // 1. Background must not contain the grid pattern (plain background with gradient orbs preserved)
+        // 1. Background must stay clean (Quiet Sky: no grid pattern and no glowing orbs)
         $response->assertDontSee('[background-size:32px_32px]');
-        $response->assertSee('Ambient Glowing Orbs');
+        $response->assertDontSee('Ambient Glowing Orbs');
 
         // 2. Chat room must contain the Explore room section for "Obrolan Baru"
         $response->assertSee('id="exploreRoomSection"', false);

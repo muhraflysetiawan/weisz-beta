@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'AI Chatbot — ' . ($topic->name ?? 'Obrolan Baru'))
+@section('title', 'AI Chatbot | ' . ($topic->name ?? 'Obrolan Baru'))
 @section('body_class', 'h-screen h-[100dvh] overflow-hidden')
 
 @section('full_content')
@@ -114,106 +114,84 @@
 @endphp
 
 <div class="flex h-screen h-[100dvh] w-full overflow-hidden relative bg-[var(--bg-page)] transition-colors chat-app-container">
-    <!-- Ambient Glowing Orbs (Gradasi warna tetap ada, background polos tanpa ornamen grid/garis) -->
-    <div class="absolute -top-36 -left-24 w-[520px] h-[520px] rounded-full bg-gradient-to-br from-amber-200/40 via-rose-200/25 to-transparent blur-3xl pointer-events-none z-0" aria-hidden="true"></div>
-    <div class="absolute -bottom-36 -right-24 w-[580px] h-[580px] rounded-full bg-gradient-to-tl from-sky-200/40 via-blue-200/25 to-transparent blur-3xl pointer-events-none z-0" aria-hidden="true"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-purple-200/15 via-rose-100/10 to-transparent blur-3xl pointer-events-none z-0" aria-hidden="true"></div>
-
-    <!-- ======================================================== -->
-    <!-- 1. LEFT SIDEBAR                                          -->
-    <!-- Logo "WeisZ", Button "Obrolan Baru", Topics & Pakar      -->
-    <!-- Riwayat Chat, Footer Akun                                -->
-    <!-- ======================================================== -->
-    <aside id="chatSidebar" class="w-72 lg:w-80 h-full h-screen h-[100dvh] bg-white/95 dark:bg-[#1f1f1f]/95 backdrop-blur-md border-r border-[var(--border-color)] flex flex-col shrink-0 transition-all duration-300 z-50 fixed inset-y-0 left-0 md:static -translate-x-full md:translate-x-0 shadow-xl md:shadow-none select-none">
-        
-        <!-- a. Bagian atas: Logo "WeisZ" + Collapse Hamburger + Mobile Close -->
-        <div id="sidebarHeaderBox" class="sidebar-header-box p-3.5 sm:p-4 border-b border-[var(--border-color)] flex items-center justify-between shrink-0">
-            <!-- Logo Website (Sembunyi saat minimize) -->
-            <a href="{{ route('chat.index') }}" id="sidebarLogo" class="sidebar-logo flex items-center gap-2.5 sm:gap-3 group min-w-0" title="WeisZ">
-                <div class="w-10 h-10 rounded-xl bg-[#252525] text-white dark:bg-white dark:text-[#252525] flex items-center justify-center font-bold text-lg sm:text-xl shadow-2xs group-hover:scale-105 transition-transform shrink-0">
+    <aside id="chatSidebar" class="w-72 lg:w-76 h-full h-screen h-[100dvh] bg-[var(--bg-subtle)] border-r border-[var(--border)] flex flex-col shrink-0 transition-all duration-200 z-50 fixed inset-y-0 left-0 md:static -translate-x-full md:translate-x-0 shadow-lg md:shadow-none select-none">
+        <div id="sidebarHeaderBox" class="sidebar-header-box p-3.5 sm:p-4 border-b border-[var(--border)] flex items-center justify-between shrink-0">
+            <a href="{{ route('chat.index') }}" id="sidebarLogo" class="sidebar-logo flex items-center gap-2.5 group min-w-0" title="Weisz">
+                <div class="w-9 h-9 rounded-[14px] bg-[var(--sky-600)] text-white dark:bg-[var(--sky-400)] dark:text-[#121821] shadow-[var(--clay-btn-primary)] flex items-center justify-center font-bold text-lg shrink-0">
                     W
                 </div>
-                <span class="sidebar-text font-bold text-xl sm:text-2xl tracking-tight text-[var(--txt-primary)] truncate">WeisZ</span>
+                <p class="sidebar-text font-bold text-xl tracking-tight text-[var(--text-primary)] truncate">Weisz</p>
             </a>
 
             <div class="flex items-center gap-1.5 shrink-0">
-                <!-- Desktop Collapse Button (Hamburger icon, saat minimize menggantikan posisi logo) -->
-                <button type="button" id="collapseSidebarBtn" aria-label="Kecilkan Sidebar" title="Kecilkan Sidebar" class="hidden md:flex w-10 h-10 rounded-xl border border-[var(--border-color)] items-center justify-center text-[var(--txt-secondary)] hover:text-[var(--txt-primary)] hover:bg-[var(--card-hover)] transition cursor-pointer">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <button type="button" id="collapseSidebarBtn" aria-label="Kecilkan Sidebar" title="Kecilkan Sidebar" class="hidden md:flex w-10 h-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] transition cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </button>
 
-                <!-- Mobile Close Button (Hanya tampil di mobile drawer) -->
-                <button type="button" id="closeSidebarBtn" aria-label="Tutup Menu" class="md:hidden w-10 h-10 rounded-xl border border-[var(--border-color)] flex items-center justify-center text-[var(--txt-secondary)] hover:bg-[var(--card-hover)] transition cursor-pointer">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <button type="button" id="closeSidebarBtn" aria-label="Tutup Menu" class="md:hidden w-10 h-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] transition cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- b. Dibawahnya: Button "Obrolan Baru", "Topics", & "Pakar" (Kebawah, Tanpa Icon, Style Mirip List History) -->
-        <div class="sidebar-actions-box p-3 sm:p-4 border-b border-[var(--border-color)]/70 shrink-0 flex flex-col gap-1.5">
-            <!-- 1. Obrolan Baru -->
-            <button type="button" id="sidebarNewChatBtn" class="sidebar-nav-btn group block w-full px-3.5 py-2.5 rounded-xl text-left transition  text-[14.5px] sm:text-[15px] text-[var(--txt-primary)] hover:bg-[var(--card-hover)]/70 border border-transparent hover:border-[var(--border-color)]/60 cursor-pointer" title="{{ __('Obrolan Baru') }}">
-                <span class="sidebar-text truncate block">{{ __('Obrolan Baru') }}</span>
-                <span class="sidebar-collapsed-tile hidden items-center justify-center">
-                    <svg class="w-5 h-5 text-[var(--txt-primary)]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <div class="sidebar-actions-box p-3 sm:p-3.5 border-b border-[var(--border)] shrink-0 flex flex-col gap-1.5">
+            <button type="button" id="sidebarNewChatBtn" class="sidebar-nav-btn group block w-full px-3.5 py-2.5 rounded-[16px] text-left transition text-sm font-semibold bg-[var(--surface-clay-blue)] text-[var(--text-accent)] border border-[var(--border-clay)] shadow-[var(--clay-rest)] hover:bg-[var(--sky-100)] dark:hover:bg-[#22384f] cursor-pointer" title="{{ __('Obrolan Baru') }}">
+                <p class="sidebar-text truncate block">{{ __('Obrolan Baru') }}</p>
+                <div class="sidebar-collapsed-tile hidden items-center justify-center">
+                    <svg class="w-5 h-5 text-[var(--text-accent)]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                </span>
+                </div>
             </button>
 
-            <!-- 2. Topics -->
-            <button type="button" id="sidebarTopicsBtn" onclick="openTopicsSection()" class="sidebar-nav-btn group block w-full px-3.5 py-2.5 rounded-xl text-left transition font-medium text-[14.5px] sm:text-[15px] text-[var(--txt-secondary)] hover:text-[var(--txt-primary)] hover:bg-[var(--card-hover)]/70 border border-transparent hover:border-[var(--border-color)]/60 cursor-pointer" title="{{ __('Topics') }}">
-                <span class="sidebar-text truncate block">{{ __('Topics') }}</span>
-                <span class="sidebar-collapsed-tile hidden items-center justify-center">
-                    <svg class="w-5 h-5 text-[var(--txt-secondary)] group-hover:text-[var(--txt-primary)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+            <button type="button" id="sidebarTopicsBtn" onclick="openTopicsSection()" class="sidebar-nav-btn group block w-full px-3.5 py-2.5 rounded-[16px] text-left transition font-medium text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-clay-hover)] border border-transparent cursor-pointer" title="{{ __('Topics') }}">
+                <p class="sidebar-text truncate block">{{ __('Topics') }}</p>
+                <div class="sidebar-collapsed-tile hidden items-center justify-center">
+                    <svg class="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
                     </svg>
-                </span>
+                </div>
             </button>
 
-            <!-- 3. Pakar -->
-            <button type="button" id="sidebarProfessionalsBtn" onclick="openProfessionalsSection()" class="sidebar-nav-btn group block w-full px-3.5 py-2.5 rounded-xl text-left transition font-medium text-[14.5px] sm:text-[15px] text-[var(--txt-secondary)] hover:text-[var(--txt-primary)] hover:bg-[var(--card-hover)]/70 border border-transparent hover:border-[var(--border-color)]/60 cursor-pointer" title="{{ __('Pakar') }}">
-                <span class="sidebar-text truncate block">{{ __('Pakar') }}</span>
-                <span class="sidebar-collapsed-tile hidden items-center justify-center">
-                    <svg class="w-5 h-5 text-[var(--txt-secondary)] group-hover:text-[var(--txt-primary)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+            <button type="button" id="sidebarProfessionalsBtn" onclick="openProfessionalsSection()" class="sidebar-nav-btn group block w-full px-3.5 py-2.5 rounded-[16px] text-left transition font-medium text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-clay-hover)] border border-transparent cursor-pointer" title="{{ __('Pakar') }}">
+                <p class="sidebar-text truncate block">{{ __('Pakar') }}</p>
+                <div class="sidebar-collapsed-tile hidden items-center justify-center">
+                    <svg class="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                     </svg>
-                </span>
+                </div>
             </button>
         </div>
 
-        <!-- c. Dibawahnya: Riwayat Chat User (Saat minimize hanya ada icon history) -->
         <div class="sidebar-history-box flex-1 overflow-y-auto p-3 space-y-1.5 no-scrollbar chat-room-scroll">
-            <div class="sidebar-text px-2 py-1 text-xs sm:text-sm font-bold text-[var(--txt-tertiary)] uppercase tracking-wider flex items-center justify-between">
-                <span>{{ __('Riwayat Obrolan') }}</span>
+            <div class="sidebar-text px-2 py-1 text-xs font-semibold text-[var(--text-muted)] flex items-center justify-between">
+                <p>{{ __('Riwayat Obrolan') }}</p>
             </div>
 
-            <!-- Icon History saat minimize (Hanya tampil saat minimize, list history disembunyikan) -->
             <div class="sidebar-minimized-history hidden items-center justify-center py-1">
-                <button type="button" onclick="toggleSidebarCollapse()" class="w-10 h-10 rounded-xl flex items-center justify-center text-[var(--txt-secondary)] hover:text-[var(--txt-primary)] hover:bg-[var(--card-hover)] border border-transparent hover:border-[var(--border-color)]/60 transition cursor-pointer" title="{{ __('Riwayat Obrolan') }}">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <button type="button" onclick="toggleSidebarCollapse()" class="w-10 h-10 rounded-xl flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] transition cursor-pointer" title="{{ __('Riwayat Obrolan') }}" aria-label="{{ __('Riwayat Obrolan') }}">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                 </button>
             </div>
 
-            <!-- List History Obrolan (Hanya tampil saat sidebar terbuka) -->
-            <div class="sidebar-history-list space-y-1.5">
+            <div class="sidebar-history-list space-y-1">
                 @forelse($userSessions as $s)
                     @php $isActive = $session && ($s->id === $session->id); @endphp
                     <a href="{{ route('chat.show', $s->id) }}"
-                       class="sidebar-history-item group block px-3 py-2.5 rounded-xl transition text-left relative {{ $isActive ? 'bg-[var(--card-hover)] font-semibold text-[var(--txt-primary)] border border-[var(--border-color)] shadow-2xs' : 'text-[var(--txt-secondary)] hover:bg-[var(--card-hover)]/70 hover:text-[var(--txt-primary)] border border-transparent' }}"
+                       class="sidebar-history-item group block px-3 py-2.5 rounded-xl transition text-left relative {{ $isActive ? 'bg-[var(--surface-gentle)] font-semibold text-[var(--text-gentle)] border border-[var(--border-gentle)]' : 'text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] border border-transparent' }}"
                        title="{{ $s->topic->name ?? $s->title }}">
                         <div class="flex items-center justify-between gap-2">
                             <p class="truncate text-[14.5px] sm:text-[15.5px] {{ $isActive ? 'font-bold text-[var(--txt-primary)]' : 'font-medium' }}">
                                 {{ $s->topic->name ?? $s->title ?? __('Percakapan Weisz') }}
                             </p>
                             @if($isActive)
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" title="{{ __('Sedang Dibuka') }}"></span>
+                            <div class="w-2 h-2 rounded-full bg-[var(--color-success)] shrink-0" title="{{ __('Sedang Dibuka') }}"></div>
                             @endif
                         </div>
                         <p class="text-xs sm:text-[13px] text-[var(--txt-tertiary)] truncate mt-0.5">
@@ -237,12 +215,11 @@
                     <p class="text-xs sm:text-[13px] text-[var(--txt-tertiary)] truncate">{{ $user->email }}</p>
                 </div>
 
-                <!-- Option: Profile -->
-                <button type="button" id="sidebarProfileBtn" onclick="openProfileSection()" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm sm:text-[15px] font-medium text-[var(--txt-primary)] hover:bg-[var(--card-hover)] transition text-left cursor-pointer">
-                    <svg class="w-4.5 h-4.5 text-[var(--txt-secondary)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                <button type="button" id="sidebarProfileBtn" onclick="openProfileSection()" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm sm:text-[15px] font-medium text-[var(--text-primary)] hover:bg-[var(--surface-clay-hover)] transition text-left cursor-pointer">
+                    <svg class="w-4.5 h-4.5 text-[var(--text-secondary)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                     </svg>
-                    <span>{{ __('Profile') }}</span>
+                    {{ __('Profile') }}
                 </button>
             </div>
 
@@ -274,7 +251,7 @@
     <!-- ======================================================== -->
     <main class="flex-1 h-full min-h-0 flex flex-col overflow-hidden relative bg-transparent z-10 min-w-0 transition-all duration-300">
         
-        <!-- Floating Controls: Mobile Hamburger (Melayang di atas tanpa memotong area scrolling) -->
+        <!-- Floating Controls: Mobile Hamburger & Quick Safety (Poin 43) -->
         <div id="chatHeaderControls" class="absolute top-0 inset-x-0 h-14 px-4 sm:px-6 md:px-10 flex items-center justify-between pointer-events-none z-30">
             <div class="flex items-center gap-2 pointer-events-auto">
                 <!-- Toggle Sidebar Button (Mobile drawer only) -->
@@ -283,23 +260,35 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </button>
-                <span class="sr-only">Context Locked</span>
+                <p class="sr-only">Context Locked</p>
+            </div>
+
+            <div class="flex items-center gap-2 pointer-events-auto ml-auto">
+                <button type="button" id="crisisSafetyBtn" onclick="openCrisisModal()" class="h-10 sm:h-11 px-3 sm:px-3.5 rounded-[18px] border border-[var(--color-warning-border)] bg-[var(--color-warning-bg)] text-[var(--color-warning)] shadow-[var(--clay-rest)] flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold hover:opacity-95 transition cursor-pointer" title="{{ __('Bantuan Darurat & Krisis 24 Jam') }}" aria-label="{{ __('Akses Bantuan Darurat dan Krisis') }}">
+                    <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                    <p class="hidden sm:block">{{ __('Bantuan Krisis') }}</p>
+                </button>
+
+                <button type="button" id="exportChatBtn" onclick="exportConversationTranscript()" class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-[var(--border-color)] bg-white/95 dark:bg-[#1f1f1f]/95 text-[var(--txt-secondary)] hover:text-[var(--txt-primary)] backdrop-blur-md flex items-center justify-center transition shadow-xs cursor-pointer" title="{{ __('Salin Transkrip Obrolan') }}" aria-label="{{ __('Salin Transkrip Obrolan') }}">
+                    <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75" />
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <!-- Chat Feed: Full width scrolling membentang penuh hingga batas paling atas layar -->
-        <div id="messagesContainer" class="flex-1 min-h-0 overflow-y-auto w-full px-4 sm:px-6 md:px-10 lg:px-12 pt-16 sm:pt-20 pb-4 sm:pb-6 scroll-smooth bg-transparent {{ (!empty($startWithExplore) || !empty($startWithProfile) || !empty($startWithTopics) || !empty($startWithProfessionals) || empty($session)) ? 'hidden' : '' }}">
-            <div id="chatFeedList" class="w-full max-w-4xl lg:max-w-5xl mx-auto space-y-6">
+        <div id="messagesContainer" role="region" aria-label="{{ __('Area Obrolan') }}" class="flex-1 min-h-0 overflow-y-auto w-full px-4 sm:px-6 md:px-10 pt-16 sm:pt-20 pb-4 sm:pb-6 scroll-smooth bg-transparent {{ (!empty($startWithExplore) || !empty($startWithProfile) || !empty($startWithTopics) || !empty($startWithProfessionals) || empty($session)) ? 'hidden' : '' }}">
+            <div id="chatFeedList" role="log" aria-live="polite" aria-label="{{ __('Riwayat Percakapan') }}" class="w-full max-w-3xl mx-auto space-y-6">
                 @php
                     $latestCheckinMsg = $messages->filter(fn($m) => !empty($m->metadata['mood_checkin']))->last();
                     $latestCheckinId = $latestCheckinMsg?->id;
                     $registeredPros = $professionals ?? \App\Models\Professional::where('status', 'active')->get();
                 @endphp
 
-                <!-- Messages List -->
                 @foreach($messages as $msg)
                     @if($msg->sender === 'user')
-                    <!-- User Bubble -->
                     <div class="flex justify-end w-full">
                         @if(!empty($msg->metadata['type']) && $msg->metadata['type'] === 'voice_note' && !empty($msg->metadata['audio_url']))
                         @php
@@ -312,10 +301,9 @@
                             }
                             $durationSec = (int)($msg->metadata['duration'] ?? 0);
                         @endphp
-                        <!-- Voice Note Bubble -->
-                        <div data-role="voice-player" data-duration="{{ $durationSec }}" class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white p-3 sm:p-4 space-y-2 select-text">
+                        <div data-role="voice-player" data-duration="{{ $durationSec }}" class="max-w-[85%] sm:max-w-[72%] rounded-2xl rounded-tr-sm bg-[var(--sky-600)] dark:bg-[var(--surface-gentle)] border border-transparent dark:border-[var(--border-gentle)] text-white dark:text-[var(--text-primary)] p-3.5 sm:p-4 space-y-2 select-text">
                             <div class="flex items-center gap-2.5 sm:gap-3">
-                                <button type="button" class="vn-play-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#252525] dark:bg-white dark:text-[#252525] flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 transition shadow-xs cursor-pointer" data-audio-src="{{ $audioSrc }}" data-duration="{{ $durationSec }}" title="Putar Pesan Suara">
+                                <button type="button" class="vn-play-btn w-10 h-10 rounded-full bg-white text-[var(--sky-700)] dark:bg-[var(--sky-300)] dark:text-[#14181d] flex items-center justify-center shrink-0 hover:opacity-90 active:scale-95 transition cursor-pointer" data-audio-src="{{ $audioSrc }}" data-duration="{{ $durationSec }}" title="Putar Pesan Suara" aria-label="Putar Pesan Suara">
                                     <svg class="vn-icon-play w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z"/>
                                     </svg>
@@ -324,26 +312,26 @@
                                     </svg>
                                 </button>
                                 <div class="flex-1 min-w-0">
-                                    <div class="vn-progress-track relative w-full h-1.5 sm:h-2 bg-white/25 rounded-full overflow-hidden cursor-pointer" title="Lompat ke durasi">
-                                        <div class="vn-progress-bar h-full bg-white rounded-full transition-all duration-75" style="width: 0%;"></div>
+                                    <div class="vn-progress-track relative w-full h-1.5 sm:h-2 bg-white/30 dark:bg-white/15 rounded-full overflow-hidden cursor-pointer" title="Lompat ke durasi">
+                                        <div class="vn-progress-bar h-full bg-white dark:bg-[var(--sky-300)] rounded-full transition-all duration-75" style="width: 0%;"></div>
                                     </div>
-                                    <div class="flex items-center justify-between text-[10.5px] sm:text-[11.5px] text-white/70 mt-1 font-mono">
-                                        <span class="vn-time-current">0:00</span>
-                                        <span class="vn-time-total">{{ gmdate('i:s', $msg->metadata['duration'] ?? 0) }}</span>
+                                    <div class="flex items-center justify-between text-[11px] text-white/80 dark:text-[var(--text-secondary)] mt-1 font-mono">
+                                        <time class="vn-time-current">0:00</time>
+                                        <time class="vn-time-total">{{ gmdate('i:s', $msg->metadata['duration'] ?? 0) }}</time>
                                     </div>
                                 </div>
                             </div>
                             @if(!empty($msg->message))
-                            <div class="vn-transcript-section pt-1.5 border-t border-white/15">
-                                <button type="button" class="vn-transcript-toggle w-full flex items-center justify-between gap-1 text-[11px] text-white/70 hover:text-white transition-colors cursor-pointer select-none py-0.5" title="Buka Transkrip">
-                                    <span class="font-medium tracking-wide">Transkrip</span>
-                                    <svg class="vn-toggle-arrow w-3.5 h-3.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                            <div class="vn-transcript-section pt-1.5 border-t border-white/20 dark:border-[var(--border-gentle)]">
+                                <button type="button" class="vn-transcript-toggle w-full flex items-center justify-between gap-1 text-[11px] text-white/80 dark:text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer select-none py-0.5" title="Buka Transkrip">
+                                    <p class="font-medium tracking-wide">Transkrip</p>
+                                    <svg class="vn-toggle-arrow w-3.5 h-3.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </button>
-                                <div class="vn-transcript-collapse grid grid-rows-[0fr] transition-all duration-300 ease-in-out">
+                                <div class="vn-transcript-collapse grid grid-rows-[0fr] transition-all duration-200 ease-in-out">
                                     <div class="overflow-hidden">
-                                        <div class="pt-1.5 text-xs sm:text-[13px] text-white/90 leading-relaxed italic mt-1">
+                                        <div class="pt-1.5 text-xs sm:text-[13px] text-white/95 dark:text-[var(--text-primary)] leading-relaxed italic mt-1">
                                             "{!! nl2br(e($msg->message)) !!}"
                                         </div>
                                     </div>
@@ -352,31 +340,27 @@
                             @endif
                         </div>
                         @else
-                        <!-- Regular Text Bubble -->
-                        <div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">
+                        <div class="max-w-[86%] sm:max-w-[72%] rounded-2xl rounded-tr-sm bg-[var(--sky-100)] dark:bg-[var(--surface-gentle)] border border-[var(--sky-200)] dark:border-[var(--border-gentle)] text-[var(--sky-800)] dark:text-[var(--text-primary)] px-4.5 sm:px-5 py-3 sm:py-3.5 text-[15px] sm:text-[15.5px] leading-[1.65]">
                             {!! nl2br(e($msg->message)) !!}
                         </div>
                         @endif
                     </div>
                     @elseif($msg->sender === 'assistant')
-                    <!-- Assistant Bubble -->
-                    <div class="max-w-[95%] sm:max-w-[85%]">
-                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">
+                    <div class="max-w-[68ch] pl-1">
+                        <div class="text-[var(--text-primary)] text-[15px] sm:text-[16px] leading-[1.7]">
                             {!! nl2br(e($msg->message)) !!}
                         </div>
                     </div>
 
-                    <!-- Beda Bubble Chat: Sistem Pakar Ekspresi & Cek Kondisi Mood (Style Bubble Biasa) -->
                     @if(!empty($msg->metadata['mood_checkin']))
                     @php
                         $checkinAnswered = !empty($msg->metadata['selected_mood']);
                         $selectedMoodKey = $msg->metadata['selected_mood'] ?? null;
-                        // Sekali pilih: bubble yang sudah dijawab atau sebelum check-in terbaru dikunci permanen
                         $isLocked = $checkinAnswered || (!empty($latestCheckinId) && $msg->id < $latestCheckinId);
                     @endphp
-                    <div class="max-w-[95%] sm:max-w-[85%] mood-checkin-wrapper" data-msg-id="{{ $msg->id }}" data-answered="{{ $isLocked ? 'true' : 'false' }}">
-                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed space-y-3">
-                            <p class="text-[15px] sm:text-base leading-relaxed text-[var(--txt-secondary)]">
+                    <div class="max-w-[68ch] mood-checkin-wrapper" data-msg-id="{{ $msg->id }}" data-answered="{{ $isLocked ? 'true' : 'false' }}">
+                        <div class="weisz-card-gentle px-5 py-4 space-y-3">
+                            <p class="text-sm sm:text-[15px] leading-relaxed text-[var(--text-secondary)]">
                                 {{ __('Seiring kita mengurai cerita, suasana perasaanmu bisa berkembang. Bagaimana kondisimu saat ini? Pilih salah satu untuk membantu Weisz menyesuaikan nada bicara dengan hatimu:') }}
                             </p>
                             <div class="grid grid-cols-5 gap-2 sm:gap-3 pt-1">
@@ -439,12 +423,11 @@
                                             </div>
                                         </div>
 
-                                        <!-- Middle: Keahlian (tanpa judul) -->
-                                        <div class="mt-2.5 pt-2 border-t border-[var(--border-color)]/70 flex flex-wrap gap-1">
+                                        <div class="mt-2.5 pt-2 border-t border-[var(--border-clay)] flex flex-wrap gap-1">
                                             @forelse($pro->specialization_tags as $tag)
-                                            <span class="px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[var(--txt-secondary)] border border-[var(--border-color)] text-[10px] sm:text-[10.5px] font-medium leading-tight">{{ $tag }}</span>
+                                            <p class="clay-pill-well text-[10px] sm:text-[10.5px] py-0.5 px-2">{{ $tag }}</p>
                                             @empty
-                                            <span class="text-[10px] text-[var(--txt-tertiary)]">-</span>
+                                            <p class="text-[10px] text-[var(--text-muted)]">-</p>
                                             @endforelse
                                         </div>
 
@@ -466,7 +449,7 @@
                                             <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.05 20.16C10.66 20.16 9.3 19.81 8.08 19.14L7.75 18.96L4.54 19.8L5.4 16.67L5.2 16.35C4.46 15.08 4.07 13.52 4.07 11.92C4.07 7.38 7.76 3.67 12.05 3.67M9.06 6.88C8.88 6.88 8.58 6.94 8.33 7.21C8.07 7.49 7.37 8.15 7.37 9.53C7.37 10.91 8.38 12.24 8.52 12.43C8.66 12.61 10.5 15.44 13.33 16.66C14 16.95 14.52 17.12 14.93 17.25C15.6 17.47 16.22 17.43 16.7 17.36C17.24 17.28 18.36 16.68 18.59 16.03C18.82 15.38 18.82 14.82 18.75 14.71C18.68 14.59 18.5 14.53 18.23 14.39C17.96 14.26 16.62 13.6 16.37 13.51C16.12 13.42 15.94 13.37 15.76 13.64C15.58 13.92 15.06 14.53 14.9 14.71C14.74 14.89 14.58 14.92 14.31 14.78C14.04 14.65 13.17 14.36 12.13 13.44C11.32 12.72 10.78 11.83 10.62 11.56C10.46 11.28 10.6 11.13 10.74 11C10.86 10.87 11.01 10.67 11.15 10.5C11.29 10.33 11.33 10.21 11.42 10.03C11.51 9.85 11.47 9.69 11.4 9.56C11.33 9.42 10.79 8.1 10.56 7.56C10.34 7.03 10.11 7.1 9.95 7.1L9.5 7.09C9.28 7.09 9.06 6.88 9.06 6.88Z" />
                                             </svg>
-                                            <span>WhatsApp</span>
+                                            WhatsApp
                                         </a>
                                     </div>
                                     @endif
@@ -477,13 +460,12 @@
                     </div>
                     @endif
 
-                    <!-- Beda Bubble Chat: Tombol Buat Percakapan Baru jika Keluar dari Topik -->
                     @if(!empty($msg->metadata['is_off_topic']))
                     <div class="max-w-[95%] sm:max-w-[85%]">
-                        <div class="p-4 sm:p-5 rounded-2xl rounded-tl-sm bg-neutral-50 dark:bg-neutral-900/50 border border-[var(--border-color)] text-[15px] sm:text-base text-[var(--txt-secondary)] space-y-3">
+                        <div class="clay-card-blue p-4 sm:p-5 text-[15px] sm:text-base text-[var(--text-secondary)] space-y-3">
                             <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-[var(--brand-main)] animate-pulse"></span>
-                                <p class="font-bold text-[var(--brand-main)] text-base sm:text-lg">{{ __('Ingin Membahas Topik Lain?') }}</p>
+                                <div class="w-2 h-2 rounded-full bg-[var(--text-accent)] shrink-0" aria-hidden="true"></div>
+                                <p class="font-semibold text-[var(--text-accent)] text-base sm:text-lg">{{ __('Ingin Membahas Topik Lain?') }}</p>
                             </div>
                             <p class="text-[15px] sm:text-base leading-relaxed text-[var(--txt-primary)]">
                                 {{ __('Sepertinya ceritamu mulai menyentuh hal di luar topik ini. Agar refleksimu tetap terarah dan efektif, kamu bisa membuat percakapan baru dengan topik yang lebih sesuai.') }}
@@ -505,17 +487,10 @@
                     @endif
                 @endforeach
 
-                <!-- Dynamic AI Typing Indicator -->
-                <div id="typingIndicator" class="hidden max-w-[95%] sm:max-w-[85%]">
-                    <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] px-4 sm:px-5 py-3 sm:py-3.5 inline-flex items-center gap-2.5 sm:gap-3">
-                        <span class="relative flex h-2.5 w-2.5 shrink-0">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--brand-main)] opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--brand-main)]"></span>
-                        </span>
-                        <span id="typingIndicatorText" class="text-xs sm:text-[13.5px] font-medium text-[var(--txt-secondary)] transition-all duration-150 ease-out select-none">
-                            {{ __('Memikirkan jawaban...') }}
-                        </span>
-                    </div>
+                <div id="typingIndicator" class="hidden max-w-[68ch] pl-1" role="status" aria-live="polite">
+                    <p id="typingIndicatorText" class="text-sm text-[var(--text-muted)] motion-safe:animate-pulse select-none">
+                        {{ __('Weisz sedang merespons...') }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -530,65 +505,69 @@
                         {{ __('Aku bingung mau cerita apa') }}
                     </button>
 
-                    @foreach($suggestedChips as $chip)
+                    @php
+                        $chipLimit = ($session && $session->hasUserMessages()) ? 4 : 2;
+                    @endphp
+                    @foreach(array_slice((array) ($suggestedChips ?? []), 0, $chipLimit) as $chip)
                     <button type="button" class="suggestion-chip weisz-chip text-xs sm:text-[13.5px] py-1 px-3 bg-white dark:bg-[#1f1f1f] shrink-0 whitespace-nowrap font-medium" data-text="{{ $chip }}">
                         {{ $chip }}
                     </button>
                     @endforeach
                 </div>
 
-                <!-- Composer Form with Clean & Compact Input Box -->
                 <form id="chatForm" method="POST" action="{{ $session ? ('/chat/' . $session->id . '/send') : '/chat' }}" data-session-id="{{ $session?->id ?? '' }}" class="w-full">
                     @csrf
-                    <div id="composerInputPill" class="flex items-center gap-2 p-1.5 sm:p-2 rounded-2xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] focus-within:border-[var(--brand-main)] focus-within:ring-2 focus-within:ring-[var(--brand-main)]/20 transition-all relative">
+                    <div id="composerInputPill" class="flex items-center gap-2 p-1.5 sm:p-2 rounded-2xl bg-[var(--surface)] border border-[var(--border)] focus-within:border-[var(--border-focus)] focus-within:ring-2 focus-within:ring-[var(--border-focus)]/20 transition relative">
                         <textarea id="messageInput" name="message" rows="1"
                             placeholder="{{ __('Ceritakan apapun...') }}"
-                            class="flex-1 bg-white dark:bg-[#1f1f1f] border-0 focus:ring-0 focus:outline-none px-3.5 py-2.5 text-sm sm:text-[15px] text-[var(--txt-primary)] placeholder-[var(--txt-tertiary)] resize-none overflow-y-hidden leading-6 break-words whitespace-pre-wrap m-0 block rounded-xl"
+                            class="flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none px-3.5 py-2.5 text-sm sm:text-[15px] text-[var(--text-primary)] placeholder-[var(--text-muted)] resize-none overflow-y-hidden leading-6 break-words whitespace-pre-wrap m-0 block rounded-xl"
                             style="min-height: 44px; height: 44px; max-height: 112px;"></textarea>
 
-                        <!-- Voice Note Recording Bar (Ditampilkan saat sedang merekam) -->
                         <div id="voiceNoteRecordingBar" class="hidden flex-1 flex items-center justify-between gap-1.5 sm:gap-2 px-2.5 py-1 min-h-[44px] h-[44px] overflow-hidden">
                             <div class="flex items-center gap-2 min-w-0">
                                 <div id="voiceNoteStatusDot" class="relative flex items-center justify-center shrink-0">
-                                    <span id="voiceNotePing" class="w-2.5 h-2.5 rounded-full bg-neutral-900 dark:bg-white opacity-40 animate-ping absolute"></span>
-                                    <span id="voiceNoteDot" class="w-2 h-2 rounded-full bg-neutral-900 dark:bg-white relative"></span>
+                                    <div id="voiceNotePing" class="w-2.5 h-2.5 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] opacity-40 motion-safe:animate-ping absolute"></div>
+                                    <div id="voiceNoteDot" class="w-2 h-2 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] relative"></div>
                                 </div>
-                                <span id="voiceNoteTimer" class="font-mono text-xs sm:text-sm font-bold text-[var(--txt-primary)] shrink-0">0:00</span>
-                                <div id="voiceNoteWaveform" class="flex items-center gap-0.5 h-3.5 shrink-0 px-1">
-                                    <span class="vn-wave-bar w-0.5 h-2 bg-[#252525] dark:bg-white rounded-full transition-all duration-75"></span>
-                                    <span class="vn-wave-bar w-0.5 h-3.5 bg-[#252525] dark:bg-white rounded-full transition-all duration-75"></span>
-                                    <span class="vn-wave-bar w-0.5 h-1.5 bg-[#252525] dark:bg-white rounded-full transition-all duration-75"></span>
-                                    <span class="vn-wave-bar w-0.5 h-3 bg-[#252525] dark:bg-white rounded-full transition-all duration-75"></span>
-                                    <span class="vn-wave-bar w-0.5 h-2 bg-[#252525] dark:bg-white rounded-full transition-all duration-75"></span>
+                                <time id="voiceNoteTimer" class="font-mono text-xs sm:text-sm font-semibold text-[var(--text-primary)] shrink-0">0:00</time>
+                                <div id="voiceNoteWaveform" class="flex items-center gap-0.5 h-3.5 shrink-0 px-1" aria-hidden="true">
+                                    <div class="vn-wave-bar w-0.5 h-2 bg-[var(--sky-600)] dark:bg-[var(--sky-400)] rounded-full transition-all duration-75"></div>
+                                    <div class="vn-wave-bar w-0.5 h-3.5 bg-[var(--sky-600)] dark:bg-[var(--sky-400)] rounded-full transition-all duration-75"></div>
+                                    <div class="vn-wave-bar w-0.5 h-1.5 bg-[var(--sky-600)] dark:bg-[var(--sky-400)] rounded-full transition-all duration-75"></div>
+                                    <div class="vn-wave-bar w-0.5 h-3 bg-[var(--sky-600)] dark:bg-[var(--sky-400)] rounded-full transition-all duration-75"></div>
+                                    <div class="vn-wave-bar w-0.5 h-2 bg-[var(--sky-600)] dark:bg-[var(--sky-400)] rounded-full transition-all duration-75"></div>
                                 </div>
-                                <span id="voiceNoteLiveText" class="text-xs text-[var(--txt-secondary)] truncate italic min-w-0">{{ __('Merekam...') }}</span>
+                                <p id="voiceNoteLiveText" class="text-xs text-[var(--text-secondary)] truncate italic min-w-0">{{ __('Merekam...') }}</p>
                             </div>
-                            <button type="button" id="cancelVoiceNoteBtn" class="text-xs font-medium text-[var(--txt-secondary)] hover:text-[var(--txt-primary)] transition-colors px-1.5 py-0.5 rounded cursor-pointer shrink-0 select-none" title="{{ __('Batalkan Rekaman') }}">
+                            <button type="button" id="cancelVoiceNoteBtn" class="text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors px-2 py-1 rounded cursor-pointer shrink-0 select-none" title="{{ __('Batalkan Rekaman') }}">
                                 {{ __('Batal') }}
                             </button>
                         </div>
 
-                        <!-- Tombol Jeda / Lanjut (Bentuk sama persis dengan button VN/kirim, hanya icon, di samping button VN/kirim) -->
-                        <button type="button" id="pauseResumeVoiceNoteBtn" class="hidden w-12 h-12 sm:w-11 sm:h-11 rounded-2xl bg-[#252525] text-white dark:bg-white dark:text-[#252525] flex items-center justify-center hover:opacity-90 active:scale-95 transition shadow-xs shrink-0 cursor-pointer" title="{{ __('Jeda Rekaman') }}">
-                            <svg id="pauseIcon" class="w-5 h-5 sm:w-4.5 sm:h-4.5" fill="currentColor" viewBox="0 0 24 24">
+                        <button type="button" id="pauseResumeVoiceNoteBtn" class="hidden w-11 h-11 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] flex items-center justify-center hover:opacity-90 active:scale-95 transition shrink-0 cursor-pointer" title="{{ __('Jeda Rekaman') }}" aria-label="{{ __('Jeda Rekaman') }}">
+                            <svg id="pauseIcon" class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                             </svg>
-                            <svg id="resumeIcon" class="w-5 h-5 sm:w-4.5 sm:h-4.5 hidden ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                            <svg id="resumeIcon" class="w-4.5 h-4.5 hidden ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z"/>
                             </svg>
                         </button>
-                        
-                        <!-- Voice Note Button (Muncul jika input kosong) -->
-                        <button type="button" id="voiceNoteBtn" class="w-12 h-12 sm:w-11 sm:h-11 rounded-2xl bg-[#252525] text-white dark:bg-white dark:text-[#252525] flex items-center justify-center hover:opacity-90 active:scale-95 transition shadow-xs shrink-0 cursor-pointer" title="{{ __('Kirim Voice Note') }}">
-                            <svg class="w-6 h-6 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor">
+
+                        <button type="button" id="voiceNoteBtn" class="w-11 h-11 rounded-full bg-[var(--sky-600)] hover:bg-[var(--sky-700)] text-white dark:bg-[var(--sky-300)] dark:hover:bg-[#b2d6f2] dark:text-[#14181d] flex items-center justify-center active:scale-95 transition shrink-0 cursor-pointer" title="{{ __('Kirim Voice Note') }}" aria-label="{{ __('Kirim Voice Note') }}">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />
                             </svg>
                         </button>
 
-                        <!-- Send Button (Muncul jika user memasukkan karakter selain spasi) -->
-                        <button type="submit" id="sendBtn" class="hidden w-12 h-12 sm:w-11 sm:h-11 rounded-2xl bg-[#252525] text-white dark:bg-white dark:text-[#252525] flex items-center justify-center hover:opacity-90 active:scale-95 transition shadow-xs shrink-0 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed" title="{{ __('Kirim Pesan') }}">
-                            <svg class="w-6 h-6 sm:w-5.5 sm:h-5.5" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor">
+                        <button type="submit" id="sendBtn" class="hidden w-11 h-11 rounded-full bg-[var(--sky-600)] hover:bg-[var(--sky-700)] text-white dark:bg-[var(--sky-300)] dark:hover:bg-[#b2d6f2] dark:text-[#14181d] flex items-center justify-center active:scale-95 transition shrink-0 cursor-pointer disabled:opacity-45 disabled:cursor-not-allowed" title="{{ __('Kirim Pesan') }}" aria-label="{{ __('Kirim Pesan') }}">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                            </svg>
+                        </button>
+
+                        <button type="button" id="stopAiBtn" class="hidden w-11 h-11 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] flex items-center justify-center hover:opacity-90 active:scale-95 transition shrink-0 cursor-pointer" title="{{ __('Hentikan Respon') }}" aria-label="{{ __('Hentikan Respon AI') }}">
+                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="5" y="5" width="14" height="14" rx="2" />
                             </svg>
                         </button>
                     </div>
@@ -596,25 +575,15 @@
             </div>
         </div>
 
-        <!-- ======================================================== -->
-        <!-- 3. EXPLORE WIZARD IN CHAT ROOM                           -->
-        <!-- Menu & Stepper Progress dari page Explore ditampilkan    -->
-        <!-- langsung di section room chat tanpa pindah halaman       -->
-        <!-- ======================================================== -->
         <div id="exploreRoomSection" class="flex-1 h-full min-h-0 flex flex-col overflow-hidden relative bg-transparent z-10 {{ (empty($startWithProfile) && empty($startWithTopics) && empty($startWithProfessionals) && (!empty($startWithExplore) || empty($session))) ? '' : 'hidden' }}">
-            
-            <!-- Scrollable Explore Area -->
             <div id="exploreScrollContainer" class="flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-16 sm:pt-8 pb-6 sm:pb-8 space-y-6 sm:space-y-8 no-scrollbar chat-room-scroll">
                 <div class="max-w-5xl mx-auto w-full space-y-6 sm:space-y-8 pb-12">
-                    
-                    <!-- Dynamic Header Card + 4-Step Stepper Progress Bar (Sama persis seperti page Explore) -->
-                    <div class="rounded-3xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] p-5 sm:p-8 space-y-5 shadow-xs">
-                        <!-- Step Header Text -->
+                    <div class="weisz-card p-5 sm:p-8 space-y-5">
                         <div class="space-y-1.5">
-                            <h1 id="exploreStepTitle" class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-[var(--txt-primary)]">
+                            <h1 id="exploreStepTitle" class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
                                 {{ __('Apa yang Sedang Mengganjal Pikiranmu?') }}
                             </h1>
-                            <p id="exploreStepDescription" class="text-xs sm:text-sm md:text-base text-[var(--txt-secondary)] leading-relaxed">
+                            <p id="exploreStepDescription" class="text-xs sm:text-sm md:text-base text-[var(--text-secondary)] leading-relaxed">
                                 {{ __('Pilih kategori situasi yang paling mendekati kondisimu saat ini. Setiap kategori dirancang dengan konteks psikologis spesifik untuk mengurai keresahanmu secara bertahap dan terarah.') }}
                             </p>
                         </div>
@@ -690,21 +659,21 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
                                                 </svg>
                                             </div>
-                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[var(--card-secondary)] text-[var(--txt-secondary)] border border-[var(--border-color)]/70">
+                                            <p class="clay-pill-well text-[11px]">
                                                 {{ $cat->subcategories->count() }} {{ __('Subkategori') }}
-                                            </span>
+                                            </p>
                                         </div>
                                         <div class="space-y-1.5 pt-1">
-                                            <h2 class="text-base sm:text-lg font-bold text-[var(--txt-primary)] group-hover:text-[var(--brand-main)] transition line-clamp-2">
+                                            <h2 class="text-base sm:text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--text-accent)] transition line-clamp-2">
                                                 {{ $cat->name }}
                                             </h2>
-                                            <p class="text-xs sm:text-sm text-[var(--txt-secondary)] leading-relaxed line-clamp-3">
+                                            <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3">
                                                 {{ $cat->description }}
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="pt-3 border-t border-[var(--border-color)]/60 flex items-center justify-between text-xs font-semibold text-[var(--txt-secondary)] group-hover:text-[var(--txt-primary)] transition">
-                                        <span>{{ __('Pilih Kategori') }}</span>
+                                    <div class="pt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-accent)] transition">
+                                        <p class="clay-arrow-cue">{{ __('Pilih Kategori') }}</p>
                                         <svg class="w-4 h-4 transition-transform group-hover:translate-x-1 text-[var(--brand-main)]" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                         </svg>
@@ -789,8 +758,8 @@
 
                         <!-- 2.a Informasi Akun: Avatar, Nama, Email -->
                         <div class="flex items-center gap-4 sm:gap-5 pb-6 border-b border-[var(--border-color)]/80 relative z-10">
-                            <div id="profileAvatarBadge" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#252525] text-white dark:bg-white dark:text-[#252525] flex items-center justify-center font-extrabold text-2xl sm:text-3xl shadow-md ring-4 ring-[var(--card-secondary)] shrink-0 transition-transform">
-                                <span id="profileAvatarLetter">{{ strtoupper(substr($user->name, 0, 1)) }}</span>
+                            <div id="profileAvatarBadge" class="w-16 h-16 sm:w-20 sm:h-20 rounded-[20px] bg-[var(--sky-600)] text-white dark:bg-[var(--sky-400)] dark:text-[#121821] flex items-center justify-center font-bold text-2xl sm:text-3xl shadow-[var(--clay-btn-primary)] shrink-0">
+                                <p id="profileAvatarLetter">{{ strtoupper(substr($user->name, 0, 1)) }}</p>
                             </div>
                             <div class="min-w-0 flex-1">
                                 <h1 id="profileDisplayName" class="text-xl sm:text-2xl font-extrabold tracking-tight text-[var(--txt-primary)] truncate">
@@ -822,28 +791,27 @@
                                         placeholder="{{ __('Masukkan nama akun...') }}" aria-label="{{ __('Nama Akun') }}"
                                         class="flex-1 h-11 sm:h-12 px-4 rounded-xl sm:rounded-2xl bg-[var(--card-secondary)] border border-[var(--border-color)] text-sm sm:text-base text-[var(--txt-primary)] placeholder-[var(--txt-tertiary)] focus:outline-none focus:border-[#252525] dark:focus:border-white focus:ring-2 focus:ring-[#252525]/10 dark:focus:ring-white/10 transition leading-normal">
 
-                                    <button type="submit" id="saveProfileNameBtn" class="shrink-0 h-11 sm:h-12 px-5 rounded-xl sm:rounded-2xl bg-[#252525] text-white dark:bg-white dark:text-[#252525] hover:opacity-90 active:scale-95 text-xs sm:text-sm font-bold transition shadow-xs cursor-pointer inline-flex items-center justify-center gap-2">
-                                        <svg id="saveProfileSpinner" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+                                    <button type="submit" id="saveProfileNameBtn" class="weisz-btn-primary shrink-0 h-11 sm:h-12 px-5 text-xs sm:text-sm">
+                                        <svg id="saveProfileSpinner" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                                         </svg>
-                                        <span>{{ __('Simpan Perubahan') }}</span>
+                                        {{ __('Simpan Perubahan') }}
                                     </button>
                                 </div>
 
-                                <!-- Status Feedback Alerts -->
-                                <div id="profileUpdateSuccessAlert" class="hidden p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs sm:text-sm text-emerald-800 dark:text-emerald-300 flex items-center gap-2">
-                                    <svg class="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                                <div id="profileUpdateSuccessAlert" class="hidden p-3 rounded-[14px] bg-[var(--color-success-bg)] border border-[var(--color-success-border)] text-xs sm:text-sm text-[var(--color-success)] flex items-center gap-2">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                     </svg>
-                                    <span id="profileSuccessMsgText">{{ __('Nama akun berhasil diperbarui.') }}</span>
+                                    <p id="profileSuccessMsgText">{{ __('Nama akun berhasil diperbarui.') }}</p>
                                 </div>
 
-                                <div id="profileUpdateErrorAlert" class="hidden p-3 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-xs sm:text-sm text-red-800 dark:text-red-300 flex items-center gap-2">
-                                    <svg class="w-4 h-4 shrink-0 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                                <div id="profileUpdateErrorAlert" class="hidden p-3 rounded-[14px] bg-[var(--color-error-bg)] border border-[var(--color-error-border)] text-xs sm:text-sm text-[var(--color-error)] flex items-center gap-2">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
                                     </svg>
-                                    <span id="profileErrorMsgText">{{ __('Terjadi kesalahan saat memperbarui nama.') }}</span>
+                                    <p id="profileErrorMsgText">{{ __('Terjadi kesalahan saat memperbarui nama.') }}</p>
                                 </div>
                             </form>
                         </div>
@@ -1002,8 +970,8 @@
                                     </p>
                                 </div>
 
-                                <div class="pt-4 mt-5 border-t border-[var(--border-color)]/70 w-full flex items-center justify-between text-xs sm:text-[13px] font-semibold text-[var(--txt-tertiary)] group-hover:text-[var(--txt-primary)] transition">
-                                    <span>{{ __('Mulai Percakapan') }}</span>
+                                <div class="pt-4 mt-5 border-t border-[var(--border-clay)] w-full flex items-center justify-between text-xs sm:text-[13px] font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-accent)] transition">
+                                    <p class="clay-arrow-cue">{{ __('Mulai Percakapan') }}</p>
                                     <div class="w-8 h-8 rounded-xl bg-[var(--card-secondary)] group-hover:bg-[#252525] group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-[#252525] flex items-center justify-center transition-all duration-200 group-hover:translate-x-0.5 shadow-2xs">
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -1088,34 +1056,32 @@
                                     </div>
                                 </div>
 
-                                <!-- Middle: Keahlian (tanpa judul) -->
-                                <div class="mt-2.5 pt-2 border-t border-[var(--border-color)]/70 flex flex-wrap gap-1">
+                                <div class="mt-2.5 pt-2 border-t border-[var(--border-clay)] flex flex-wrap gap-1">
                                     @forelse($pro->specialization_tags as $tag)
-                                    <span class="px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[var(--txt-secondary)] border border-[var(--border-color)] text-[10px] sm:text-[10.5px] font-medium leading-tight">{{ $tag }}</span>
+                                    <p class="clay-pill-well text-[10px] sm:text-[10.5px] py-0.5 px-2">{{ $tag }}</p>
                                     @empty
-                                    <span class="text-[10px] text-[var(--txt-tertiary)]">-</span>
+                                    <p class="text-[10px] text-[var(--text-muted)]">-</p>
                                     @endforelse
                                 </div>
 
-                                <!-- Bottom: Alamat Praktik (tanpa judul) -->
-                                <div class="mt-2.5 pt-2 border-t border-[var(--border-color)]/70 flex items-start gap-1.5">
-                                    <svg class="w-3.5 h-3.5 text-[var(--txt-tertiary)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <div class="mt-2.5 pt-2 border-t border-[var(--border-clay)] flex items-start gap-1.5">
+                                    <svg class="w-3.5 h-3.5 text-[var(--text-muted)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                     </svg>
-                                    <p class="text-[11px] sm:text-xs text-[var(--txt-secondary)] leading-relaxed font-normal line-clamp-2" title="{{ $pro->address ?: ($pro->location ?: '-') }}">
+                                    <p class="text-[11px] sm:text-xs text-[var(--text-secondary)] leading-relaxed font-normal line-clamp-2" title="{{ $pro->address ?: ($pro->location ?: '-') }}">
                                         {{ $pro->address ?: ($pro->location ?: '-') }}
                                     </p>
                                 </div>
                             </div>
 
                             @if($pro->phone)
-                            <div class="mt-3 pt-2.5 border-t border-[var(--border-color)]/70">
-                                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pro->phone) }}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-semibold transition shadow-2xs">
-                                    <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                            <div class="mt-3 pt-2.5 border-t border-[var(--border-clay)]">
+                                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pro->phone) }}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-[14px] bg-[var(--color-success)] hover:opacity-95 text-white text-xs font-semibold transition shadow-[var(--clay-rest)]">
+                                    <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.05 20.16C10.66 20.16 9.3 19.81 8.08 19.14L7.75 18.96L4.54 19.8L5.4 16.67L5.2 16.35C4.46 15.08 4.07 13.52 4.07 11.92C4.07 7.38 7.76 3.67 12.05 3.67M9.06 6.88C8.88 6.88 8.58 6.94 8.33 7.21C8.07 7.49 7.37 8.15 7.37 9.53C7.37 10.91 8.38 12.24 8.52 12.43C8.66 12.61 10.5 15.44 13.33 16.66C14 16.95 14.52 17.12 14.93 17.25C15.6 17.47 16.22 17.43 16.7 17.36C17.24 17.28 18.36 16.68 18.59 16.03C18.82 15.38 18.82 14.82 18.75 14.71C18.68 14.59 18.5 14.53 18.23 14.39C17.96 14.26 16.62 13.6 16.37 13.51C16.12 13.42 15.94 13.37 15.76 13.64C15.58 13.92 15.06 14.53 14.9 14.71C14.74 14.89 14.58 14.92 14.31 14.78C14.04 14.65 13.17 14.36 12.13 13.44C11.32 12.72 10.78 11.83 10.62 11.56C10.46 11.28 10.6 11.13 10.74 11C10.86 10.87 11.01 10.67 11.15 10.5C11.29 10.33 11.33 10.21 11.42 10.03C11.51 9.85 11.47 9.69 11.4 9.56C11.33 9.42 10.79 8.1 10.56 7.56C10.34 7.03 10.11 7.1 9.95 7.1L9.5 7.09C9.28 7.09 9.06 6.88 9.06 6.88Z" />
                                     </svg>
-                                    <span>WhatsApp</span>
+                                    WhatsApp
                                 </a>
                             </div>
                             @endif
@@ -1147,6 +1113,49 @@
         </div>
     </main>
 </div>
+
+<!-- Crisis Support & Safety Modal (Poin 43) -->
+<div id="crisisSafetyModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs" role="dialog" aria-modal="true" aria-labelledby="crisisModalTitle">
+    <div class="weisz-card max-w-lg w-full p-6 sm:p-7 space-y-5 shadow-2xl relative">
+        <div class="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
+            <div class="flex items-center gap-2.5 text-amber-700 dark:text-amber-300">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/15 dark:bg-amber-400/15 flex items-center justify-center shrink-0">
+                    <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                </div>
+                <h3 id="crisisModalTitle" class="font-bold text-base sm:text-lg text-[var(--txt-primary)]">{{ __('Layanan Bantuan & Keselamatan') }}</h3>
+            </div>
+            <button type="button" onclick="closeCrisisModal()" class="text-[var(--txt-tertiary)] hover:text-[var(--txt-primary)] p-1.5 rounded-lg cursor-pointer" aria-label="{{ __('Tutup') }}">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <p class="text-xs sm:text-sm text-[var(--txt-secondary)] leading-relaxed">
+            {{ __('Jika kamu atau seseorang yang kamu kenal sedang berada dalam krisis emosional darurat atau dorongan menyakiti diri, mohon segera hubungi layanan profesional bebas pulsa berikut:') }}
+        </p>
+        <div class="space-y-2.5">
+            <a href="tel:119" class="clay-card-interactive p-3.5 rounded-[18px] bg-[var(--surface-clay-blue)] flex items-center justify-between gap-3">
+                <div>
+                    <p class="font-bold text-xs sm:text-sm text-[var(--text-primary)]">{{ __('Hotline Kesehatan Jiwa (Kemenkes)') }}</p>
+                    <p class="text-[11px] text-[var(--text-secondary)]">{{ __('Layanan darurat psikologis 24 jam') }}</p>
+                </div>
+                <p class="px-3 py-1.5 rounded-[14px] bg-[var(--sky-600)] text-white shadow-[var(--clay-btn-primary)] text-xs font-bold shrink-0">119 (ext. 8)</p>
+            </a>
+            <a href="tel:1500567" class="clay-card-interactive p-3.5 rounded-[18px] bg-[var(--surface-clay-blue)] flex items-center justify-between gap-3">
+                <div>
+                    <p class="font-bold text-xs sm:text-sm text-[var(--text-primary)]">{{ __('Halo Kemenkes') }}</p>
+                    <p class="text-[11px] text-[var(--text-secondary)]">{{ __('Pusat informasi & konseling kesehatan') }}</p>
+                </div>
+                <p class="px-3 py-1.5 rounded-[14px] bg-[var(--sky-600)] text-white shadow-[var(--clay-btn-primary)] text-xs font-bold shrink-0">1500-567</p>
+            </a>
+        </div>
+        <div class="pt-2 border-t border-[var(--border-color)] text-[11px] text-[var(--txt-tertiary)] leading-relaxed">
+            {{ __('Weisz adalah pendamping refleksi dan evaluasi pakar terpandu, bukan pengganti intervensi medis darurat.') }}
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -1170,106 +1179,91 @@
     const voiceNoteDot = document.getElementById('voiceNoteDot');
     const voiceNoteWaveform = document.getElementById('voiceNoteWaveform');
     const stuckHelpBtn = document.getElementById('stuckHelpBtn');
+    const stopAiBtn = document.getElementById('stopAiBtn');
+    const crisisSafetyModal = document.getElementById('crisisSafetyModal');
+    let currentAiAbortController = null;
     let isRecording = false;
     let isPaused = false;
     let userHasSentMessage = {{ ($session && $session->hasUserMessages()) ? 'true' : 'false' }};
 
-    // Tahapan logis indikator loading AI secara berurut:
-    // 1. Memikirkan -> 2. Menyiapkan -> 3. Memberikan -> 4. Sudah siap
-    let typingIndicatorTimer = null;
-    let typingIndicatorStepTimeout = null;
-    const indicatorStages = [
-        [
-            "Memikirkan jawaban...",
-            "Memikirkan jawaban terbaik...",
-            "Meresapi ceritamu...",
-            "Merenungkan respon yang tepat...",
-            "Memikirkan sudut pandang baru...",
-            "Memikirkan langkah awal yang nyaman..."
-        ],
-        [
-            "Menyiapkan solusi...",
-            "Menyiapkan solusi perlahan...",
-            "Merangkai kata yang menenangkan...",
-            "Menyiapkan respon hangat untukmu...",
-            "Menyusun solusi dan dukungan...",
-            "Menyiapkan sudut pandang nyaman..."
-        ],
-        [
-            "Memberikan jawaban...",
-            "Memberikan jawaban untukmu...",
-            "Menyusun pesan balasan...",
-            "Menyampaikan respon hangat...",
-            "Memberikan sudut pandang hangat...",
-            "Menyampaikan saran terbaik..."
-        ],
-        [
-            "Sudah siap...",
-            "Jawaban sudah siap...",
-            "Balasan sudah siap...",
-            "Sedikit lagi siap..."
-        ]
-    ];
+    function openCrisisModal() {
+        if (!crisisSafetyModal) return;
+        crisisSafetyModal.classList.remove('hidden');
+        const focusable = crisisSafetyModal.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]');
+        if (focusable.length) focusable[0].focus();
+    }
+
+    function closeCrisisModal() {
+        if (!crisisSafetyModal) return;
+        crisisSafetyModal.classList.add('hidden');
+        const trigger = document.getElementById('crisisSafetyBtn');
+        if (trigger) trigger.focus();
+    }
+
+    if (crisisSafetyModal) {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !crisisSafetyModal.classList.contains('hidden')) {
+                closeCrisisModal();
+            }
+        });
+        crisisSafetyModal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const focusable = Array.from(crisisSafetyModal.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]'));
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        });
+        crisisSafetyModal.addEventListener('click', (e) => {
+            if (e.target === crisisSafetyModal) closeCrisisModal();
+        });
+    }
+
+    function exportConversationTranscript() {
+        const bubbles = Array.from(document.querySelectorAll('#chatFeedList > div'));
+        if (!bubbles.length) {
+            if (window.weiszToast) window.weiszToast('Belum ada pesan untuk disalin.', 'info');
+            return;
+        }
+        let transcript = "=== Transkrip Percakapan Weisz ===\nTanggal: " + new Date().toLocaleString() + "\n\n";
+        bubbles.forEach(b => {
+            if (b.id === 'typingIndicator') return;
+            const isUser = b.classList.contains('justify-end');
+            const text = b.innerText.trim();
+            if (text && !text.includes('Weisz sedang merespons...') && !text.includes('Layanan Bantuan')) {
+                transcript += (isUser ? "Kamu: " : "Weisz: ") + text + "\n\n";
+            }
+        });
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(transcript).then(() => {
+                if (window.weiszToast) window.weiszToast('Transkrip percakapan berhasil disalin ke clipboard!', 'success');
+            }).catch(() => {
+                if (window.weiszToast) window.weiszToast('Gagal menyalin transkrip.', 'error');
+            });
+        }
+    }
+
+    if (stopAiBtn) {
+        stopAiBtn.addEventListener('click', () => {
+            if (currentAiAbortController) {
+                currentAiAbortController.abort();
+            }
+        });
+    }
 
     function showTypingIndicator() {
         if (!typingIndicator) return;
-
-        if (typingIndicatorTimer) {
-            clearInterval(typingIndicatorTimer);
-            typingIndicatorTimer = null;
-        }
-        if (typingIndicatorStepTimeout) {
-            clearTimeout(typingIndicatorStepTimeout);
-            typingIndicatorStepTimeout = null;
-        }
-
-        // Ambil 1 frasa acak per tahapan untuk variasi dinamis namun tetap berurutan logis
-        const currentSequence = indicatorStages.map(stageGroup => {
-            return stageGroup[Math.floor(Math.random() * stageGroup.length)];
-        });
-
-        let currentStageIndex = 0;
-        const textEl = document.getElementById('typingIndicatorText');
-
-        if (textEl) {
-            textEl.textContent = currentSequence[0];
-            textEl.style.opacity = '1';
-            textEl.style.transform = 'translateY(0)';
-        }
-
         typingIndicator.classList.remove('hidden');
         scrollToBottom();
-
-        // Transisi berurut antar tahapan setiap ~750ms
-        typingIndicatorTimer = setInterval(() => {
-            if (currentStageIndex < currentSequence.length - 1) {
-                currentStageIndex++;
-                if (textEl) {
-                    textEl.style.opacity = '0';
-                    textEl.style.transform = 'translateY(-2px)';
-
-                    typingIndicatorStepTimeout = setTimeout(() => {
-                        textEl.textContent = currentSequence[currentStageIndex];
-                        textEl.style.opacity = '1';
-                        textEl.style.transform = 'translateY(0)';
-                    }, 120);
-                }
-            } else {
-                clearInterval(typingIndicatorTimer);
-                typingIndicatorTimer = null;
-            }
-        }, 750);
     }
 
     function hideTypingIndicator() {
-        if (typingIndicatorTimer) {
-            clearInterval(typingIndicatorTimer);
-            typingIndicatorTimer = null;
-        }
-        if (typingIndicatorStepTimeout) {
-            clearTimeout(typingIndicatorStepTimeout);
-            typingIndicatorStepTimeout = null;
-        }
         if (typingIndicator) {
             typingIndicator.classList.add('hidden');
         }
@@ -2109,27 +2103,27 @@
                     <div class="space-y-4 flex-1 flex flex-col justify-between">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between gap-3">
-                                <div class="w-10 h-10 rounded-2xl bg-[var(--card-secondary)] border border-[var(--border-color)]/80 flex items-center justify-center text-[var(--txt-primary)] group-hover:border-[var(--brand-main)]/50 group-hover:bg-[var(--card-surface)] transition">
-                                    <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                                <div class="clay-icon-pill w-10 h-10 rounded-[14px] bg-[var(--surface-clay-blue)] border border-[var(--border-clay)] flex items-center justify-center text-[var(--text-accent)]">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
                                     </svg>
                                 </div>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[var(--card-secondary)] text-[var(--txt-secondary)] border border-[var(--border-color)]/70">
+                                <p class="clay-pill-well text-[11px]">
                                     ${(sub.topics || []).length} Topik
-                                </span>
+                                </p>
                             </div>
                             <div class="space-y-1.5 pt-1">
-                                <h2 class="text-base sm:text-lg font-bold text-[var(--txt-primary)] group-hover:text-[var(--brand-main)] transition line-clamp-2">
+                                <h2 class="text-base sm:text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--text-accent)] transition line-clamp-2">
                                     ${sub.name}
                                 </h2>
-                                <p class="text-xs sm:text-sm text-[var(--txt-secondary)] leading-relaxed line-clamp-3">
+                                <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3">
                                     ${sub.description || ''}
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-[var(--border-color)]/60 flex items-center justify-between text-xs font-semibold text-[var(--txt-secondary)] group-hover:text-[var(--txt-primary)] transition">
-                            <span>Pilih Subkategori</span>
-                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1 text-[var(--brand-main)]" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor">
+                        <div class="pt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-accent)] transition">
+                            <p class="clay-arrow-cue">Pilih Subkategori</p>
+                            <svg class="clay-arrow-cue w-4 h-4 text-[var(--text-accent)]" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                             </svg>
                         </div>
@@ -2156,20 +2150,11 @@
                 let chipsHtml = '';
                 if (Array.isArray(chips) && chips.length > 0) {
                     chipsHtml = `
-                        <div class="pt-3 mt-2 border-t border-[var(--border-color)]/70 space-y-2">
-                            <div class="flex items-center gap-1.5 text-xs font-semibold text-[var(--txt-secondary)]">
-                                <svg class="w-3.5 h-3.5 text-amber-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.322 1.488-3.923 3.518-3.923 4.869.34-.143.766-.213 1.25-.213 1.932 0 3.5 1.568 3.5 3.5s-1.568 3.5-3.5 3.5c-.975 0-1.874-.397-2.667-1.036zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.322 1.488-3.923 3.518-3.923 4.869.34-.143.766-.213 1.25-.213 1.932 0 3.5 1.568 3.5 3.5s-1.568 3.5-3.5 3.5c-.975 0-1.874-.397-2.667-1.036z"/>
-                                </svg>
-                                <span class="tracking-normal font-medium">Mungkin ini yang kamu rasakan:</span>
-                            </div>
+                        <div class="pt-3 mt-2 border-t border-[var(--border-clay)] space-y-2">
+                            <p class="text-xs font-medium text-[var(--text-secondary)]">Mungkin ini yang kamu rasakan:</p>
                             <div class="grid grid-cols-1 gap-1.5">
                                 ${chips.slice(0, 3).map(chip => `
-                                    <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[var(--card-secondary)]/80 border border-[var(--border-color)]/70 text-xs text-[var(--txt-secondary)]">
-                                        <span class="text-amber-500 font-bold select-none text-xs">&ldquo;</span>
-                                        <span class="truncate italic font-normal">${chip}</span>
-                                        <span class="text-amber-500 font-bold select-none text-xs">&rdquo;</span>
-                                    </div>
+                                    <p class="px-3 py-1.5 rounded-[14px] bg-[var(--surface-well)] border border-[var(--border-clay)] shadow-[var(--clay-well)] text-xs text-[var(--text-secondary)] truncate italic">&ldquo;${chip}&rdquo;</p>
                                 `).join('')}
                             </div>
                         </div>
@@ -2723,6 +2708,14 @@
 
     function updateComposerButtons() {
         if (!messageInput || !voiceNoteBtn || !sendBtn) return;
+        if (typeof isAiGenerating !== 'undefined' && isAiGenerating) {
+            voiceNoteBtn.classList.add('hidden');
+            sendBtn.classList.add('hidden');
+            if (stopAiBtn) stopAiBtn.classList.remove('hidden');
+            if (pauseResumeVoiceNoteBtn) pauseResumeVoiceNoteBtn.classList.add('hidden');
+            return;
+        }
+        if (stopAiBtn) stopAiBtn.classList.add('hidden');
         const hasText = messageInput.value.trim().length > 0;
         if (hasText) {
             voiceNoteBtn.classList.add('hidden');
@@ -2850,8 +2843,8 @@
         });
         suggestionChipsContainer.appendChild(stuckBtn);
 
-        // Dynamically append new chips
-        chips.forEach(chipText => {
+        const maxChips = userHasSentMessage ? 4 : 2;
+        chips.slice(0, maxChips).forEach(chipText => {
             const cleanText = sanitizeForDisplay(chipText);
             if (!cleanText) return;
             const chipBtn = document.createElement('button');
@@ -3363,7 +3356,7 @@
             ? `
                 <div class="vn-transcript-section pt-1.5 border-t border-white/15">
                     <button type="button" class="vn-transcript-toggle w-full flex items-center justify-between gap-1 text-[11px] text-white/70 hover:text-white transition-colors cursor-pointer select-none py-0.5" title="Buka Transkrip">
-                        <span class="font-medium tracking-wide">Transkrip</span>
+                        <p class="font-medium tracking-wide">Transkrip</p>
                         <svg class="vn-toggle-arrow w-3.5 h-3.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
@@ -3395,8 +3388,8 @@
                             <div class="vn-progress-bar h-full bg-white rounded-full transition-all duration-75" style="width: 0%;"></div>
                         </div>
                         <div class="flex items-center justify-between text-[10.5px] sm:text-[11.5px] text-white/70 mt-1 font-mono">
-                            <span class="vn-time-current">0:00</span>
-                            <span class="vn-time-total">${formattedDuration}</span>
+                            <time class="vn-time-current">0:00</time>
+                            <time class="vn-time-total">${formattedDuration}</time>
                         </div>
                     </div>
                 </div>
@@ -3706,13 +3699,13 @@
 
         try {
             const aiBubble = document.createElement('div');
-            aiBubble.className = 'max-w-[95%] sm:max-w-[85%]';
+            aiBubble.className = 'max-w-[68ch] pl-1';
 
             const cleanRawMsg = sanitizeForDisplay(data.assistant_message.message || '');
             const safeMsg = cleanRawMsg.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>');
 
             aiBubble.innerHTML = `
-                <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">
+                <div class="text-[var(--text-primary)] text-[15px] sm:text-[16px] leading-[1.7]">
                     ${safeMsg}
                 </div>
             `;
@@ -3738,12 +3731,12 @@
                     });
 
                     const moodBubble = document.createElement('div');
-                    moodBubble.className = 'max-w-[95%] sm:max-w-[85%] mood-checkin-wrapper';
+                    moodBubble.className = 'max-w-[68ch] mood-checkin-wrapper';
                     moodBubble.dataset.msgId = (data.assistant_message && data.assistant_message.id) ? data.assistant_message.id : '';
                     moodBubble.dataset.answered = 'false';
                     moodBubble.innerHTML = `
-                        <div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-primary)] px-5 sm:px-6 py-4 text-base sm:text-[16.5px] leading-relaxed space-y-3">
-                            <p class="text-[15px] sm:text-base leading-relaxed text-[var(--txt-secondary)]">
+                        <div class="weisz-card-gentle px-5 py-4 space-y-3">
+                            <p class="text-sm sm:text-[15px] leading-relaxed text-[var(--text-secondary)]">
                                 Seiring kita mengurai cerita, suasana perasaanmu bisa berkembang. Bagaimana kondisimu saat ini? Pilih salah satu untuk membantu Weisz menyesuaikan nada bicara dengan hatimu:
                             </p>
                             <div class="grid grid-cols-5 gap-2 sm:gap-3 pt-1">
@@ -3787,10 +3780,10 @@
                     const offTopicBubble = document.createElement('div');
                     offTopicBubble.className = 'max-w-[95%] sm:max-w-[85%]';
                     offTopicBubble.innerHTML = `
-                        <div class="p-4 sm:p-5 rounded-2xl rounded-tl-sm bg-neutral-50 dark:bg-neutral-900/50 border border-[var(--border-color)] text-[15px] sm:text-base text-[var(--txt-secondary)] space-y-3">
+                        <div class="clay-card-blue p-4 sm:p-5 text-[15px] sm:text-base text-[var(--text-secondary)] space-y-3">
                             <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-[var(--brand-main)] animate-pulse"></span>
-                                <p class="font-bold text-[var(--brand-main)] text-base sm:text-lg">Ingin Membahas Topik Lain?</p>
+                                <div class="w-2 h-2 rounded-full bg-[var(--text-accent)] shrink-0" aria-hidden="true"></div>
+                                <p class="font-semibold text-[var(--text-accent)] text-base sm:text-lg">Ingin Membahas Topik Lain?</p>
                             </div>
                             <p class="text-[15px] sm:text-base leading-relaxed text-[var(--txt-primary)]">
                                 Sepertinya ceritamu mulai menyentuh hal di luar topik ini. Agar refleksimu tetap terarah dan efektif, kamu bisa membuat percakapan baru dengan topik yang lebih sesuai.
@@ -3847,10 +3840,9 @@
             isAiGenerating = true;
             hasSentIdleSuggestionInTurn = false;
 
-            // Append user bubble immediately
             const userBubble = document.createElement('div');
             userBubble.className = 'flex justify-end w-full';
-            userBubble.innerHTML = `<div class="max-w-[85%] sm:max-w-[75%] rounded-2xl rounded-tr-sm bg-[var(--brand-btn)] text-white px-5 sm:px-6 py-3.5 sm:py-4 text-base sm:text-[16.5px] leading-relaxed">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>')}</div>`;
+            userBubble.innerHTML = `<div class="max-w-[86%] sm:max-w-[72%] rounded-2xl rounded-tr-sm bg-[var(--sky-100)] dark:bg-[var(--surface-gentle)] border border-[var(--sky-200)] dark:border-[var(--border-gentle)] text-[var(--sky-800)] dark:text-[var(--text-primary)] px-4.5 sm:px-5 py-3 sm:py-3.5 text-[15px] sm:text-[15.5px] leading-[1.65]">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>')}</div>`;
             
             // Insert before typing indicator safely
             if (typingIndicator && typingIndicator.parentNode === chatFeedList) {
@@ -3870,6 +3862,8 @@
             updateComposerButtons();
 
             showTypingIndicator();
+            currentAiAbortController = new AbortController();
+            updateComposerButtons();
             sendBtn.disabled = true;
 
             const sessionId = chatForm.dataset.sessionId || '{{ $session?->id ?? "" }}';
@@ -3892,7 +3886,8 @@
                         'X-CSRF-TOKEN': csrfToken,
                         'Accept': 'application/json'
                     },
-                    body: JSON.stringify({ message: text })
+                    body: JSON.stringify({ message: text }),
+                    signal: currentAiAbortController.signal
                 });
 
                 // Auto-refresh CSRF token and retry once if 419 occurs
@@ -3905,7 +3900,8 @@
                             'X-CSRF-TOKEN': csrfToken,
                             'Accept': 'application/json'
                         },
-                        body: JSON.stringify({ message: text })
+                        body: JSON.stringify({ message: text }),
+                        signal: currentAiAbortController.signal
                     });
                 }
 
@@ -3922,14 +3918,33 @@
                     }
                 }
             } catch (err) {
-                console.error('Fetch error during chat submit:', err);
-                data = {
-                    success: false,
-                    message: 'Koneksi internet terputus atau server tidak merespon. Boleh klik tombol di bawah untuk kirim ulang ya.'
-                };
+                if (err.name === 'AbortError') {
+                    data = {
+                        success: false,
+                        aborted: true,
+                        message: 'Pembuatan respon dihentikan.'
+                    };
+                } else {
+                    console.error('Fetch error during chat submit:', err);
+                    data = {
+                        success: false,
+                        message: 'Koneksi internet terputus atau server tidak merespon. Boleh klik tombol di bawah untuk kirim ulang ya.'
+                    };
+                }
             }
 
-            if (data && data.success && data.assistant_message) {
+            if (data && data.aborted) {
+                hideTypingIndicator();
+                const stopBubble = document.createElement('div');
+                stopBubble.className = 'max-w-[95%] sm:max-w-[85%]';
+                stopBubble.innerHTML = `<div class="rounded-2xl rounded-tl-sm bg-[var(--card-surface)] border border-[var(--border-color)] text-[var(--txt-tertiary)] italic px-5 sm:px-6 py-3.5 text-sm sm:text-base leading-relaxed">${escapeHtml(data.message)}</div>`;
+                if (typingIndicator && typingIndicator.parentNode === chatFeedList) {
+                    chatFeedList.insertBefore(stopBubble, typingIndicator);
+                } else if (chatFeedList) {
+                    chatFeedList.appendChild(stopBubble);
+                }
+                scrollToBottom();
+            } else if (data && data.success && data.assistant_message) {
                 handleAiAssistantResponse(data);
                 hideTypingIndicator();
             } else {
@@ -3938,10 +3953,13 @@
                 renderErrorBubble(errMsg, text);
             }
 
+            currentAiAbortController = null;
             sendBtn.disabled = false;
             isAiGenerating = false;
+            updateComposerButtons();
             lastInputTime = Date.now();
             lastInputValue = messageInput ? messageInput.value : '';
+            startIdleTimer();
             startIdleTimer();
         });
     }
@@ -3983,18 +4001,18 @@
             }
 
             const tagsHtml = tags.length > 0
-                ? tags.map(tag => `<span class="px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[var(--txt-secondary)] border border-[var(--border-color)] text-[10px] sm:text-[10.5px] font-medium leading-tight">${escapeHtml(tag)}</span>`).join('')
-                : '<span class="text-[10px] text-[var(--txt-tertiary)]">-</span>';
+                ? tags.map(tag => `<p class="clay-pill-well text-[10px] sm:text-[10.5px] py-0.5 px-2">${escapeHtml(tag)}</p>`).join('')
+                : '<p class="text-[10px] text-[var(--text-muted)]">-</p>';
 
             const phone = pro.phone ? String(pro.phone).trim() : '';
             const phoneClean = phone.replace(/[^0-9]/g, '');
             const contactHtml = phone ? `
-                <div class="mt-3 pt-2.5 border-t border-[var(--border-color)]/70">
-                    <a href="https://wa.me/${phoneClean}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-semibold transition shadow-2xs">
-                        <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <div class="mt-3 pt-2.5 border-t border-[var(--border-clay)]">
+                    <a href="https://wa.me/${phoneClean}" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-[14px] bg-[var(--color-success)] hover:opacity-95 text-white text-xs font-semibold transition shadow-[var(--clay-rest)]">
+                        <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.05 20.16C10.66 20.16 9.3 19.81 8.08 19.14L7.75 18.96L4.54 19.8L5.4 16.67L5.2 16.35C4.46 15.08 4.07 13.52 4.07 11.92C4.07 7.38 7.76 3.67 12.05 3.67M9.06 6.88C8.88 6.88 8.58 6.94 8.33 7.21C8.07 7.49 7.37 8.15 7.37 9.53C7.37 10.91 8.38 12.24 8.52 12.43C8.66 12.61 10.5 15.44 13.33 16.66C14 16.95 14.52 17.12 14.93 17.25C15.6 17.47 16.22 17.43 16.7 17.36C17.24 17.28 18.36 16.68 18.59 16.03C18.82 15.38 18.82 14.82 18.75 14.71C18.68 14.59 18.5 14.53 18.23 14.39C17.96 14.26 16.62 13.6 16.37 13.51C16.12 13.42 15.94 13.37 15.76 13.64C15.58 13.92 15.06 14.53 14.9 14.71C14.74 14.89 14.58 14.92 14.31 14.78C14.04 14.65 13.17 14.36 12.13 13.44C11.32 12.72 10.78 11.83 10.62 11.56C10.46 11.28 10.6 11.13 10.74 11C10.86 10.87 11.01 10.67 11.15 10.5C11.29 10.33 11.33 10.21 11.42 10.03C11.51 9.85 11.47 9.69 11.4 9.56C11.33 9.42 10.79 8.1 10.56 7.56C10.34 7.03 10.11 7.1 9.95 7.1L9.5 7.09C9.28 7.09 9.06 6.88 9.06 6.88Z" />
                         </svg>
-                        <span>WhatsApp</span>
+                        WhatsApp
                     </a>
                 </div>` : '';
 

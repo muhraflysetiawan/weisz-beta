@@ -94,6 +94,7 @@ Route::middleware('auth')->group(function () {
     // 14. Profile & Settings
     Route::get('/profile', [AuthController::class, 'showProfile'])->name('profile');
     Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/onboarding/acknowledge', [AuthController::class, 'acknowledgeOnboarding'])->name('onboarding.acknowledge');
 
     // ==========================================
     // ADMIN ROUTES (Admin Pages 15 - 20)
@@ -130,5 +131,6 @@ Route::middleware('auth')->group(function () {
 
         // 20. Conversation Monitoring
         Route::get('/monitoring', [AdminController::class, 'monitoring'])->name('monitoring');
+        Route::post('/safety/{riskAssessment}/acknowledge', [AdminController::class, 'acknowledgeSafety'])->name('safety.acknowledge');
     });
 });

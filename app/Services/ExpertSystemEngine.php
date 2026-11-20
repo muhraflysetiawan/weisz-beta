@@ -17,6 +17,7 @@ class ExpertSystemEngine
      * @return array{
      *     signals: array<string, mixed>,
      *     actions: list<array<string, mixed>>,
+     *     confidence_factor: float,
      *     conversation_state: string,
      *     suggested_chips: list<string>,
      *     recommend_professional: bool,
@@ -46,9 +47,11 @@ class ExpertSystemEngine
                     ->orWhereNull('topic_id');
             })
             ->orderByDesc('priority')
+            ->orderByDesc('confidence_factor')
             ->get();
 
         $triggeredActions = [];
+        $matchedConfidences = [];
         $recommendProfessional = false;
         $safetyAlert = false;
         $suggestedChips = [];
@@ -62,10 +65,13 @@ class ExpertSystemEngine
 
         foreach ($rules as $rule) {
             if ($this->checkRuleConditions($rule, $mergedFacts)) {
+                $matchedConfidences[] = (float) ($rule->confidence_factor ?? 0.80);
+
                 foreach ($rule->actions as $action) {
                     $triggeredActions[] = [
                         'rule_id' => $rule->id,
                         'rule_name' => $rule->name,
+                        'confidence_factor' => (float) ($rule->confidence_factor ?? 0.80),
                         'type' => $action->action_type,
                         'payload' => $action->action_payload,
                     ];
@@ -142,19 +148,42 @@ class ExpertSystemEngine
             $persistentSignals['professional_support'] = 'suggested';
         }
 
+        $confidenceFactor = self::combineConfidence($matchedConfidences);
+        $contextData = $context->context_data ?? [];
+        $contextData['rule_confidence'] = $confidenceFactor;
+
         $context->update([
             'current_state' => $currentState,
             'signals' => $persistentSignals,
+            'context_data' => $contextData,
         ]);
 
         return [
             'signals' => $mergedFacts,
             'actions' => $triggeredActions,
+            'confidence_factor' => $confidenceFactor,
             'conversation_state' => $currentState,
             'suggested_chips' => $suggestedChips,
             'recommend_professional' => $recommendProfessional,
             'safety_alert' => $safetyAlert,
         ];
+    }
+
+    /**
+     * Combine certainty factors (0.00-1.00) using MYCIN parallel combination: CF1 + CF2 * (1 - CF1).
+     *
+     * @param  list<float>  $factors
+     */
+    public static function combineConfidence(array $factors): float
+    {
+        $combined = 0.0;
+
+        foreach ($factors as $cf) {
+            $clamped = max(0.0, min(1.0, (float) $cf));
+            $combined = $combined + $clamped * (1.0 - $combined);
+        }
+
+        return round($combined, 2);
     }
 
     /**

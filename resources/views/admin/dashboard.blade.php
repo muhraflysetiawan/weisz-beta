@@ -7,7 +7,7 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight text-[var(--txt-primary)]">
+            <h1 class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
                 {{ __('Dashboard Administrator') }}
             </h1>
             <p class="text-xs text-[var(--txt-secondary)] mt-0.5">
@@ -55,32 +55,31 @@
 
     <!-- Topic Distribution & Safety Alerts -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Topic Distribution Table -->
         <div class="weisz-card p-6 space-y-4">
-            <div class="flex items-center justify-between">
-                <h2 class="text-sm font-bold text-[var(--txt-primary)]">{{ __('Topik Paling Banyak Dibicarakan') }}</h2>
-                <a href="{{ route('admin.categories') }}" class="text-xs text-[var(--brand-main)] hover:underline">{{ __('Kelola') }} &rarr;</a>
+            <div class="flex items-center justify-between gap-3">
+                <h2 class="text-sm font-semibold text-[var(--text-primary)]">{{ __('Topik Paling Banyak Dibicarakan') }}</h2>
+                <a href="{{ route('admin.categories') }}" class="text-xs font-medium text-[var(--text-accent)] hover:underline whitespace-nowrap">{{ __('Kelola') }} &rarr;</a>
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
+                <table class="clay-table">
                     <thead>
-                        <tr class="border-b border-[var(--border-color)] text-[var(--txt-tertiary)]">
-                            <th class="pb-2.5 font-medium">{{ __('Topik') }}</th>
-                            <th class="pb-2.5 font-medium">{{ __('Subkategori') }}</th>
-                            <th class="pb-2.5 font-medium text-right">{{ __('Jumlah Sesi') }}</th>
+                        <tr>
+                            <th>{{ __('Topik') }}</th>
+                            <th>{{ __('Subkategori') }}</th>
+                            <th class="text-right">{{ __('Jumlah Sesi') }}</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-[var(--border-color)]">
+                    <tbody>
                         @forelse($topicStats as $t)
                         <tr>
-                            <td class="py-3 font-medium text-[var(--txt-primary)]">{{ $t->name }}</td>
-                            <td class="py-3 text-[var(--txt-secondary)]">{{ $t->subcategory->name ?? '-' }}</td>
-                            <td class="py-3 text-right font-bold text-[var(--brand-main)]">{{ $t->chat_sessions_count }}</td>
+                            <td class="font-medium text-[var(--text-primary)] min-w-[180px]">{{ $t->name }}</td>
+                            <td class="text-[var(--text-secondary)] whitespace-nowrap">{{ $t->subcategory->name ?? '-' }}</td>
+                            <td class="text-right font-bold text-[var(--text-accent)] whitespace-nowrap">{{ $t->chat_sessions_count }}</td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" class="py-4 text-center text-[var(--txt-tertiary)]">{{ __('Belum ada statistik topik.') }}</td>
+                            <td colspan="3" class="py-6 text-center text-[var(--text-muted)]">{{ __('Belum ada statistik topik.') }}</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -88,30 +87,29 @@
             </div>
         </div>
 
-        <!-- Recent Safety Alerts -->
         <div class="weisz-card p-6 space-y-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
-                    <h2 class="text-sm font-bold text-[var(--txt-primary)]">{{ __('Pemicu Keselamatan (Safety Events)') }}</h2>
+                    <div class="w-2.5 h-2.5 rounded-full bg-[var(--color-error)] shrink-0" aria-hidden="true"></div>
+                    <h2 class="text-sm font-bold text-[var(--text-primary)]">{{ __('Pemicu Keselamatan (Safety Events)') }}</h2>
                 </div>
-                <a href="{{ route('admin.monitoring', ['filter' => 'safety']) }}" class="text-xs text-[var(--brand-main)] hover:underline">{{ __('Pantau Semua') }} &rarr;</a>
+                <a href="{{ route('admin.monitoring', ['filter' => 'safety']) }}" class="text-xs text-[var(--text-accent)] hover:underline">{{ __('Pantau Semua') }} &rarr;</a>
             </div>
 
             @if($recentSafetyEvents->isEmpty())
-            <div class="p-8 text-center text-xs text-[var(--txt-tertiary)]">
+            <div class="p-8 text-center text-xs text-[var(--text-muted)]">
                 {{ __('Tidak ada peristiwa pemicu keselamatan baru-baru ini. Semua obrolan berjalan normal.') }}
             </div>
             @else
             <div class="space-y-3">
                 @foreach($recentSafetyEvents as $event)
-                <div class="p-3.5 rounded-xl bg-red-50/60 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 space-y-1 text-xs">
-                    <div class="flex items-center justify-between">
-                        <span class="font-bold text-red-700 dark:text-red-400 uppercase tracking-wide text-[10px]">{{ __('Tingkat') }}: {{ $event->risk_level }}</span>
-                        <span class="text-[11px] text-[var(--txt-tertiary)]">{{ $event->triggered_at?->diffForHumans() }}</span>
+                <div class="p-3.5 rounded-[16px] bg-[var(--color-error-bg)] border border-[var(--color-error-border)] shadow-[var(--clay-well)] space-y-1.5 text-xs">
+                    <div class="flex items-center justify-between gap-2">
+                        <p class="clay-pill-error uppercase">{{ __('Tingkat') }}: {{ $event->risk_level }}</p>
+                        <time class="text-[11px] text-[var(--text-muted)]">{{ $event->triggered_at?->diffForHumans() }}</time>
                     </div>
-                    <p class="text-[var(--txt-secondary)]">{{ __('User') }}: <strong class="text-[var(--txt-primary)]">{{ $event->session->user->name ?? __('Anonim') }}</strong> &bull; {{ __('Topik') }}: {{ $event->session->topic->name ?? '-' }}</p>
-                    <p class="text-[11px] text-[var(--txt-tertiary)] italic line-clamp-1">"{{ $event->trigger_text }}"</p>
+                    <p class="text-[var(--text-secondary)]">{{ __('User') }}: <strong class="text-[var(--text-primary)]">{{ $event->session->user->name ?? __('Anonim') }}</strong> &bull; {{ __('Topik') }}: {{ $event->session->topic->name ?? '-' }}</p>
+                    <p class="text-[11px] text-[var(--text-muted)] italic line-clamp-1">"{{ $event->trigger_text }}"</p>
                 </div>
                 @endforeach
             </div>
@@ -119,37 +117,45 @@
         </div>
     </div>
 
-    <!-- Recent Sessions -->
     <div class="weisz-card p-6 space-y-4">
-        <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold text-[var(--txt-primary)]">{{ __('Sesi Percakapan Terbaru') }}</h2>
-            <a href="{{ route('admin.monitoring') }}" class="text-xs text-[var(--brand-main)] hover:underline">{{ __('Lihat Semua di Monitoring') }} &rarr;</a>
+        <div class="flex items-center justify-between gap-3">
+            <h2 class="text-sm font-semibold text-[var(--text-primary)]">{{ __('Sesi Percakapan Terbaru') }}</h2>
+            <a href="{{ route('admin.monitoring') }}" class="text-xs font-medium text-[var(--text-accent)] hover:underline whitespace-nowrap">{{ __('Lihat Semua di Monitoring') }} &rarr;</a>
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+            <table class="clay-table">
                 <thead>
-                    <tr class="border-b border-[var(--border-color)] text-[var(--txt-tertiary)]">
-                        <th class="pb-2.5 font-medium">{{ __('User') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Kategori & Topik') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Status') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Mulai') }}</th>
-                        <th class="pb-2.5 font-medium text-right">{{ __('Aksi') }}</th>
+                    <tr>
+                        <th>{{ __('User') }}</th>
+                        <th>{{ __('Kategori & Topik') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th>{{ __('Mulai') }}</th>
+                        <th class="text-right">{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-[var(--border-color)]">
+                <tbody>
                     @foreach($recentSessions as $s)
                     <tr>
-                        <td class="py-3 font-semibold text-[var(--txt-primary)]">{{ $s->user->name ?? '-' }}</td>
-                        <td class="py-3 text-[var(--txt-secondary)]">{{ $s->category->name ?? '-' }} &bull; {{ $s->topic->name ?? '-' }}</td>
-                        <td class="py-3">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold {{ $s->status === 'active' ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400' : 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400' }}">
-                                {{ $s->status }}
-                            </span>
+                        <td class="font-semibold text-[var(--text-primary)] whitespace-nowrap">{{ $s->user->name ?? '-' }}</td>
+                        <td class="min-w-[260px] max-w-lg">
+                            <p class="font-medium text-[var(--text-primary)] leading-snug line-clamp-1" title="{{ $s->topic->name ?? '-' }}">
+                                {{ $s->topic->name ?? '-' }}
+                            </p>
+                            <p class="text-[11px] text-[var(--text-muted)] mt-0.5 line-clamp-1" title="{{ $s->category->name ?? '-' }}">
+                                {{ $s->category->name ?? '-' }}
+                            </p>
                         </td>
-                        <td class="py-3 text-[var(--txt-tertiary)]">{{ $s->created_at->diffForHumans() }}</td>
-                        <td class="py-3 text-right">
-                            <a href="{{ route('chat.show', $s->id) }}" class="text-[var(--brand-main)] font-semibold hover:underline">
+                        <td class="whitespace-nowrap">
+                            <p class="{{ $s->status === 'active' ? 'clay-pill-warning' : 'clay-pill-success' }}">
+                                {{ $s->status }}
+                            </p>
+                        </td>
+                        <td class="text-[var(--text-muted)] whitespace-nowrap">
+                            <time>{{ $s->created_at->diffForHumans() }}</time>
+                        </td>
+                        <td class="text-right whitespace-nowrap">
+                            <a href="{{ route('chat.show', $s->id) }}" class="text-[var(--text-accent)] font-semibold hover:underline">
                                 {{ __('Buka Chat') }}
                             </a>
                         </td>

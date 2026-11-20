@@ -1,1133 +1,464 @@
-# Weisz Design System
+# Weisz Design System v3: Soft Cloud Clay
 
-> **Project:** Weisz  
-> **Product type:** Gen Z Mental Health Expert-System + AI Chatbot  
-> **Design direction:** Simple, calm, modern, rounded, minimal, trustworthy  
-> **Themes:** White Mode + Dark Mode  
-> **Primary UI reference:** Conversational simplicity similar to ChatGPT, without copying its branding or exact interface.
-
----
-
-## 1. Design Principles
-
-Weisz must always follow these principles:
-
-1. **Simple** — avoid unnecessary decoration and visual noise.
-2. **Calm** — the interface must feel safe, comfortable, and non-judgmental.
-3. **Modern** — clean layouts, generous spacing, subtle borders, and contemporary typography.
-4. **Rounded** — buttons, cards, inputs, dialogs, chips, and containers use soft rounded corners.
-5. **Content first** — the conversation and user's information are more important than decoration.
-6. **Consistent** — use the design tokens in this document instead of inventing new values.
-7. **Accessible** — maintain readable contrast, visible focus states, and sufficiently large interactive targets.
-8. **Responsive** — every page must work on mobile, tablet, and desktop.
-
-Do not introduce gradients, excessive shadows, glassmorphism, excessive illustrations, neon colors, or unnecessary animations unless explicitly requested.
+> **Project:** Weisz (Gen Z Mental Health Expert System + Conversational Companion)
+> **Visual Style:** Soft Blue Claymorphism. Tactile matte clay surfaces, cushioned soft-blue depth, airy cloud canvas, and organic interactive cards that respond like real soft clay without feeling rigid or childish.
+> **Dial:** `ENERGY 2 / RHYTHM 2 / MOTION 2`
+> **Design Read:** Reading this as a mental-health reflection web app for Gen Z users, in a Soft Blue Claymorphism style with tactile interactive cards, dial ENERGY 2 / RHYTHM 2 / MOTION 2.
 
 ---
 
-# 2. Brand
+## 1. Identity, Dials & Decision Ledger
 
-## 2.1 Name
+Weisz feels like holding a smooth, warm-matte soft-blue pebble: approachable, calm, cushioned, and safe to lean on. Clay depth is reserved for meaningful containers and controls so the screen never turns into visual mush.
 
-**Weisz**
+### Liveliness Dials
 
-The name is inspired by **John R. Weisz**, associated with research on child and adolescent mental health.
+- **ENERGY 2 (Soft & Tactile):** Friendly sculpted warmth that invites interaction without harsh contrast or neon overstimulation.
+- **RHYTHM 2 (Balanced):** Flat matte cloud canvas anchors the eye, contrasted by puffed clay interactive cards, recessed input wells, and open conversational prose.
+- **MOTION 2 (Tactile Micro-Feedback):** Spring-eased (`220ms cubic-bezier(0.22, 1, 0.36, 1)`) hover lift, press squish, and restrained desktop pointer tilt on interactive cards only. Fully degrades under `prefers-reduced-motion: reduce`.
 
-The UI must not visually depend on the historical reference. Weisz should feel like a modern digital mental-health product for Gen Z.
+### Core Levers
 
-## 2.2 Brand personality
+- **One focal point per screen:** One hero clay card or active conversation stream leads every view; secondary elements stay recessed or matte.
+- **Identity motif (The Sculpted Cloud Cushion):** Matte soft-blue clay surfaces (`--surface-clay-blue`) combining a gentle outer blue-tinted shadow with a soft inner top highlight and soft inner bottom shade.
+- **One deliberate accent:** Soft Blue (`--sky-primary` / `--sky-soft`) unifies primary actions, active selections, and supportive highlights.
 
-- Calm
-- Friendly
-- Intelligent
-- Trustworthy
-- Private
-- Modern
-- Human
-- Non-judgmental
+### Decision Ledger (Why Every Choice Exists)
 
-Avoid a clinical/hospital visual identity.
+- **Claymorphism (Soft Blue + Cloud Matte):** Chosen per product direction to replace cold flat corporate boxes with soft, comforting tactile affordances suited for stressed Gen Z users.
+- **Three-Tier Clay Discipline (Flat Canvas / Raised Clay / Recessed Well):** Prevents the common claymorphism flaw where everything floats equally. Inputs press *into* the page; interactive cards rise *above* it.
+- **Typography (`Nunito` + `Plus Jakarta Sans`):** `Nunito` brings calm, approachable rounded warmth to hero and section headings; `Plus Jakarta Sans` keeps body copy, navbar, buttons, chatbot, and metadata crisp and effortless to scan.
+- **Interactive Non-Rigid Cards:** Hover lift, press squish, inner icon nudge, and optional `±2.5deg` fine-pointer tilt communicate real responsiveness and playfulness while staying calm.
+- **Static vs. Interactive Separation:** Non-clickable cards never lift or tilt on hover, preventing false affordance.
+- **Restrained Iconography:** Minimal functional stroke icons nestled inside small soft-blue clay icon pills. No decorative sparkles, robots, or emojis.
 
 ---
 
-# 3. Color System
+## 2. Color System (Soft Blue Clay, WCAG AA Verified)
 
-Weisz uses one accent color and neutral colors. White Mode and Dark Mode share the same accent.
+Palette cap: 1 Soft Blue scale + airy blue-tinted neutrals + restrained semantic tokens. Both Light Mode (Airy Cloud) and Dark Mode (Night Cloud) are first-class themes.
 
-## 3.1 Brand / Accent
+### 2.1 Soft Blue Scale
 
-| Token | Hex | Usage |
+| Token | Hex | Role |
 |---|---|---|
-| `--color-primary-50` | `#EEF2FF` | Very light accent background |
-| `--color-primary-100` | `#E0E7FF` | Selected background |
-| `--color-primary-200` | `#C7D2FE` | Soft borders |
-| `--color-primary-300` | `#A5B4FC` | Secondary accent |
-| `--color-primary-400` | `#818CF8` | Hover / secondary |
-| `--color-primary-500` | `#6366F1` | Main brand color |
-| `--color-primary-600` | `#4F46E5` | Primary button |
-| `--color-primary-700` | `#4338CA` | Button hover / active |
-| `--color-primary-800` | `#3730A3` | Strong accent |
-| `--color-primary-900` | `#312E81` | Deep accent |
+| `--sky-50` | `#F3F7FB` | Matte cloud canvas (Light) |
+| `--sky-100` | `#E6F2FC` | Soft blue clay card tint & supportive surface (Light) |
+| `--sky-200` | `#CFE6FA` | User chat clay bubble & selected chip fill (Light) |
+| `--sky-300` | `#A6D4F7` | Dark Mode primary clay button hover |
+| `--sky-400` | `#8DC5F2` | Dark Mode primary clay button fill & accent text |
+| `--sky-500` | `#86BCE8` | Signature soft blue clay accent, icons, focus tint |
+| `--sky-600` | `#2B74AE` | Light Mode primary clay button fill (4.99:1 with `#FFFFFF`) |
+| `--sky-700` | `#226194` | Light Mode primary button hover (6.55:1 with `#FFFFFF`) |
+| `--sky-800` | `#1E5C8E` | Light Mode readable soft-blue accent text (7.05:1 on white) |
+| `--sky-900` | `#182433` | Deep slate-navy ink (Light Mode primary text) |
 
-**Primary default:** `#6366F1`
+### 2.2 Theme Surface & Text Tokens
 
-Do not use a different primary color on individual pages.
+| Token | Light Mode (Airy Cloud) | Dark Mode (Night Cloud) | Contrast / Usage |
+|---|---|---|---|
+| `--bg-page` | `#F3F7FB` | `#121821` | Flat matte ground canvas (never pure `#000000`) |
+| `--bg-subtle` | `#E9F1F9` | `#18202C` | Sidebar & secondary bands |
+| `--surface-clay` | `#FFFFFF` | `#1E2836` | Primary elevated matte clay card |
+| `--surface-clay-blue` | `#E6F2FC` | `#1B2D40` | Soft blue clay card, reflection prompt, selected state |
+| `--surface-clay-hover` | `#F7FBFF` | `#243142` | Interactive clay card hover tint |
+| `--surface-well` | `#EDF4FA` | `#151C26` | Recessed clay well for text inputs & search bars |
+| `--text-primary` | `#182433` | `#EFF5FB` | Primary text (15.68:1 / 16.23:1) |
+| `--text-secondary` | `#475A6E` | `#BFD0E2` | Descriptions & subtitles (7.11:1 / 9.44:1) |
+| `--text-muted` | `#5B7085` | `#8EA5BC` | Helper copy & timestamps (5.12:1 / 5.85:1) |
+| `--text-accent` | `#1E5C8E` | `#8DC5F2` | Soft blue links & headings (7.05:1 / 8.07:1) |
+| `--border-clay` | `#D6E6F5` | `#2B3B4E` | Soft hairline edge for clay definition |
+| `--border-focus` | `#2B74AE` | `#8DC5F2` | Accessible `:focus-visible` outline (`>= 3:1`) |
 
----
+### 2.3 Restrained Semantic Colors
 
-# 4. White Mode
+Use strictly for real status feedback, never as page decoration.
 
-## 4.1 Backgrounds
-
-| Token | Hex | Usage |
+| Role | Light Text / Surface / Border | Dark Text / Surface / Border |
 |---|---|---|
-| `--background` | `#FFFFFF` | Main page background |
-| `--background-secondary` | `#F8F9FC` | Secondary sections |
-| `--surface` | `#FFFFFF` | Cards / dialogs |
-| `--surface-secondary` | `#F5F6FA` | Inputs / secondary containers |
-| `--surface-hover` | `#F1F3F7` | Hover state |
+| Success (Soft Mint-Sage) | `#1E6B4B` / `#EBF7F1` / `#BCE3D0` | `#7AD4AC` / `#162A24` / `#254A3E` |
+| Care / Crisis (Warm Peach-Ochre) | `#8C4F16` / `#FDF5EB` / `#F2D2AD` | `#F2BE7A` / `#2B2217` / `#4D3A24` |
+| Error (Soft Clay-Rose) | `#B2333B` / `#FDF1F2` / `#F2C4C7` | `#F5959B` / `#2E1B1F` / `#542C33` |
 
-## 4.2 Text
+---
 
-| Token | Hex | Usage |
+## 3. Claymorphism Depth, Radius & Elevation System
+
+Claymorphism works when depth is **consistent, directional (top-left light source), and matte**. Never mix glassmorphism blur onto clay cards.
+
+### 3.1 Four Clay Depth Tiers
+
+| Tier | Token | Light Mode Shadow Recipe | Dark Mode Shadow Recipe |
+|---|---|---|---|
+| **Well (Recessed)** | `--clay-well` | `inset 0 2px 5px rgba(24, 36, 51, 0.08), inset 0 -1px 2px rgba(255, 255, 255, 0.9)` | `inset 0 3px 6px rgba(0, 0, 0, 0.45), inset 0 -1px 2px rgba(255, 255, 255, 0.05)` |
+| **Resting Clay** | `--clay-rest` | `0 10px 24px -6px rgba(43, 116, 174, 0.13), inset 0 2px 4px rgba(255, 255, 255, 0.95), inset 0 -4px 8px rgba(134, 188, 232, 0.20)` | `0 12px 26px -6px rgba(0, 0, 0, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.08), inset 0 -4px 8px rgba(0, 0, 0, 0.35)` |
+| **Hover Lift** | `--clay-lift` | `0 18px 34px -8px rgba(43, 116, 174, 0.20), inset 0 2px 5px rgba(255, 255, 255, 1), inset 0 -5px 10px rgba(134, 188, 232, 0.26)` | `0 18px 36px -8px rgba(0, 0, 0, 0.58), inset 0 2px 4px rgba(141, 197, 242, 0.14), inset 0 -5px 10px rgba(0, 0, 0, 0.40)` |
+| **Pressed Squish** | `--clay-press` | `0 4px 10px -2px rgba(43, 116, 174, 0.14), inset 0 3px 7px rgba(43, 116, 174, 0.16), inset 0 -1px 3px rgba(255, 255, 255, 0.8)` | `0 4px 10px -2px rgba(0, 0, 0, 0.40), inset 0 3px 7px rgba(0, 0, 0, 0.48), inset 0 -1px 2px rgba(255, 255, 255, 0.05)` |
+
+### 3.2 Deliberate Soft Radius Hierarchy (Never Pill Everything)
+
+| Token | Value | Components |
 |---|---|---|
-| `--text-primary` | `#171717` | Main text |
-| `--text-secondary` | `#525252` | Secondary text |
-| `--text-tertiary` | `#737373` | Metadata / helper text |
-| `--text-disabled` | `#A3A3A3` | Disabled text |
+| `--radius-well` | `14px` | Recessed text inputs, search bars, inner tags, compact badges |
+| `--radius-btn` | `18px` | Clay buttons, toasts, alerts, selectable list rows |
+| `--radius-card` | `24px` | Standard interactive clay cards, chat composer, user clay bubbles |
+| `--radius-hero` | `28px` | Hero feature card, modals, major reflection containers |
+| `--radius-full` | `9999px` | Circular icon triggers (send, mic, stop) and quick-reply chips only |
 
-## 4.3 Borders
+### 3.3 Restraint Caps
 
-| Token | Hex | Usage |
-|---|---|---|
-| `--border` | `#E5E7EB` | Default border |
-| `--border-secondary` | `#F0F1F3` | Subtle divider |
-| `--border-focus` | `#6366F1` | Focused input |
+- Backdrop blur capped at **at most 1 element** (sticky top header or modal backdrop). Clay cards themselves stay **100% opaque matte**.
+- Zero ambient corner glow blobs, zero rainbow gradients, zero dot-grid backgrounds.
 
 ---
 
-# 5. Dark Mode
-
-Dark mode must not use pure black for the main background.
-
-## 5.1 Backgrounds
-
-| Token | Hex | Usage |
-|---|---|---|
-| `--background` | `#171717` | Main page background |
-| `--background-secondary` | `#1F1F1F` | Secondary sections |
-| `--surface` | `#242424` | Cards / dialogs |
-| `--surface-secondary` | `#2A2A2A` | Inputs / secondary containers |
-| `--surface-hover` | `#303030` | Hover state |
-
-## 5.2 Text
-
-| Token | Hex | Usage |
-|---|---|---|
-| `--text-primary` | `#F5F5F5` | Main text |
-| `--text-secondary` | `#D4D4D4` | Secondary text |
-| `--text-tertiary` | `#A3A3A3` | Metadata / helper text |
-| `--text-disabled` | `#666666` | Disabled text |
-
-## 5.3 Borders
-
-| Token | Hex | Usage |
-|---|---|---|
-| `--border` | `#3A3A3A` | Default border |
-| `--border-secondary` | `#303030` | Subtle divider |
-| `--border-focus` | `#818CF8` | Focused input |
-
----
-
-# 6. Semantic Colors
-
-Semantic colors are used only when their meaning is necessary.
-
-| Purpose | Light | Dark |
-|---|---|---|
-| Success | `#16A34A` | `#4ADE80` |
-| Warning | `#D97706` | `#FBBF24` |
-| Error | `#DC2626` | `#F87171` |
-| Info | `#2563EB` | `#60A5FA` |
-
-Do not use semantic colors as decoration.
-
-For mental-health risk states, avoid dramatic red UI unless an immediate safety action is required.
-
----
-
-# 7. Typography
-
-## 7.1 Font
-
-Use:
-
-**Inter**
-
-Fallback:
-
-`Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
-
-Do not use multiple font families.
-
-## 7.2 Type Scale
-
-| Token | Size | Line Height | Weight | Usage |
-|---|---:|---:|---:|---|
-| `display` | 40px | 48px | 700 | Hero heading |
-| `h1` | 32px | 40px | 700 | Main page heading |
-| `h2` | 24px | 32px | 700 | Section heading |
-| `h3` | 20px | 28px | 600 | Card heading |
-| `h4` | 18px | 26px | 600 | Small heading |
-| `body-lg` | 16px | 26px | 400 | Important body |
-| `body` | 14px | 22px | 400 | Default UI text |
-| `body-sm` | 13px | 20px | 400 | Secondary information |
-| `caption` | 12px | 18px | 400 | Metadata |
-| `button` | 14px | 20px | 600 | Button text |
-
-### Typography rules
-
-- Do not use font sizes smaller than `12px`.
-- Main UI text should normally be `14px`.
-- Body content should normally be `14px–16px`.
-- Use weight `700` sparingly.
-- Do not use all-caps for normal UI text.
-
----
-
-# 8. Spacing System
-
-Use a 4px base spacing scale.
-
-| Token | Value |
-|---|---:|
-| `space-1` | 4px |
-| `space-2` | 8px |
-| `space-3` | 12px |
-| `space-4` | 16px |
-| `space-5` | 20px |
-| `space-6` | 24px |
-| `space-8` | 32px |
-| `space-10` | 40px |
-| `space-12` | 48px |
-| `space-16` | 64px |
-| `space-20` | 80px |
-| `space-24` | 96px |
-
-### Default rules
-
-- Small gap: `8px`
-- Component gap: `12–16px`
-- Card internal padding: `20–24px`
-- Section gap: `32–48px`
-- Large section gap: `64–96px`
-
-Avoid arbitrary spacing values such as `13px`, `17px`, `27px`, etc. unless technically necessary.
-
----
-
-# 9. Border Radius
-
-Everything should feel softly rounded.
-
-| Token | Value | Usage |
-|---|---:|---|
-| `radius-sm` | 8px | Small controls |
-| `radius-md` | 12px | Inputs / buttons |
-| `radius-lg` | 16px | Cards |
-| `radius-xl` | 20px | Large cards / containers |
-| `radius-2xl` | 24px | Feature sections |
-| `radius-full` | 9999px | Avatar / pill / circular controls |
-
-### Default
-
-- Button: `12px`
-- Input: `12px`
-- Card: `16px`
-- Modal: `20px`
-- Chat bubble: `16px`
-- Avatar: `9999px`
-
-Avoid sharp 0px corners unless required for a specific layout.
-
----
-
-# 10. Buttons
-
-## 10.1 Standard sizes
-
-| Size | Height | Horizontal Padding | Font |
-|---|---:|---:|---:|
-| Small | 36px | 14px | 13px |
-| Medium | 40px | 16px | 14px |
-| Large | 48px | 20px | 14px |
-| XL / Hero | 52px | 24px | 15px |
-
-Default button size: **40px**
-
-Minimum touch target: **44px** where practical on mobile.
-
-## 10.2 Button styles
-
-### Primary
-- Background: `primary-600`
-- Text: `#FFFFFF`
-- Radius: `12px`
-- Hover: `primary-700`
-- Active: `primary-800`
-
-### Secondary
-- Background: transparent or `surface-secondary`
-- Text: `text-primary`
-- Border: `border`
-- Hover: `surface-hover`
-
-### Ghost
-- Background: transparent
-- No visible border
-- Hover: `surface-hover`
-
-### Danger
-- Use only for destructive actions.
-- Background: semantic error.
-- Never use danger styling for ordinary mental-health states.
-
----
-
-# 11. Inputs
-
-Default input:
-
-- Height: `44px`
-- Padding: `0 14px`
-- Radius: `12px`
-- Border: `1px solid var(--border)`
-- Font: `14px`
-- Background: `var(--surface)`
-- Text: `var(--text-primary)`
-
-Focus:
-
-- Border: `var(--border-focus)`
-- Add a subtle focus ring.
-- Do not use a large glowing effect.
-
-Textarea:
-
-- Minimum height: `100px`
-- Padding: `12px 14px`
-- Radius: `12px`
-
----
-
-# 12. Cards
-
-Default card:
-
-- Background: `var(--surface)`
-- Border: `1px solid var(--border)`
-- Radius: `16px`
-- Padding: `20px`
-- Shadow: none or extremely subtle
-
-Cards should primarily be separated by spacing and borders, not heavy shadows.
-
-### Card sizes
-
-- Compact: `16px` padding
-- Default: `20px` padding
-- Large: `24px` padding
-
----
-
-# 13. Shadows
-
-Weisz uses very subtle shadows.
-
-```css
---shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
---shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
---shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+## 4. Interactive Clay Card System (Fluid & Non-Rigid)
+
+Cards are Weisz's signature tactile element. They must feel soft, alive, and responsive without jittering or looking rigid.
+
+### 4.1 Card Variants (Content-Driven Variation, Not Copy-Paste)
+
+1. **Interactive Clay Card (`.clay-card-interactive`):** For selectable categories, topics, history sessions, and clickable actions. Uses `--clay-rest`, full hover lift, press squish, inner icon nudge, and optional subtle tilt.
+2. **Soft Blue Cushion Card (`.clay-card-blue`):** For supportive reflections, expert-system reasoning, and mood check-in prompts (`--surface-clay-blue`).
+3. **Static Matte Card (`.clay-card-static`):** For read-only summaries, auth containers, and disclaimers. Uses softer resting depth and **zero hover movement** so users never mistake it for a button.
+4. **3D Book Clay Card (`.clay-book` / `.book`):** For curated featured collections such as landing category cards. Uses a tactile 3D perspective (`perspective: 2000px; transform-origin: 0% 50%`) where the cover swings open (`rotateY(-80deg)`) on hover to reveal available subcategories on the inside page, paired with a transition shadow and "Lihat Selengkapnya" navigation.
+
+### 4.2 Interactive Micro-Physics
+
+- **Hover (Desktop):** Lifts gently (`transform: translateY(-4px) scale(1.01)`), shifts to `--clay-lift` and `--surface-clay-hover`, with smooth spring easing (`220ms cubic-bezier(0.22, 1, 0.36, 1)`).
+- **Nested Content Choreography:**
+  - Icon pill inside card nudges gently (`transform: scale(1.06) rotate(-3deg)`).
+  - Action cue text shifts slightly (`transform: translateX(3px)`).
+- **Press / Tap (`:active`):** Soft clay squish (`transform: translateY(1px) scale(0.985)` + `--clay-press`), giving immediate physical confirmation on both desktop click and mobile tap.
+- **Selected State:** Locks into `--surface-clay-blue` with `2px solid var(--sky-primary)` and a cushioned inner rim.
+- **Keyboard Focus (`:focus-visible`):** Triggers the same visual lift as hover plus a clear `2px solid var(--border-focus)` ring (`outline-offset: 3px`).
+- **Optional Subtle Pointer Tilt (Progressive Enhancement):** On fine-pointer devices (`(hover: hover) and (pointer: fine)`), cards carrying `data-clay-tilt` apply a gentle max `±2.5deg` 3D tilt (`perspective(800px) rotateX(...) rotateY(...)`) following cursor position, easing smoothly back to flat on `mouseleave`. Always disabled on touch devices and when `prefers-reduced-motion: reduce` is active.
+
+### 4.3 Vanilla JS Helper for Subtle Card Tilt (Optional, ~15 Lines)
+
+```js
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('[data-clay-tilt]').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) translateY(-4px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
 ```
 
-Dark mode shadows should be reduced or replaced with borders.
-
-Do not use large floating shadows as a primary visual style.
-
 ---
 
-# 14. Layout & Content Width
+## 5. Typography
 
-## Desktop
+- **Display / Heading (`--font-serif`):** `"Nunito", sans-serif` exclusively for hero headings and section/page headings.
+- **UI & Conversation Sans (`--font-sans`):** `"Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif` for body text, navbar, buttons, chatbot, and metadata.
 
-- Maximum content width: `1200px`
-- Comfortable reading width: `720px`
-- Chat content maximum width: `768px`
-- Page horizontal padding: `32px`
+### Element Font Mapping
 
-## Tablet
-
-- Horizontal padding: `24px`
-
-## Mobile
-
-- Horizontal padding: `16px`
-
-### Main content
-
-Use centered content where appropriate.
-
-```text
-Desktop:
-[ 32px ] [       Main Content       ] [ 32px ]
-
-Mobile:
-[ 16px ] [      Main Content      ] [ 16px ]
-```
-
-Do not stretch text-heavy content across the entire desktop screen.
-
----
-
-# 15. Responsive Breakpoints
-
-Use:
-
-| Name | Width |
-|---|---:|
-| Mobile | `< 640px` |
-| Tablet | `640px–1023px` |
-| Desktop | `>= 1024px` |
-| Large Desktop | `>= 1280px` |
-
-Mobile is the priority for the chatbot experience.
-
----
-
-# 16. Navbar
-
-Desktop:
-
-- Height: `64px`
-- Horizontal padding: `24–32px`
-- Logo on left
-- Navigation/actions on right
-- Border bottom: `1px solid var(--border)`
-
-Mobile:
-
-- Height: `56px`
-- Horizontal padding: `16px`
-- Keep navigation minimal.
-- Use a menu/drawer when necessary.
-
-Navbar must remain visually simple.
-
----
-
-# 17. Sidebar
-
-For authenticated dashboard/admin layouts:
-
-- Width: `240px`
-- Compact width when collapsed: `72px`
-- Padding: `12px`
-- Navigation item height: `40px`
-- Radius: `10px`
-- Gap between items: `4px`
-
-Active navigation:
-
-- Background: `primary-50` in White Mode
-- Background: subtle primary-tinted surface in Dark Mode
-- Text/icon: primary
-
-Do not use highly saturated full-sidebar backgrounds.
-
----
-
-# 18. Chatbot Design
-
-The chatbot is the **core experience of Weisz**.
-
-Its interaction model should feel familiar and simple, inspired by modern AI chat applications such as ChatGPT, while keeping Weisz's own visual identity.
-
-## 18.1 Chat layout
-
-Desktop:
-
-```text
-┌──────────────────────────────────────────────┐
-│ Header                                       │
-├───────────────┬──────────────────────────────┤
-│ Conversation  │                              │
-│ History       │       Chat Content           │
-│               │                              │
-│               │                              │
-│               │                              │
-│               │     Message Composer         │
-└───────────────┴──────────────────────────────┘
-```
-
-Mobile:
-
-```text
-┌─────────────────────────────┐
-│ Header                      │
-├─────────────────────────────┤
-│                             │
-│       Chat Content          │
-│                             │
-│                             │
-├─────────────────────────────┤
-│ Message Composer            │
-└─────────────────────────────┘
-```
-
-## 18.2 Message width
-
-Assistant messages:
-
-- Maximum width: `768px`
-- Align: left
-
-User messages:
-
-- Maximum width: `70%` desktop
-- Align: right
-
-On mobile:
-
-- Maximum width: `88%`
-
-## 18.3 Message spacing
-
-- Message group gap: `16px`
-- Individual message gap: `8px`
-- Paragraph line-height: `1.6`
-
-Avoid excessive speech-bubble styling.
-
-The chatbot should feel like a clean conversation rather than a traditional messaging app.
-
-## 18.4 User message
-
-- Background: `primary-600`
-- Text: white
-- Radius: `16px`
-- Padding: `10px 14px`
-
-## 18.5 Assistant message
-
-White Mode:
-
-- Background: transparent or `surface`
-- Text: `text-primary`
-
-Dark Mode:
-
-- Background: transparent or `surface`
-- Text: `text-primary`
-
-Assistant messages should not look visually heavier than user messages.
-
----
-
-# 19. Chat Composer
-
-The message composer is a major component.
-
-Desktop:
-
-- Maximum width: `768px`
-- Minimum height: `52px`
-- Radius: `16px`
-- Border: `1px solid var(--border)`
-- Background: `var(--surface)`
-
-Mobile:
-
-- Minimum height: `48px`
-- Horizontal margin: `12–16px`
-
-Structure:
-
-```text
-┌──────────────────────────────────────────┐
-│  Message...                         [↑]  │
-└──────────────────────────────────────────┘
-```
-
-Send button:
-
-- Size: `36px`
-- Radius: `9999px`
-- Primary color
-- Disabled when there is no message
-
-Do not create a giant input box.
-
----
-
-# 20. Chatbot Quick Suggestions
-
-Suggestion chips may be displayed when the user starts a conversation or becomes stuck.
-
-Chip:
-
-- Height: `36px`
-- Padding: `8px 14px`
-- Radius: `9999px`
-- Border: `1px solid var(--border)`
-- Background: `var(--surface)`
-- Font: `13px`
-
-Hover:
-
-- Background: `surface-hover`
-
-Examples:
-
-- "I'm feeling overwhelmed"
-- "Help me understand this"
-- "What should I do next?"
-- "I don't know how to explain it"
-
-Do not present too many options at once. Prefer 2–4 suggestions.
-
----
-
-# 21. Context Confirmation
-
-Before entering the chatbot, show the selected context clearly.
-
-Example:
-
-```text
-Your selected topic
-
-Academic Stress
-
-We'll focus this conversation on academic stress.
-You can change the topic anytime.
-
-[Continue] [Change Topic]
-```
-
-Use a simple card with:
-
-- Radius: `16px`
-- Padding: `24px`
-- Border
-- No heavy illustration
-
----
-
-# 22. Problem Selection UI
-
-For Problem Explorer, Subcategory, and Topic Selection:
-
-Use cards or selectable list items.
-
-Selectable item:
-
-- Minimum height: `64px`
-- Padding: `16px`
-- Radius: `14px`
-- Border: `1px solid var(--border)`
-- Gap: `12px`
-
-Selected:
-
-- Border: primary
-- Background: subtle primary background
-- Optional check icon
-
-Do not use huge colorful category cards.
-
----
-
-# 23. Conversation Summary
-
-The summary should look like a calm information card.
-
-Recommended structure:
-
-```text
-Conversation Summary
-
-Main topic
-Academic Stress
-
-What you shared
-...
-
-Possible factors
-...
-
-Suggested next steps
-...
-
-Professional support
-Recommended when appropriate
-```
-
-Use clear sections and whitespace.
-
-Do not describe the summary as a medical diagnosis.
-
----
-
-# 24. Professional Recommendation
-
-Professional recommendations are informational.
-
-Each professional card should contain:
-
-- Name
-- Profession: Psychologist / Psychiatrist
-- Location
-- Contact information
-- Optional short description
-- Optional available service information if stored by admin
-
-Card:
-
-- Radius: `16px`
-- Padding: `20px`
-- Border: `1px solid var(--border)`
-
-The AI must never invent professional data.
-
-Professional information must come from the admin-managed database.
-
----
-
-# 25. Admin UI
-
-Admin pages use the same design system.
-
-Admin dashboard:
-
-- Maximum content width: `1200px`
-- Metric cards: `16px radius`
-- Table radius: `16px`
-- Table row height: `52–56px`
-- Button height: `40px`
-- Page heading: `24–32px`
-
-Admin UI should be functional and clean, not visually different from the user product.
-
----
-
-# 26. Tables
-
-Default:
-
-- Border: `1px solid var(--border)`
-- Radius: `16px`
-- Overflow: hidden
-- Row height: `52–56px`
-- Cell padding: `12px 16px`
-
-Header:
-
-- Font weight: `600`
-- Background: `surface-secondary`
-
-Hover:
-
-- Background: `surface-hover`
-
-On mobile, convert wide tables into cards or horizontally scrollable containers.
-
----
-
-# 27. Badges / Status
-
-Default badge:
-
-- Height: `28px`
-- Padding: `4px 10px`
-- Radius: `9999px`
-- Font: `12px`
-- Font weight: `600`
-
-Use semantic colors only when the status requires meaning.
-
-Examples:
-
-- Active
-- Inactive
-- Pending
-- Completed
-- Draft
-
----
-
-# 28. Modal / Dialog
-
-- Maximum width: `480px` default
-- Large modal: `640px`
-- Radius: `20px`
-- Padding: `24px`
-- Background: `var(--surface)`
-- Border: `1px solid var(--border)`
-
-Overlay:
-
-- Use a subtle dark translucent overlay.
-- Do not heavily blur the entire interface.
-
----
-
-# 29. Avatar
-
-Sizes:
-
-| Size | Diameter |
-|---|---:|
-| Small | 32px |
-| Medium | 40px |
-| Large | 48px |
-| XL | 64px |
-
-Radius: `9999px`
-
----
-
-# 30. Icons
-
-Use **Lucide Icons** or another consistent outline icon library.
-
-Rules:
-
-- Default size: `20px`
-- Small: `16px`
-- Large: `24px`
-- Stroke width: approximately `2`
-- Do not mix multiple icon styles.
-
-Icons should support the text, not replace important labels.
-
----
-
-# 31. Animation
-
-Animations must be subtle.
-
-Recommended:
-
-- Hover: `120–180ms`
-- Standard transition: `180ms`
-- Modal: `200ms`
-- Page transition: `200–250ms`
-
-Use:
-
-```css
-transition: all 180ms ease;
-```
-
-Avoid:
-
-- Bouncing UI
-- Excessive scaling
-- Large parallax
-- Constant motion
-- Distracting background animations
-
-For chatbot typing/loading, use a subtle three-dot indicator.
-
----
-
-# 32. Accessibility
-
-Always:
-
-- Provide visible focus states.
-- Use semantic HTML.
-- Maintain sufficient text/background contrast.
-- Do not communicate information by color alone.
-- Make interactive controls keyboard accessible.
-- Provide labels for form inputs.
-- Use at least `44px` touch targets where practical on mobile.
-- Respect `prefers-reduced-motion`.
-
----
-
-# 33. Mental Health UX Rules
-
-This is a mental-health-related product, so the UI must feel safe.
-
-### Always
-
-- Use calm language.
-- Avoid judgmental wording.
-- Explain uncertainty.
-- Make recommendations feel optional and supportive.
-- Keep professional recommendations factual.
-- Provide clear safety actions when an immediate-risk situation is detected.
-
-### Never
-
-- Claim that the AI has diagnosed the user.
-- Present an expert-system result as a medical diagnosis.
-- Use frightening visual effects for risk states.
-- Shame the user.
-- Invent psychologist/psychiatrist information.
-- Make the chatbot appear to replace a mental-health professional.
-
----
-
-# 34. Design Token Priority
-
-When implementing a new page, follow this order:
-
-1. Layout
-2. Spacing
-3. Typography
-4. Colors
-5. Components
-6. Interaction states
-7. Responsive behavior
-8. Accessibility
-
-Do not create a new design token unless an existing token cannot reasonably solve the requirement.
-
----
-
-# 35. Forbidden Visual Patterns
-
-Do NOT introduce these patterns unless explicitly requested:
-
-- Neon cyberpunk colors
-- Excessive gradients
-- Glassmorphism
-- Excessive blur
-- Excessive shadows
-- Sharp rectangular cards
-- Excessive illustrations
-- Random decorative shapes
-- Multiple unrelated accent colors
-- Excessive animations
-- Huge text everywhere
-- Dense dashboard layouts
-- Hospital/medical UI aesthetics
-- Generic AI robot imagery
-- Chatbot UI filled with speech bubbles
-
----
-
-# 36. Page-Specific Design Direction
-
-## User Pages
-
-### Landing Page
-Minimal hero, short explanation, clear CTA, calm visual hierarchy.
-
-### Login
-Centered authentication card, minimal distractions.
-
-### Register
-Same visual language as Login.
-
-### Dashboard
-Simple overview with "Start Conversation" as the main CTA.
-
-### Problem Explorer
-Simple problem categories with selectable cards.
-
-### Subcategory
-Progressive selection with clear hierarchy.
-
-### Topic Selection
-Specific topic choices with short descriptions.
-
-### Context Confirmation
-Confirm the selected context before starting the chatbot.
-
-### AI Chatbot
-Primary product experience. Maximum simplicity.
-
-### Chatbot Suggestion
-Small suggestion chips/cards that help users continue.
-
-### Conversation Summary
-Structured summary with clear sections.
-
-### Professional Recommendation
-Clean factual professional cards.
-
-### Conversation History
-Simple chronological conversation list.
-
-### Profile & Settings
-Grouped settings with clean forms.
-
-## Admin Pages
-
-### Admin Dashboard
-Metrics, recent activity, and system overview.
-
-### Category Management
-CRUD interface for problem categories.
-
-### Knowledge Base
-Manage expert knowledge used by the system.
-
-### Expert Rule Management
-Manage conditions, facts, rules, and actions.
-
-### Professional Management
-CRUD interface for psychologist/psychiatrist data.
-
-### Conversation Monitoring
-System-level conversation/activity statistics.
-
----
-
-# 37. Default Component Specifications
-
-| Component | Default |
+| Element | Font |
 |---|---|
-| Button | 40px height / 12px radius |
-| Input | 44px height / 12px radius |
-| Card | 16px radius / 20px padding |
-| Modal | 20px radius / 24px padding |
-| Chat Bubble | 16px radius |
-| Badge | 28px height / full radius |
-| Avatar | 40px |
-| Navbar | 64px desktop / 56px mobile |
-| Sidebar | 240px |
-| Table Row | 52–56px |
-| Chat Composer | 52px minimum |
-| Page max width | 1200px |
-| Chat max width | 768px |
-| Mobile page padding | 16px |
-| Desktop page padding | 32px |
+| Hero heading | Nunito |
+| Section heading | Nunito |
+| Body text | Plus Jakarta Sans |
+| Navbar | Plus Jakarta Sans |
+| Button | Plus Jakarta Sans |
+| Chatbot | Plus Jakarta Sans |
+| Metadata | Plus Jakarta Sans |
+
+### Type Scale
+
+| Level | Font | Size (Mobile / Desktop) | Weight | Line Height |
+|---|---|---|---|---|
+| Display (Hero) | Nunito | `30px` / `44px` | 500 | `1.16` |
+| Page Title (`h1`) | Nunito | `24px` / `30px` | 500 | `1.22` |
+| Section Heading (`h2`) | Nunito | `20px` / `24px` | 500 | `1.3` |
+| Card Title (`h3`) | Plus Jakarta Sans | `15px` / `16px` | 600 | `1.4` |
+| Chat & Body | Plus Jakarta Sans | `15px` / `16px` | 400 | `1.68` |
+| Navbar / Button / Control | Plus Jakarta Sans | `14px` | 600 | `1.2` |
+| Helper / Validation / Metadata | Plus Jakarta Sans | `13px` | 400 | `1.45` |
+
+Rules: Zero wide-tracked uppercase boilerplate labels (`HOW IT WORKS`), zero monospace decorative headings, keep reading line length under `68ch`.
 
 ---
 
-# 38. AI Implementation Rules
+## 6. Core UI Components
 
-When generating UI/UX or frontend code for Weisz:
+### 6.1 Clay Buttons (Min `44px` Mobile Height, `42px` Desktop)
 
-1. **Always use this design system.**
-2. Do not invent new colors when an existing token is available.
-3. Do not invent arbitrary spacing values.
-4. Do not change the primary color per page.
-5. Use `Inter`.
-6. Use rounded components.
-7. Support both White Mode and Dark Mode.
-8. Use CSS variables/design tokens for colors.
-9. Keep the interface minimal.
-10. Keep chatbot UI simple and conversational.
-11. Make mobile responsive by default.
-12. Use consistent iconography.
-13. Prefer borders and spacing over heavy shadows.
-14. Do not add unnecessary decorative elements.
-15. Do not redesign the brand unless explicitly instructed.
-16. Preserve existing components and tokens when extending the system.
-17. If a new component is required, derive its dimensions, spacing, radius, typography, and colors from existing tokens.
-18. Never create a one-off visual style for a single page.
-19. The user experience must remain calm and non-clinical.
-20. Never represent chatbot output as a medical diagnosis.
+- **Primary Soft Blue Clay:** Light `--sky-600` (`#2B74AE`) + `#FFFFFF` text with soft clay bevel (`0 8px 18px -4px rgba(43, 116, 174, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.35), inset 0 -3px 6px rgba(18, 48, 74, 0.25)`); Dark `--sky-400` (`#8DC5F2`) + `#121821` ink. Radius `18px`. Hover lifts `-2px`; active squishes `scale(0.98)`.
+- **Secondary Clay:** `--surface-clay`, `--clay-rest`, `--text-primary` text, `--border-clay` edge.
+- **Destructive Action:** Used strictly inside confirmation dialogs (`--color-error` soft clay fill on final confirm only).
+- Required states: default, hover, `:focus-visible`, active squish, disabled (`opacity: 0.45`, no lift), loading.
+
+### 6.2 Recessed Clay Inputs & Inline Form Validation
+
+- Surface: `--surface-well`, shadow `--clay-well`, radius `14px`, min-height `44px`, padding `10px 16px`.
+- Focus: border `var(--border-focus)` + soft outer ring `0 0 0 3px rgba(43, 116, 174, 0.18)` (Light) / `rgba(141, 197, 242, 0.24)` (Dark).
+- Invalid: border `var(--color-error)`, `aria-invalid="true"`, linked via `aria-describedby` to a `13px` helper line `6px` below.
+- Validate on `blur` or submit; re-validate on `input` only after an error is shown. Write plain-language fix guidance.
+
+### 6.3 Toasts, Alerts & Tables
+
+- **Toasts:** Floating clay pills (`radius: 18px`, max width `380px`, bottom-right desktop / bottom-center mobile above safe area), max `3` stacked, auto-dismiss `4s` for info/success, persistent for error/safety, always with accessible close button and `Escape` support.
+- **Admin Tables:** Wrapped inside a single `--surface-clay` container (`radius: 24px`) with clean `52px` rows and hairline dividers (never apply individual clay shadows to every table row).
 
 ---
 
-# 39. Recommended CSS Variables
+## 7. Conversational Experience (Core Product)
+
+### 7.1 Layout & Message Rhythm
+
+- **Desktop:** `264px` solid `--bg-subtle` sidebar (collapsible to `72px`) + centered `740px` conversation stream on flat `--bg-page` cloud canvas.
+- **Mobile:** Off-canvas drawer sidebar, top floating bar (`44px` circular clay controls for menu, crisis help, copy transcript), pinned keyboard-aware composer (`100dvh` + `env(safe-area-inset-bottom)`).
+- **User message:** Right-aligned soft blue clay bubble (`--sky-200` Light / `--surface-clay-blue` Dark, `--text-primary`, radius `22px` with `6px` top-right corner, light resting clay bevel).
+- **Assistant message:** Left-aligned open prose directly on `--bg-page` (`max-w-[68ch]`, `15.5px`, `leading-[1.68]`). Keeps long empathetic replies airy instead of trapped inside heavy puffy boxes.
+- **Voice note entry:** Soft blue clay audio pill with circular `40px` play/pause button, progress bar, timer, and collapsible transcript.
+
+### 7.2 Composer & Interaction States
+
+- Container: Elevated `--surface-clay` container (`radius: 24px`, `--clay-rest`), containing an inner recessed textarea (`min-height: 44px`, auto-grow up to `120px`) and circular `44px` primary clay trigger (Voice Note when empty, Send when text exists, square Stop button during generation).
+- Supported states: **Idle**, **Typing**, **Recording**, **Sending**, **Thinking/Streaming**, **Completed**, **Interrupted**, **Failed**, **Retrying**.
+- Prevent duplicate submissions while generating; allow one-click abort via `AbortController` (`Respon dihentikan.`); preserve user text on network failure with an inline retry clay card.
+- Quick suggestions: 2 to 4 tactile clay chips (`38px` height, pill radius, hover lift `-2px`).
+
+---
+
+## 8. Mental Health, Safety & Privacy Patterns
+
+- **Onboarding & Consent:** Brief, skippable steps covering Weisz's purpose, non-diagnostic boundary, data privacy explanation, and optional initial mood check-in.
+- **Mood Check-in (Non-Gamified):** Five balanced emotional anchors (`Very Difficult`, `Difficult`, `Okay`, `Good`, `Very Good`) presented as interactive soft clay tiles (`min-height: 44px`, radius `18px`) with tactile press squish and cushioned `--surface-clay-blue` selected lock. Zero streak guilt or cartoon emoji clutter.
+- **Expert System Reasoning Card:** Uses `.clay-card-blue` (`--surface-clay-blue`) to explain supportive suggestions in calm observation phrasing ("Based on what you shared..."), never raw rule IDs or diagnostic labels.
+- **Conversation Summary & Professionals:** Clean typographic summary card (no decorative emojis, clear non-diagnostic disclaimer) + interactive clay practitioner cards displaying verified factual details only.
+- **Crisis Support & Safety Dialog:** Always one tap away from chat top bar and standard footer using Warm Peach-Ochre tokens (calm, never flashing). Lists verified 24/7 hotlines (**Hotline Kesehatan Jiwa Kemenkes 119 ext. 8**, **Halo Kemenkes 1500-567**), traps keyboard focus, and closes with `Escape`.
+- **Privacy & Recovery States:** One-click transcript export, confirmation modal before destructive deletion, private conversations hidden from aggregate admin monitoring, plus explicit **Empty**, **Loading**, and **Error** states on every data view.
+
+### 8.1 Crisis Path Availability
+
+Crisis access is **not limited to the chat view**. It must be available on every authenticated page:
+
+- Implemented as a global crisis button in `app.blade.php` navbar (authenticated users only).
+- Uses `--color-warning-bg` / `--color-warning-border` / `--color-warning` tokens (Warm Peach-Ochre), minimum `40x40px`, with an accessible `aria-label`.
+- The crisis modal traps keyboard focus (Tab cycling within the modal), closes with `Escape`, and returns focus to the trigger button on close. Backdrop click also closes it.
+- Never use a flashing animation, red alert color, or alarming language. Calm, grounded phrasing always.
+
+### 8.2 Two Entry Paths
+
+The exploration flow has two distinct entry points:
+
+1. **Explore path:** `/ > /explore > /{category} > /{subcategory} > /{topic} > /confirm > /chat` -- for users who want to browse and choose.
+2. **Quick path:** `/curhat` -- bypasses explore, starts chat directly without topic selection.
+
+Prioritize the Quick path CTA in the hero for users who arrive already distressed. Five navigation steps before reaching support is too many for someone in acute distress.
+
+### 8.3 Mood Check-in Storage Contract
+
+Mood values are stored directly in `chat_sessions`, not only in `chat_messages.metadata`:
+
+| Column | Type | Values |
+|---|---|---|
+| `mood_score` | `TINYINT UNSIGNED NULL` | `1` = `overwhelmed`, `2` = `anxious`, `3` = `sad`, `4` = `numb`, `5` = `calm` |
+| `mood_label` | `VARCHAR(20) NULL` | `overwhelmed`, `anxious`, `sad`, `numb`, `calm` |
+
+Session creation (`chat.start`) and in-chat mood updates (`chat/{session}/update-mood`) persist both columns alongside conversation context history. This enables mood trend analysis and admin reporting without JSON parsing.
+
+### 8.4 Loading State for Assistant Thinking
+
+When the assistant is in Thinking/Streaming state, show a single calm text line:
+
+```
+Weisz sedang merespons...
+```
+
+Apply a gentle fade-pulse animation. Under `prefers-reduced-motion: reduce`, show static text only. No spinner, no skeleton screen. A single calm line is least alarming for anxious users.
+
+### 8.5 Empty State: History
+
+When a user has no prior sessions, show:
+
+> "Belum ada refleksi. Mulai dari topik yang terasa berat sekarang."
+
+Followed by a single CTA to `/explore`. No illustration, no empty-state graphic. The sentence carries the message.
+
+---
+
+## 9. Mobile, Accessibility & Copywriting Guardrails
+
+- **Accessibility (WCAG AA):** Minimum `4.5:1` normal text contrast, `3:1` focus/UI contrast, `44x44px` touch targets, `.skip-to-content` link to `#mainContent`, visible `2px` `:focus-visible` outlines, `role="log" aria-live="polite"` on chat feed, explicit `aria-label` on icon controls, and full `prefers-reduced-motion: reduce` support.
+- **Semantic Hierarchy (Avoid `<span>`):** Avoid generic `<span>` tags across UI templates. Express hierarchy using semantic HTML paired with clay depth tiers: `.clay-pill-blue` / `.clay-pill-well` / `.clay-pill-{success|warning|error}` on `<p>` or `<div>` for badges and metadata, `.clay-badge-num` for step/priority indices, `<time>` for timestamps, `<strong>`/`<em>` for inline prose emphasis, and direct text inside buttons and links.
+- **Voice & Specific CTAs:** Calm, grounded, Gen-Z respectful copy. Concrete CTAs (`Mulai Refleksi Sekarang`, `Lihat Topik Refleksi`, `Bantuan Krisis`, `Salin Transkrip`) instead of generic `Get Started` or `Explore`.
+- **Forbidden Patterns:** Zero em dashes (`U+2014`) in UI copy, zero AI buzzwords (`AI Powered`, `Seamless`, `Revolutionary`), zero toxic positivity, zero medical diagnosis claims, zero fake stats/testimonials, zero glowing corner blobs or blueprint dot-grids.
+
+---
+
+## 10. CSS Tokens & Interactive Clay Classes
+
+Copy-ready foundation for `resources/css/app.css`:
 
 ```css
 :root {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Nunito", sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  --color-primary-50: #EEF2FF;
-  --color-primary-100: #E0E7FF;
-  --color-primary-200: #C7D2FE;
-  --color-primary-300: #A5B4FC;
-  --color-primary-400: #818CF8;
-  --color-primary-500: #6366F1;
-  --color-primary-600: #4F46E5;
-  --color-primary-700: #4338CA;
-  --color-primary-800: #3730A3;
-  --color-primary-900: #312E81;
+  /* Soft Blue Clay Scale */
+  --sky-50: #f3f7fb;
+  --sky-100: #e6f2fc;
+  --sky-200: #cfe6fa;
+  --sky-300: #a6d4f7;
+  --sky-400: #8dc5f2;
+  --sky-500: #86bce8;
+  --sky-600: #2b74ae;
+  --sky-700: #226194;
+  --sky-800: #1e5c8e;
+  --sky-900: #182433;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  /* Light Mode: Airy Cloud */
+  --bg-page: #f3f7fb;
+  --bg-subtle: #e9f1f9;
+  --surface-clay: #ffffff;
+  --surface-clay-blue: #e6f2fc;
+  --surface-clay-hover: #f7fbff;
+  --surface-well: #edf4fa;
+
+  --text-primary: #182433;
+  --text-secondary: #475a6e;
+  --text-muted: #5b7085;
+  --text-accent: #1e5c8e;
+
+  --border-clay: #d6e6f5;
+  --border-focus: #2b74ae;
+
+  /* Clay Depth Recipes */
+  --clay-well: inset 0 2px 5px rgba(24, 36, 51, 0.08), inset 0 -1px 2px rgba(255, 255, 255, 0.9);
+  --clay-rest: 0 10px 24px -6px rgba(43, 116, 174, 0.13), inset 0 2px 4px rgba(255, 255, 255, 0.95), inset 0 -4px 8px rgba(134, 188, 232, 0.2);
+  --clay-lift: 0 18px 34px -8px rgba(43, 116, 174, 0.2), inset 0 2px 5px #ffffff, inset 0 -5px 10px rgba(134, 188, 232, 0.26);
+  --clay-press: 0 4px 10px -2px rgba(43, 116, 174, 0.14), inset 0 3px 7px rgba(43, 116, 174, 0.16), inset 0 -1px 3px rgba(255, 255, 255, 0.8);
+  --clay-btn-primary: 0 8px 18px -4px rgba(43, 116, 174, 0.34), inset 0 2px 3px rgba(255, 255, 255, 0.32), inset 0 -3px 6px rgba(18, 48, 74, 0.24);
+
+  /* Semantics */
+  --color-success: #1e6b4b;
+  --color-success-bg: #ebf7f1;
+  --color-success-border: #bce3d0;
+  --color-warning: #8c4f16;
+  --color-warning-bg: #fdf5eb;
+  --color-warning-border: #f2d2ad;
+  --color-error: #b2333b;
+  --color-error-bg: #fdf1f2;
+  --color-error-border: #f2c4c7;
+
+  /* Radii & Motion */
+  --radius-well: 14px;
+  --radius-btn: 18px;
+  --radius-card: 24px;
+  --radius-hero: 28px;
   --radius-full: 9999px;
-
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
-  --space-24: 96px;
+  --ease-clay: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-[data-theme="light"] {
-  --background: #FFFFFF;
-  --background-secondary: #F8F9FC;
-  --surface: #FFFFFF;
-  --surface-secondary: #F5F6FA;
-  --surface-hover: #F1F3F7;
+html.dark {
+  --bg-page: #121821;
+  --bg-subtle: #18202c;
+  --surface-clay: #1e2836;
+  --surface-clay-blue: #1b2d40;
+  --surface-clay-hover: #243142;
+  --surface-well: #151c26;
 
-  --text-primary: #171717;
-  --text-secondary: #525252;
-  --text-tertiary: #737373;
-  --text-disabled: #A3A3A3;
+  --text-primary: #eff5fb;
+  --text-secondary: #bfd0e2;
+  --text-muted: #8ea5bc;
+  --text-accent: #8dc5f2;
 
-  --border: #E5E7EB;
-  --border-secondary: #F0F1F3;
-  --border-focus: #6366F1;
+  --border-clay: #2b3b4e;
+  --border-focus: #8dc5f2;
+
+  --clay-well: inset 0 3px 6px rgba(0, 0, 0, 0.45), inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+  --clay-rest: 0 12px 26px -6px rgba(0, 0, 0, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.08), inset 0 -4px 8px rgba(0, 0, 0, 0.35);
+  --clay-lift: 0 18px 36px -8px rgba(0, 0, 0, 0.58), inset 0 2px 4px rgba(141, 197, 242, 0.14), inset 0 -5px 10px rgba(0, 0, 0, 0.4);
+  --clay-press: 0 4px 10px -2px rgba(0, 0, 0, 0.4), inset 0 3px 7px rgba(0, 0, 0, 0.48), inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+  --clay-btn-primary: 0 8px 20px -4px rgba(0, 0, 0, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(34, 97, 148, 0.3);
+
+  --color-success: #7ad4ac;
+  --color-success-bg: #162a24;
+  --color-success-border: #254a3e;
+  --color-warning: #f2be7a;
+  --color-warning-bg: #2b2217;
+  --color-warning-border: #4d3a24;
+  --color-error: #f5959b;
+  --color-error-bg: #2e1b1f;
+  --color-error-border: #542c33;
 }
 
-[data-theme="dark"] {
-  --background: #171717;
-  --background-secondary: #1F1F1F;
-  --surface: #242424;
-  --surface-secondary: #2A2A2A;
-  --surface-hover: #303030;
+.clay-card-static {
+  background-color: var(--surface-clay);
+  border: 1px solid var(--border-clay);
+  border-radius: var(--radius-card);
+  box-shadow: var(--clay-rest);
+}
 
-  --text-primary: #F5F5F5;
-  --text-secondary: #D4D4D4;
-  --text-tertiary: #A3A3A3;
-  --text-disabled: #666666;
+.clay-card-blue {
+  background-color: var(--surface-clay-blue);
+  border: 1px solid var(--border-clay);
+  border-radius: var(--radius-card);
+  box-shadow: var(--clay-rest);
+}
 
-  --border: #3A3A3A;
-  --border-secondary: #303030;
-  --border-focus: #818CF8;
+.clay-card-interactive {
+  background-color: var(--surface-clay);
+  border: 1px solid var(--border-clay);
+  border-radius: var(--radius-card);
+  box-shadow: var(--clay-rest);
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 220ms var(--ease-clay), box-shadow 220ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.clay-card-interactive:hover,
+.clay-card-interactive:focus-visible {
+  background-color: var(--surface-clay-hover);
+  border-color: var(--sky-500);
+  box-shadow: var(--clay-lift);
+  transform: translateY(-4px) scale(1.01);
+}
+
+.clay-card-interactive:active {
+  box-shadow: var(--clay-press);
+  transform: translateY(1px) scale(0.985);
+}
+
+.clay-card-interactive:hover .clay-icon-pill,
+.clay-card-interactive:focus-visible .clay-icon-pill {
+  transform: scale(1.06) rotate(-3deg);
+}
+
+.clay-card-interactive:hover .clay-arrow-cue,
+.clay-card-interactive:focus-visible .clay-arrow-cue {
+  transform: translateX(3px);
+}
+
+.clay-well-input {
+  background-color: var(--surface-well);
+  border: 1px solid var(--border-clay);
+  border-radius: var(--radius-well);
+  box-shadow: var(--clay-well);
+  color: var(--text-primary);
+  min-height: 44px;
+  padding: 10px 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clay-card-interactive,
+  .clay-card-interactive:hover,
+  .clay-card-interactive:focus-visible,
+  .clay-card-interactive:active,
+  .clay-icon-pill,
+  .clay-arrow-cue {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 ```
-
----
-
-# 40. Final Rule
-
-**Weisz should look like one coherent product, not 20 individually designed pages.**
-
-Every new screen, component, feature, and frontend implementation must reuse this design system.
-
-When there is a design decision that is not explicitly defined here:
-
-1. Prefer simplicity.
-2. Prefer existing tokens.
-3. Prefer consistency with existing components.
-4. Prefer whitespace over decoration.
-5. Prefer accessibility.
-6. Prefer calm and trustworthy visual communication.
-7. Do not introduce a new visual pattern without a strong functional reason.
-
-**Design keywords:**
-
-`Minimal · Calm · Modern · Rounded · Clean · Friendly · Trustworthy · Gen-Z · Conversational · Accessible`

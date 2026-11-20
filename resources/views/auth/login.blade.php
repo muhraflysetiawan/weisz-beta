@@ -6,11 +6,11 @@
 <div class="max-w-md mx-auto py-8 sm:py-16">
     <div class="weisz-card p-6 sm:p-8 space-y-6">
         <div class="text-center space-y-2">
-            <div class="w-10 h-10 rounded-2xl bg-[var(--brand-main)] text-white flex items-center justify-center font-bold text-lg mx-auto shadow-sm">
+            <div class="w-10 h-10 rounded-[14px] bg-[var(--sky-600)] text-white dark:bg-[var(--sky-400)] dark:text-[#121821] shadow-[var(--clay-btn-primary)] flex items-center justify-center font-bold text-xl mx-auto">
                 W
             </div>
-            <h1 class="text-2xl font-bold tracking-tight text-[var(--txt-primary)]">{{ __('Masuk ke Weisz') }}</h1>
-            <p class="text-xs text-[var(--txt-secondary)]">{{ __('Lanjutkan sesi refleksi dan kelola riwayat percakapanmu.') }}</p>
+            <h1 class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">{{ __('Masuk ke Weisz') }}</h1>
+            <p class="text-xs sm:text-sm text-[var(--text-secondary)]">{{ __('Lanjutkan sesi refleksi dan kelola riwayat percakapanmu.') }}</p>
         </div>
 
         <form method="POST" action="{{ route('login') }}" class="space-y-4">
@@ -19,7 +19,11 @@
             <div class="space-y-1.5">
                 <label for="email" class="text-xs font-semibold text-[var(--txt-secondary)]">{{ __('Alamat Email') }}</label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                    placeholder="nama@email.com" class="weisz-input w-full">
+                    placeholder="nama@email.com" class="weisz-input w-full @error('email') weisz-input-error @enderror"
+                    @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                @error('email')
+                <p id="email-error" class="weisz-field-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="space-y-1.5">
@@ -27,7 +31,11 @@
                     <label for="password" class="text-xs font-semibold text-[var(--txt-secondary)]">{{ __('Kata Sandi') }}</label>
                 </div>
                 <input id="password" type="password" name="password" required
-                    placeholder="••••••••" class="weisz-input w-full">
+                    placeholder="••••••••" class="weisz-input w-full @error('password') weisz-input-error @enderror"
+                    @error('password') aria-invalid="true" aria-describedby="password-error" @enderror>
+                @error('password')
+                <p id="password-error" class="weisz-field-error">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex items-center justify-between text-xs">

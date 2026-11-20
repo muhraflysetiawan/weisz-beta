@@ -120,6 +120,8 @@ class ExplorationController extends Controller
             'topic_id' => $topic->id,
             'title' => 'Sesi: '.$topic->name,
             'status' => 'active',
+            'mood_score' => MoodExpertService::getScore($initialMood),
+            'mood_label' => $initialMood,
             'started_at' => now(),
         ]);
 

@@ -69,11 +69,11 @@
 
             <form method="POST" action="{{ route('logout') }}" class="shrink-0">
                 @csrf
-                <button type="submit" class="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-950/70 border border-red-200 dark:border-red-900/40 transition flex items-center justify-center gap-2 cursor-pointer shadow-2xs" title="{{ __('Log Out') }}">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <button type="submit" class="w-full sm:w-auto px-5 py-2.5 rounded-[16px] text-xs sm:text-sm font-semibold text-[var(--color-error)] bg-[var(--color-error-bg)] hover:opacity-90 border border-[var(--color-error-border)] shadow-[var(--clay-rest)] transition flex items-center justify-center gap-2 cursor-pointer" title="{{ __('Log Out') }}">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
                     </svg>
-                    <span>{{ __('Log Out') }}</span>
+                    {{ __('Log Out') }}
                 </button>
             </form>
         </div>

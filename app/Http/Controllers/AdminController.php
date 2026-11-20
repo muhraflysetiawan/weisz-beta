@@ -230,6 +230,7 @@ class AdminController extends Controller
             'topic_id' => ['nullable', 'exists:problem_topics,id'],
             'description' => ['nullable', 'string'],
             'priority' => ['required', 'integer'],
+            'confidence_factor' => ['nullable', 'numeric', 'between:0,1'],
             'condition_fact_key' => ['required', 'string'],
             'condition_operator' => ['required', 'string'],
             'condition_fact_value' => ['required', 'string'],
@@ -242,6 +243,7 @@ class AdminController extends Controller
             'topic_id' => $validated['topic_id'] ?: null,
             'description' => $validated['description'] ?? null,
             'priority' => $validated['priority'],
+            'confidence_factor' => round((float) ($validated['confidence_factor'] ?? 0.80), 2),
             'is_active' => true,
         ]);
 
@@ -357,5 +359,12 @@ class AdminController extends Controller
             'sessions' => $sessions,
             'safetyAssessments' => $safetyAssessments,
         ]);
+    }
+
+    public function acknowledgeSafety(RiskAssessment $riskAssessment): RedirectResponse
+    {
+        $riskAssessment->update(['is_acknowledged' => true]);
+
+        return back()->with('success', 'Sinyal keselamatan ditandai sudah ditinjau.');
     }
 }

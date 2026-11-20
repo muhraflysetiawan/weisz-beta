@@ -7,7 +7,7 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight text-[var(--txt-primary)]">
+            <h1 class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
                 {{ __('Knowledge Base Pakar') }}
             </h1>
             <p class="text-xs text-[var(--txt-secondary)] mt-0.5">
@@ -77,44 +77,43 @@
         </form>
     </div>
 
-    <!-- Knowledge Base Items List -->
     <div class="weisz-card p-6 space-y-4">
-        <h2 class="text-sm font-bold text-[var(--txt-primary)]">{{ __('Daftar Entri Knowledge Base') }}</h2>
+        <h2 class="text-sm font-semibold text-[var(--text-primary)]">{{ __('Daftar Entri Knowledge Base') }}</h2>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+            <table class="clay-table">
                 <thead>
-                    <tr class="border-b border-[var(--border-color)] text-[var(--txt-tertiary)]">
-                        <th class="pb-2.5 font-medium">{{ __('Judul & Referensi') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Kategori / Topik') }}</th>
-                        <th class="pb-2.5 font-medium">{{ __('Status') }}</th>
-                        <th class="pb-2.5 font-medium text-right">{{ __('Aksi') }}</th>
+                    <tr>
+                        <th>{{ __('Judul & Referensi') }}</th>
+                        <th>{{ __('Kategori / Topik') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th class="text-right">{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-[var(--border-color)]">
+                <tbody>
                     @forelse($knowledgeItems as $item)
                     <tr>
-                        <td class="py-3 max-w-sm space-y-1">
-                            <p class="font-bold text-[var(--txt-primary)]">{{ $item->title }}</p>
-                            <p class="text-[11px] text-[var(--txt-secondary)] line-clamp-2 leading-relaxed">{{ $item->content }}</p>
+                        <td class="min-w-[260px] max-w-md space-y-1">
+                            <p class="font-semibold text-[var(--text-primary)]">{{ $item->title }}</p>
+                            <p class="text-[11px] text-[var(--text-secondary)] line-clamp-2 leading-relaxed">{{ $item->content }}</p>
                             @if($item->reference_source)
-                            <p class="text-[10px] text-[var(--brand-main)] italic">Ref: {{ $item->reference_source }}</p>
+                            <p class="text-[11px] text-[var(--text-accent)] italic">Ref: {{ $item->reference_source }}</p>
                             @endif
                         </td>
-                        <td class="py-3 text-[var(--txt-secondary)]">
-                            <p>{{ $item->category->name ?? __('Semua Kategori') }}</p>
-                            <p class="text-[11px] text-[var(--txt-tertiary)]">{{ $item->topic->name ?? __('Semua Topik') }}</p>
+                        <td class="min-w-[180px] text-[var(--text-secondary)]">
+                            <p class="font-medium text-[var(--text-primary)]">{{ $item->category->name ?? __('Semua Kategori') }}</p>
+                            <p class="text-[11px] text-[var(--text-muted)] mt-0.5">{{ $item->topic->name ?? __('Semua Topik') }}</p>
                         </td>
-                        <td class="py-3">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold {{ $item->status === 'published' ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400' : 'bg-gray-100 text-gray-700' }}">
+                        <td class="whitespace-nowrap">
+                            <p class="{{ $item->status === 'published' ? 'clay-pill-success' : 'clay-pill-well' }}">
                                 {{ $item->status }}
-                            </span>
+                            </p>
                         </td>
-                        <td class="py-3 text-right">
+                        <td class="text-right whitespace-nowrap">
                             <form method="POST" action="{{ route('admin.knowledge.destroy', $item->id) }}" onsubmit="return confirm('{{ __('Hapus entri knowledge base ini?') }}')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-xs text-red-600 dark:text-red-400 hover:underline">
+                                <button type="submit" class="text-xs font-medium text-[var(--color-error)] hover:underline cursor-pointer">
                                     {{ __('Hapus') }}
                                 </button>
                             </form>
@@ -122,7 +121,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="py-8 text-center text-xs text-[var(--txt-tertiary)]">
+                        <td colspan="4" class="py-8 text-center text-xs text-[var(--text-muted)]">
                             {{ __('Belum ada entri knowledge base yang tercatat.') }}
                         </td>
                     </tr>

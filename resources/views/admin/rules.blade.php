@@ -4,33 +4,36 @@
 
 @section('content')
 <div class="space-y-8">
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-color)] pb-4">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-clay)] pb-4">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight text-[var(--txt-primary)]">
+            <h1 class="font-serif-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
                 {{ __('Manajemen Aturan Expert System') }}
             </h1>
-            <p class="text-xs text-[var(--txt-secondary)] mt-0.5">
-                {{ __('Kelola logika IF-THEN, kondisi sinyal emosi, dan tindakan otomatis (rekomendasi profesional, opsi stuck, intervensi keselamatan).') }}
+            <p class="text-xs sm:text-sm text-[var(--text-secondary)] mt-0.5">
+                {{ __('Kelola logika IF-THEN, bobot certainty factor (CF), kondisi sinyal emosi, dan tindakan otomatis sistem.') }}
             </p>
         </div>
     </div>
 
-    <!-- Create Expert Rule Form -->
-    <div class="weisz-card p-6 space-y-4">
-        <h2 class="text-sm font-bold text-[var(--txt-primary)]">{{ __('Tambah Aturan Expert System Baru') }}</h2>
+    <div class="clay-card-static p-6 space-y-4">
+        <h2 class="text-sm font-semibold text-[var(--text-primary)]">{{ __('Tambah Aturan Expert System Baru') }}</h2>
 
         <form method="POST" action="{{ route('admin.rules.store') }}" class="space-y-4">
             @csrf
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <div class="space-y-1 sm:col-span-2">
-                    <label class="text-xs font-semibold text-[var(--txt-secondary)]">{{ __('Nama Aturan') }}</label>
+                    <label class="text-xs font-semibold text-[var(--text-secondary)]">{{ __('Nama Aturan') }}</label>
                     <input type="text" name="name" required placeholder="{{ __('Contoh: Tekanan Skripsi Kronis + Insomnia') }}" class="weisz-input w-full text-xs">
                 </div>
 
                 <div class="space-y-1">
-                    <label class="text-xs font-semibold text-[var(--txt-secondary)]">{{ __('Prioritas Evaluasi (0 - 100)') }}</label>
+                    <label class="text-xs font-semibold text-[var(--text-secondary)]">{{ __('Prioritas (0 - 100)') }}</label>
                     <input type="number" name="priority" value="10" required class="weisz-input w-full text-xs">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-[var(--text-secondary)]">{{ __('Confidence Factor (0.00 - 1.00)') }}</label>
+                    <input type="number" name="confidence_factor" value="0.80" step="0.05" min="0" max="1" required class="weisz-input w-full text-xs">
                 </div>
             </div>
 
@@ -56,9 +59,8 @@
                 </div>
             </div>
 
-            <!-- Condition IF Builder -->
-            <div class="p-4 rounded-xl bg-[var(--card-secondary)] border border-[var(--border-color)] space-y-3">
-                <span class="text-xs font-bold text-[var(--txt-primary)] uppercase tracking-wider">{{ __('Kondisi Logika IF (Single Condition)') }}</span>
+            <div class="p-4 rounded-[18px] bg-[var(--surface-well)] border border-[var(--border-clay)] shadow-[var(--clay-well)] space-y-3">
+                <p class="text-xs font-semibold text-[var(--text-primary)]">{{ __('Kondisi Logika IF (Single Condition)') }}</p>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div class="space-y-1">
@@ -104,13 +106,18 @@
             @foreach($rules as $rule)
             <div class="p-4 rounded-xl border {{ $rule->is_active ? 'border-[var(--border-color)] bg-[var(--card-surface)]' : 'border-dashed border-gray-300 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/30 opacity-75' }} space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-lg bg-[#252525]/10 dark:bg-white/10 text-[var(--brand-main)] flex items-center justify-center font-bold text-xs">
+                    <div class="flex items-center gap-2.5">
+                        <div class="clay-badge-num w-8 h-8 text-xs shrink-0" title="{{ __('Prioritas') }}">
                             {{ $rule->priority }}
-                        </span>
+                        </div>
                         <div>
-                            <h3 class="font-bold text-sm text-[var(--txt-primary)]">{{ $rule->name }}</h3>
-                            <p class="text-[11px] text-[var(--txt-tertiary)]">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h3 class="font-semibold text-sm text-[var(--text-primary)]">{{ $rule->name }}</h3>
+                                <p class="clay-pill-well text-[10px] text-[var(--text-accent)]">
+                                    CF {{ number_format((float) ($rule->confidence_factor ?? 0.80), 2) }}
+                                </p>
+                            </div>
+                            <p class="text-[11px] text-[var(--text-muted)]">
                                 {{ __('Cakupan') }}: {{ $rule->topic->name ?? __('Global (Semua Sesi)') }}
                             </p>
                         </div>
@@ -134,27 +141,24 @@
                     </div>
                 </div>
 
-                <!-- Conditions & Actions Logic Preview -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
-                    <!-- IF Conditions -->
-                    <div class="p-3 rounded-lg bg-[var(--card-secondary)] space-y-1">
-                        <span class="font-bold text-[10px] uppercase tracking-wider text-[var(--txt-tertiary)]">{{ __('Kondisi (IF)') }}</span>
+                    <div class="p-3.5 rounded-[14px] bg-[var(--surface-well)] border border-[var(--border-clay)] shadow-[var(--clay-well)] space-y-1">
+                        <p class="font-semibold text-[11px] text-[var(--text-muted)]">{{ __('Kondisi (IF)') }}</p>
                         @foreach($rule->conditions as $cond)
-                        <p class="text-[var(--txt-primary)] font-mono text-[11px]">
+                        <p class="text-[var(--text-primary)] font-mono text-[11px]">
                             {{ $cond->fact_key }} {{ $cond->operator }} "{{ $cond->fact_value }}"
                         </p>
                         @endforeach
                     </div>
 
-                    <!-- THEN Actions -->
-                    <div class="p-3 rounded-lg bg-[var(--card-secondary)] space-y-1">
-                        <span class="font-bold text-[10px] uppercase tracking-wider text-[var(--txt-tertiary)]">{{ __('Aksi Sistem (THEN)') }}</span>
+                    <div class="p-3.5 rounded-[14px] bg-[var(--surface-well)] border border-[var(--border-clay)] shadow-[var(--clay-well)] space-y-1">
+                        <p class="font-semibold text-[11px] text-[var(--text-muted)]">{{ __('Aksi Sistem (THEN)') }}</p>
                         @foreach($rule->actions as $act)
-                        <p class="text-[var(--brand-main)] font-semibold text-[11px]">
+                        <p class="text-[var(--text-accent)] font-semibold text-[11px]">
                             &rarr; {{ $act->action_type }}
                         </p>
                         @if(!empty($act->action_payload['directive']))
-                        <p class="text-[10px] text-[var(--txt-secondary)] line-clamp-1 italic">"{{ $act->action_payload['directive'] }}"</p>
+                        <p class="text-[10px] text-[var(--text-secondary)] line-clamp-1 italic">"{{ $act->action_payload['directive'] }}"</p>
                         @endif
                         @endforeach
                     </div>
