@@ -304,7 +304,7 @@ html.dark .clay-book-cover {
 .clay-book:hover .clay-book-cover,
 .book:focus-visible .cover,
 .clay-book:focus-visible .clay-book-cover {
-    transform: rotateY(-80deg);
+    transform: rotateY(-90deg);
     box-shadow: -8px 12px 24px -4px rgba(43, 116, 174, 0.22);
 }
 
@@ -313,6 +313,46 @@ html.dark .clay-book:hover .clay-book-cover,
 html.dark .book:focus-visible .cover,
 html.dark .clay-book:focus-visible .clay-book-cover {
     box-shadow: -8px 12px 28px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* Alur Terstruktur Step Icon Masks */
+.alur-step-circle {
+    box-shadow: var(--clay-rest);
+    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease-clay);
+}
+
+.alur-step-item:hover .alur-step-circle {
+    transform: translateY(-2px);
+    box-shadow: var(--clay-lift);
+}
+
+.alur-icon-mask {
+    width: 24px;
+    height: 24px;
+    background-color: currentColor;
+    -webkit-mask-image: var(--icon-url);
+    mask-image: var(--icon-url);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    transition: transform 220ms var(--ease-clay);
+    pointer-events: none;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+    .alur-icon-mask {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+.alur-step-item:hover .alur-icon-mask {
+    transform: scale(1.12);
 }
 
 /* Recessed Clay Inputs */
@@ -757,6 +797,10 @@ html.dark {
     .clay-book:focus-visible .clay-book-cover,
     .clay-icon-pill,
     .clay-arrow-cue,
+    .alur-icon-mask,
+    .alur-step-item:hover .alur-icon-mask,
+    .alur-step-circle,
+    .alur-step-item:hover .alur-step-circle,
     .weisz-btn-primary:hover,
     .weisz-btn-primary:active,
     .weisz-btn-secondary:hover,

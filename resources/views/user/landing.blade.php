@@ -84,7 +84,7 @@
             </div>
 
             <div id="alurSection" class="relative pt-2 pb-2">
-                <div class="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-1 z-0" aria-hidden="true">
+                <div class="hidden md:block absolute top-6 sm:top-7 left-[12.5%] right-[12.5%] h-1 z-0" aria-hidden="true">
                     <div class="w-full h-full bg-[var(--border)] rounded-full overflow-hidden">
                         <div id="alurProgressBar" class="h-full bg-[var(--sky-600)] dark:bg-[var(--sky-300)] rounded-full transition-all duration-300" style="width: 33.33%;"></div>
                     </div>
@@ -92,8 +92,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 relative z-10">
                     <div class="alur-step-item flex flex-col items-start md:items-center md:text-center group cursor-pointer" data-step="1">
-                        <div id="alurCircle-1" class="alur-step-circle w-12 h-12 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] font-semibold text-base flex items-center justify-center transition">
-                            1
+                        <div id="alurCircle-1" class="alur-step-circle w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] flex items-center justify-center transition shrink-0">
+                            <div class="alur-icon-mask" style="--icon-url: url('{{ asset('images/logo/heart.svg') }}');" aria-hidden="true"></div>
                         </div>
                         <h3 class="font-semibold text-base text-[var(--text-primary)] mt-4">{{ __('Pilih Masalah') }}</h3>
                         <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] mt-1.5 leading-relaxed max-w-xs">
@@ -102,8 +102,8 @@
                     </div>
 
                     <div class="alur-step-item flex flex-col items-start md:items-center md:text-center group cursor-pointer" data-step="2">
-                        <div id="alurCircle-2" class="alur-step-circle w-12 h-12 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] font-semibold text-base flex items-center justify-center transition">
-                            2
+                        <div id="alurCircle-2" class="alur-step-circle w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] flex items-center justify-center transition shrink-0">
+                            <div class="alur-icon-mask" style="--icon-url: url('{{ asset('images/logo/target.svg') }}');" aria-hidden="true"></div>
                         </div>
                         <h3 class="font-semibold text-base text-[var(--text-primary)] mt-4">{{ __('Kunci Konteks') }}</h3>
                         <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] mt-1.5 leading-relaxed max-w-xs">
@@ -112,8 +112,8 @@
                     </div>
 
                     <div class="alur-step-item flex flex-col items-start md:items-center md:text-center group cursor-pointer" data-step="3">
-                        <div id="alurCircle-3" class="alur-step-circle w-12 h-12 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] font-semibold text-base flex items-center justify-center transition">
-                            3
+                        <div id="alurCircle-3" class="alur-step-circle w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] flex items-center justify-center transition shrink-0">
+                            <div class="alur-icon-mask" style="--icon-url: url('{{ asset('images/logo/machine-learning.svg') }}');" aria-hidden="true"></div>
                         </div>
                         <h3 class="font-semibold text-base text-[var(--text-primary)] mt-4">{{ __('AI + Expert System') }}</h3>
                         <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] mt-1.5 leading-relaxed max-w-xs">
@@ -122,8 +122,8 @@
                     </div>
 
                     <div class="alur-step-item flex flex-col items-start md:items-center md:text-center group cursor-pointer" data-step="4">
-                        <div id="alurCircle-4" class="alur-step-circle w-12 h-12 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] font-semibold text-base flex items-center justify-center transition">
-                            4
+                        <div id="alurCircle-4" class="alur-step-circle w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[var(--surface-gentle)] text-[var(--text-gentle)] border border-[var(--border-gentle)] flex items-center justify-center transition shrink-0">
+                            <div class="alur-icon-mask" style="--icon-url: url('{{ asset('images/logo/clipboard.svg') }}');" aria-hidden="true"></div>
                         </div>
                         <h3 class="font-semibold text-base text-[var(--text-primary)] mt-4">{{ __('Rangkuman & Rujukan') }}</h3>
                         <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] mt-1.5 leading-relaxed max-w-xs">
