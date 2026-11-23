@@ -588,18 +588,18 @@
                             </p>
                         </div>
 
-                        <!-- Stepper Progress Bar 4 Step -->
+                        <!-- Stepper Progress Bar 3 Step -->
                         <div class="relative w-full pt-2">
                             <!-- Track & Animated Progress Bar -->
                             <div class="relative w-full">
-                                <div class="absolute inset-x-[12.5%] top-1/2 -translate-y-1/2 h-2 sm:h-2.5 z-0 pointer-events-none" aria-hidden="true">
+                                <div class="absolute inset-x-[16.6%] top-1/2 -translate-y-1/2 h-2 sm:h-2.5 z-0 pointer-events-none" aria-hidden="true">
                                     <div class="w-full h-full bg-neutral-200/80 dark:bg-neutral-800 rounded-full overflow-hidden">
                                         <div id="roomExploreProgressBar" class="h-full bg-[#252525] dark:bg-white rounded-full transition-all duration-500 shadow-xs" style="width: 0%;"></div>
                                     </div>
                                 </div>
 
-                                <!-- 4 Step Circles Grid -->
-                                <div class="grid grid-cols-4 relative z-10 text-center">
+                                <!-- 3 Step Circles Grid -->
+                                <div class="grid grid-cols-3 relative z-10 text-center">
                                     <!-- Step 1 Circle -->
                                     <div class="flex justify-center">
                                         <button type="button" id="stepCircle1" onclick="goToExploreStep(1)" class="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#252525] text-white dark:bg-white dark:text-[#252525] font-extrabold text-xs sm:text-sm flex items-center justify-center shadow-lg shadow-black/10 dark:shadow-black/40 ring-4 sm:ring-6 ring-[var(--card-surface)] dark:ring-[#1f1f1f] scale-105 transition-all cursor-pointer" title="{{ __('Langkah 1: Kategori') }}">
@@ -608,75 +608,135 @@
                                     </div>
                                     <!-- Step 2 Circle -->
                                     <div class="flex justify-center">
-                                        <button type="button" id="stepCircle2" onclick="goToExploreStep(2)" class="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[var(--card-secondary)] text-[var(--txt-tertiary)] border-2 border-[var(--border-color)] font-extrabold text-xs sm:text-sm flex items-center justify-center ring-4 sm:ring-6 ring-[var(--card-surface)] dark:ring-[#1f1f1f] transition-all cursor-not-allowed" disabled title="{{ __('Langkah 2: Subkategori') }}">
+                                        <button type="button" id="stepCircle2" onclick="goToExploreStep(2)" class="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[var(--card-secondary)] text-[var(--txt-tertiary)] border-2 border-[var(--border-color)] font-extrabold text-xs sm:text-sm flex items-center justify-center ring-4 sm:ring-6 ring-[var(--card-surface)] dark:ring-[#1f1f1f] transition-all cursor-not-allowed" disabled title="{{ __('Langkah 2: Topik') }}">
                                             2
                                         </button>
                                     </div>
                                     <!-- Step 3 Circle -->
                                     <div class="flex justify-center">
-                                        <button type="button" id="stepCircle3" onclick="goToExploreStep(3)" class="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[var(--card-secondary)] text-[var(--txt-tertiary)] border-2 border-[var(--border-color)] font-extrabold text-xs sm:text-sm flex items-center justify-center ring-4 sm:ring-6 ring-[var(--card-surface)] dark:ring-[#1f1f1f] transition-all cursor-not-allowed" disabled title="{{ __('Langkah 3: Topik') }}">
+                                        <button type="button" id="stepCircle3" onclick="goToExploreStep(3)" class="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[var(--card-secondary)] text-[var(--txt-tertiary)] border-2 border-[var(--border-color)] font-extrabold text-xs sm:text-sm flex items-center justify-center ring-4 sm:ring-6 ring-[var(--card-surface)] dark:ring-[#1f1f1f] transition-all cursor-not-allowed" disabled title="{{ __('Langkah 3: Konfirmasi') }}">
                                             3
-                                        </button>
-                                    </div>
-                                    <!-- Step 4 Circle -->
-                                    <div class="flex justify-center">
-                                        <button type="button" id="stepCircle4" onclick="goToExploreStep(4)" class="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[var(--card-secondary)] text-[var(--txt-tertiary)] border-2 border-[var(--border-color)] font-extrabold text-xs sm:text-sm flex items-center justify-center ring-4 sm:ring-6 ring-[var(--card-surface)] dark:ring-[#1f1f1f] transition-all cursor-not-allowed" disabled title="{{ __('Langkah 4: Konfirmasi') }}">
-                                            4
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Step Labels Grid -->
-                            <div class="grid grid-cols-4 text-center mt-2.5">
+                            <div class="grid grid-cols-3 text-center mt-2.5">
                                 <button type="button" id="stepLabel1" onclick="goToExploreStep(1)" class="text-xs sm:text-sm font-bold text-[var(--txt-primary)] transition cursor-pointer">
                                     {{ __('Kategori') }}
                                 </button>
                                 <button type="button" id="stepLabel2" onclick="goToExploreStep(2)" class="text-xs sm:text-sm font-medium text-[var(--txt-tertiary)] transition cursor-not-allowed" disabled>
-                                    {{ __('Subkategori') }}
-                                </button>
-                                <button type="button" id="stepLabel3" onclick="goToExploreStep(3)" class="text-xs sm:text-sm font-medium text-[var(--txt-tertiary)] transition cursor-not-allowed" disabled>
                                     {{ __('Topik') }}
                                 </button>
-                                <button type="button" id="stepLabel4" onclick="goToExploreStep(4)" class="text-xs sm:text-sm font-medium text-[var(--txt-tertiary)] transition cursor-not-allowed" disabled>
+                                <button type="button" id="stepLabel3" onclick="goToExploreStep(3)" class="text-xs sm:text-sm font-medium text-[var(--txt-tertiary)] transition cursor-not-allowed" disabled>
                                     {{ __('Konfirmasi') }}
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- STEP 1 CONTAINER: Categories Grid -->
+                    <!-- STEP 1 CONTAINER: Categories List with Dropdowns -->
                     <div id="exploreStep1Container" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
+                        <div class="flex items-center justify-between pb-1">
+                            @if($session)
+                            <button type="button" onclick="closeNewChatExplore()" class="weisz-btn-secondary text-xs sm:text-sm py-2 px-3.5 inline-flex items-center gap-2 group cursor-pointer" title="{{ __('Kembali ke Percakapan Aktif') }}">
+                                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                </svg>
+                                <p>{{ __('Kembali ke Percakapan') }}</p>
+                            </button>
+                            @else
+                            <a href="{{ route('home') }}" class="weisz-btn-secondary text-xs sm:text-sm py-2 px-3.5 inline-flex items-center gap-2 group" title="{{ __('Kembali ke Beranda') }}">
+                                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                </svg>
+                                <p>{{ __('Kembali ke Beranda') }}</p>
+                            </a>
+                            @endif
+                        </div>
+
+                        <!-- Vertical List of Categories -->
+                        <div class="flex flex-col gap-3.5 sm:gap-4">
                             @foreach($exploreCategories as $cat)
-                            <div onclick="selectCategory('{{ $cat->id }}')" class="group relative rounded-3xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:-translate-y-1 hover:border-[#252525] dark:hover:border-white/50 overflow-hidden cursor-pointer shadow-xs">
-                                <div class="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-gradient-to-br from-amber-400/15 via-rose-300/10 to-transparent blur-2xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" aria-hidden="true"></div>
-                                <div class="space-y-4 flex-1 flex flex-col justify-between">
-                                    <div class="space-y-3">
-                                        <div class="flex items-center justify-between gap-3">
-                                            <div class="w-10 h-10 rounded-2xl bg-[var(--card-secondary)] border border-[var(--border-color)]/80 flex items-center justify-center text-[var(--txt-primary)] group-hover:border-[var(--brand-main)]/50 group-hover:bg-[var(--card-surface)] transition">
-                                                <svg class="w-5 h-5 text-[var(--brand-main)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-                                                </svg>
-                                            </div>
-                                            <p class="clay-pill-well text-[11px]">
-                                                {{ $cat->subcategories->count() }} {{ __('Subkategori') }}
-                                            </p>
+                            <div id="categoryItem_{{ $cat->id }}" class="category-accordion-item rounded-3xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] transition-all duration-300 shadow-xs overflow-hidden">
+                                <button type="button" 
+                                    id="categoryHeader_{{ $cat->id }}" 
+                                    onclick="toggleCategoryAccordion('{{ $cat->id }}')" 
+                                    class="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50/50 dark:hover:bg-white/[0.02] transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-main)]"
+                                    aria-expanded="false"
+                                    aria-controls="categoryDropdown_{{ $cat->id }}">
+                                    
+                                    <div class="flex items-center gap-3.5 sm:gap-4 min-w-0 flex-1">
+                                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[var(--card-secondary)] border border-[var(--border-color)]/80 flex items-center justify-center text-[var(--brand-main)] shrink-0 transition-colors group-hover:border-[var(--brand-main)]/50 group-hover:bg-[var(--card-surface)]">
+                                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[var(--brand-main)]" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                            </svg>
                                         </div>
-                                        <div class="space-y-1.5 pt-1">
-                                            <h2 class="text-base sm:text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--text-accent)] transition line-clamp-2">
+                                        
+                                        <div class="min-w-0 flex-1">
+                                            <h2 class="text-base sm:text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--text-accent)] transition truncate">
                                                 {{ $cat->name }}
                                             </h2>
-                                            <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3">
+                                            <p class="text-xs sm:text-sm text-[var(--text-secondary)] line-clamp-1 sm:line-clamp-2 mt-0.5 leading-relaxed">
                                                 {{ $cat->description }}
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="pt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-accent)] transition">
-                                        <p class="clay-arrow-cue">{{ __('Pilih Kategori') }}</p>
-                                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1 text-[var(--brand-main)]" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                        </svg>
+
+                                    <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                                        <p class="clay-pill-well text-[11px] sm:text-xs">
+                                            {{ $cat->subcategories->count() }} {{ __('Subkategori') }}
+                                        </p>
+                                        <div class="category-chevron w-8 h-8 rounded-full flex items-center justify-center bg-[var(--card-secondary)] text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-transform duration-300">
+                                            <svg class="w-4 h-4 transition-transform duration-300 transform" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <div id="categoryDropdown_{{ $cat->id }}" class="category-dropdown hidden border-t border-[var(--border-color)]/80 bg-neutral-50/50 dark:bg-black/20 p-3 sm:p-5 transition-all">
+                                    <div class="flex flex-col gap-2.5 sm:gap-3">
+                                        @forelse($cat->subcategories as $sub)
+                                        <button type="button" 
+                                            onclick="selectSubcategoryFromDropdown('{{ $cat->id }}', '{{ $sub->id }}')" 
+                                            class="w-full text-left p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-[#252525] border border-[var(--border-color)] hover:border-[var(--brand-main)]/60 hover:shadow-md hover:shadow-black/5 dark:hover:shadow-black/20 transition-all duration-200 group flex items-center justify-between gap-3 cursor-pointer">
+                                            
+                                            <div class="flex items-center gap-3 sm:gap-3.5 min-w-0 flex-1">
+                                                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[var(--surface-clay-blue)] border border-[var(--border-clay)] flex items-center justify-center text-[var(--text-accent)] shrink-0">
+                                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
+                                                    </svg>
+                                                </div>
+                                                <div class="min-w-0 flex-1">
+                                                    <h3 class="text-xs sm:text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--brand-main)] transition truncate">
+                                                        {{ $sub->name }}
+                                                    </h3>
+                                                    @if($sub->description)
+                                                    <p class="text-[11px] sm:text-xs text-[var(--text-secondary)] line-clamp-1 mt-0.5">
+                                                        {{ $sub->description }}
+                                                    </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="flex items-center gap-2.5 shrink-0">
+                                                <p class="clay-pill-well text-[10px] sm:text-[11px] py-1 px-2.5">
+                                                    {{ $sub->topics_count ?? $sub->topics->count() }} {{ __('Topik') }}
+                                                </p>
+                                                <div class="w-7 h-7 rounded-xl flex items-center justify-center bg-[var(--card-secondary)] text-[var(--text-secondary)] group-hover:bg-[var(--brand-main)] group-hover:text-white transition-colors">
+                                                    <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </button>
+                                        @empty
+                                        <p class="text-xs text-[var(--text-secondary)] italic p-3 text-center">
+                                            {{ __('Belum ada subkategori tersedia untuk kategori ini.') }}
+                                        </p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -684,22 +744,41 @@
                         </div>
                     </div>
 
-                    <!-- STEP 2 CONTAINER: Subcategories Grid -->
+                    <!-- STEP 2 CONTAINER: Topics Grid with Back Button -->
                     <div id="exploreStep2Container" class="hidden space-y-5">
-                        <div id="subcategoriesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
-                            <!-- Populated dynamically by JS -->
-                        </div>
-                    </div>
+                        <div class="flex items-center justify-between gap-3 pb-1">
+                            <button type="button" onclick="goToExploreStep(1)" class="weisz-btn-secondary text-xs sm:text-sm py-2 px-3.5 inline-flex items-center gap-2 group cursor-pointer" title="{{ __('Kembali ke Pilihan Kategori') }}">
+                                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                </svg>
+                                <p>{{ __('Kembali ke Kategori') }}</p>
+                            </button>
 
-                    <!-- STEP 3 CONTAINER: Topics Grid -->
-                    <div id="exploreStep3Container" class="hidden space-y-5">
+                            <div id="selectedSubcategoryBadge" class="hidden sm:flex items-center gap-2">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+
                         <div id="topicsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
                             <!-- Populated dynamically by JS -->
                         </div>
                     </div>
 
-                    <!-- STEP 4 CONTAINER: Mood Confirmation & Start Form -->
-                    <div id="exploreStep4Container" class="hidden space-y-5">
+                    <!-- STEP 3 CONTAINER: Mood Confirmation & Start Form with Back Button -->
+                    <div id="exploreStep3Container" class="hidden space-y-5">
+                        <div class="flex items-center justify-between gap-3 pb-1">
+                            <button type="button" onclick="goToExploreStep(2)" class="weisz-btn-secondary text-xs sm:text-sm py-2 px-3.5 inline-flex items-center gap-2 group cursor-pointer" title="{{ __('Kembali ke Pilihan Topik') }}">
+                                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                </svg>
+                                <p>{{ __('Kembali ke Topik') }}</p>
+                            </button>
+                        </div>
+
+                        <div id="selectedTopicSummary">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+
                         <!-- Mood Expressions Card (5 Pilihan Ilustrasi Ekspresi Suasana Hati) -->
                         <div class="rounded-3xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] p-5 sm:p-8 space-y-6 shadow-xs">
                             <div class="grid grid-cols-5 gap-2.5 sm:gap-4 md:gap-5">
@@ -1298,7 +1377,6 @@
     const exploreStep1Container = document.getElementById('exploreStep1Container');
     const exploreStep2Container = document.getElementById('exploreStep2Container');
     const exploreStep3Container = document.getElementById('exploreStep3Container');
-    const exploreStep4Container = document.getElementById('exploreStep4Container');
     const exploreScrollContainer = document.getElementById('exploreScrollContainer');
 
     function openNewChatExplore() {
@@ -1310,6 +1388,18 @@
         selectedSubcategory = null;
         selectedTopic = null;
         selectedMood = null;
+
+        // Reset any open accordion
+        document.querySelectorAll('.category-dropdown').forEach(dd => dd.classList.add('hidden'));
+        document.querySelectorAll('.category-accordion-item button[aria-expanded]').forEach(btn => {
+            btn.setAttribute('aria-expanded', 'false');
+            const chevron = btn.querySelector('.category-chevron svg');
+            if (chevron) chevron.classList.remove('rotate-180');
+        });
+        document.querySelectorAll('.category-accordion-item').forEach(it => {
+            it.classList.remove('border-[var(--brand-main)]/60', 'shadow-md');
+            it.classList.add('border-[var(--border-color)]');
+        });
 
         if (messagesContainer) messagesContainer.classList.add('hidden');
         if (chatComposerArea) chatComposerArea.classList.add('hidden');
@@ -2014,20 +2104,15 @@
     const stepMetadata = {
         1: {
             title: @json(__('Apa yang Sedang Mengganjal Pikiranmu?')),
-            desc: @json(__('Pilih kategori situasi yang paling mendekati kondisimu saat ini. Setiap kategori dirancang dengan konteks psikologis spesifik untuk mengurai keresahanmu secara bertahap dan terarah.')),
+            desc: @json(__('Pilih kategori situasi dan buka subkategori yang paling sesuai dengan kondisimu saat ini. Setiap kategori dirancang dengan konteks psikologis spesifik untuk mengurai keresahanmu secara bertahap dan terarah.')),
             progress: "0%"
         },
         2: {
-            title: @json(__('Kerucutkan Subkategori')),
-            desc: @json(__('Pilih area yang paling relevan untuk membantumu memfokuskan cerita pada aspek yang paling mengganggu pikiranmu.')),
-            progress: "33.33%"
-        },
-        3: {
             title: @json(__('Pilih Topik Percakapan')),
             desc: @json(__('Pilih topik yang paling mewakili situasi yang sedang kamu alami. Weisz akan mengunci konteks ini agar sesi berlangsung terarah dan tidak melebar.')),
-            progress: "66.66%"
+            progress: "50%"
         },
-        4: {
+        3: {
             title: @json(__('Bagaimana kondisi atau perasaanmu saat ini?')),
             desc: @json(__('Pilih ekspresi yang paling menggambarkan suasana hatimu agar Weisz AI dapat memahami dan masuk ke suasana hatimu secara tepat.')),
             progress: "100%"
@@ -2035,17 +2120,17 @@
     };
 
     function updateStepperUI(step) {
-        if (roomExploreProgressBar) {
+        if (roomExploreProgressBar && stepMetadata[step]) {
             roomExploreProgressBar.style.width = stepMetadata[step].progress;
         }
-        if (exploreStepTitle) {
+        if (exploreStepTitle && stepMetadata[step]) {
             exploreStepTitle.textContent = stepMetadata[step].title;
         }
-        if (exploreStepDescription) {
+        if (exploreStepDescription && stepMetadata[step]) {
             exploreStepDescription.textContent = stepMetadata[step].desc;
         }
 
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i <= 3; i++) {
             const circle = document.getElementById('stepCircle' + i);
             const label = document.getElementById('stepLabel' + i);
             if (!circle || !label) continue;
@@ -2073,9 +2158,8 @@
     }
 
     function goToExploreStep(step) {
-        if (step === 2 && !selectedCategory) return;
-        if (step === 3 && (!selectedCategory || !selectedSubcategory)) return;
-        if (step === 4 && (!selectedCategory || !selectedSubcategory || !selectedTopic)) return;
+        if (step === 2 && (!selectedCategory || !selectedSubcategory)) return;
+        if (step === 3 && (!selectedCategory || !selectedSubcategory || !selectedTopic)) return;
 
         exploreCurrentStep = step;
         updateStepperUI(step);
@@ -2083,106 +2167,160 @@
         if (exploreStep1Container) exploreStep1Container.classList.toggle('hidden', step !== 1);
         if (exploreStep2Container) exploreStep2Container.classList.toggle('hidden', step !== 2);
         if (exploreStep3Container) exploreStep3Container.classList.toggle('hidden', step !== 3);
-        if (exploreStep4Container) exploreStep4Container.classList.toggle('hidden', step !== 4);
+
+        // Keep selected category accordion open when returning to Step 1
+        if (step === 1 && selectedCategory) {
+            const dropdown = document.getElementById('categoryDropdown_' + selectedCategory.id);
+            const header = document.getElementById('categoryHeader_' + selectedCategory.id);
+            const item = document.getElementById('categoryItem_' + selectedCategory.id);
+            if (dropdown && header) {
+                dropdown.classList.remove('hidden');
+                header.setAttribute('aria-expanded', 'true');
+                const chevron = header.querySelector('.category-chevron svg');
+                if (chevron) chevron.classList.add('rotate-180');
+                if (item) {
+                    item.classList.add('border-[var(--brand-main)]/60', 'shadow-md');
+                    item.classList.remove('border-[var(--border-color)]');
+                }
+            }
+        }
 
         if (exploreScrollContainer) {
             exploreScrollContainer.scrollTop = 0;
         }
     }
 
+    function toggleCategoryAccordion(catId) {
+        const dropdown = document.getElementById('categoryDropdown_' + catId);
+        const header = document.getElementById('categoryHeader_' + catId);
+        const item = document.getElementById('categoryItem_' + catId);
+        if (!dropdown || !header) return;
+
+        const isCurrentlyOpen = !dropdown.classList.contains('hidden');
+
+        // Close all dropdowns
+        document.querySelectorAll('.category-dropdown').forEach(dd => dd.classList.add('hidden'));
+        document.querySelectorAll('.category-accordion-item button[aria-expanded]').forEach(btn => {
+            btn.setAttribute('aria-expanded', 'false');
+            const chevron = btn.querySelector('.category-chevron svg');
+            if (chevron) chevron.classList.remove('rotate-180');
+        });
+        document.querySelectorAll('.category-accordion-item').forEach(it => {
+            it.classList.remove('border-[var(--brand-main)]/60', 'shadow-md');
+            it.classList.add('border-[var(--border-color)]');
+        });
+
+        if (!isCurrentlyOpen) {
+            dropdown.classList.remove('hidden');
+            header.setAttribute('aria-expanded', 'true');
+            const chevron = header.querySelector('.category-chevron svg');
+            if (chevron) chevron.classList.add('rotate-180');
+            if (item) {
+                item.classList.add('border-[var(--brand-main)]/60', 'shadow-md');
+                item.classList.remove('border-[var(--border-color)]');
+            }
+            selectedCategory = exploreCategoriesData.find(c => c.id == catId);
+        }
+    }
+
     function selectCategory(catId) {
+        toggleCategoryAccordion(catId);
+    }
+
+    function selectSubcategoryFromDropdown(catId, subId) {
         selectedCategory = exploreCategoriesData.find(c => c.id == catId);
         if (!selectedCategory) return;
 
-        const subGrid = document.getElementById('subcategoriesGrid');
+        selectedSubcategory = (selectedCategory.subcategories || []).find(s => s.id == subId);
+        if (!selectedSubcategory) return;
 
-        if (subGrid) {
-            const subHtml = (selectedCategory.subcategories || []).map(sub => `
-                <div onclick="selectSubcategory('${sub.id}')" class="group relative rounded-3xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:-translate-y-1 hover:border-[#252525] dark:hover:border-white/50 overflow-hidden cursor-pointer shadow-xs">
-                    <div class="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-gradient-to-br from-emerald-400/15 via-teal-300/10 to-transparent blur-2xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" aria-hidden="true"></div>
-                    <div class="space-y-4 flex-1 flex flex-col justify-between">
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="clay-icon-pill w-10 h-10 rounded-[14px] bg-[var(--surface-clay-blue)] border border-[var(--border-clay)] flex items-center justify-center text-[var(--text-accent)]">
-                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
-                                    </svg>
-                                </div>
-                                <p class="clay-pill-well text-[11px]">
-                                    ${(sub.topics || []).length} Topik
-                                </p>
-                            </div>
-                            <div class="space-y-1.5 pt-1">
-                                <h2 class="text-base sm:text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--text-accent)] transition line-clamp-2">
-                                    ${sub.name}
-                                </h2>
-                                <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3">
-                                    ${sub.description || ''}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="pt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-accent)] transition">
-                            <p class="clay-arrow-cue">Pilih Subkategori</p>
-                            <svg class="clay-arrow-cue w-4 h-4 text-[var(--text-accent)]" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        renderTopicsList(selectedSubcategory);
 
-            subGrid.innerHTML = subHtml;
+        const badge = document.getElementById('selectedSubcategoryBadge');
+        if (badge) {
+            badge.innerHTML = `
+                <p class="clay-pill-blue text-xs font-semibold">${selectedCategory.name}</p>
+                <p class="text-xs text-[var(--text-muted)]">/</p>
+                <p class="clay-pill text-xs font-semibold text-[var(--text-primary)]">${selectedSubcategory.name}</p>
+            `;
         }
 
         goToExploreStep(2);
     }
 
     function selectSubcategory(subId) {
-        if (!selectedCategory) return;
-        selectedSubcategory = (selectedCategory.subcategories || []).find(s => s.id == subId);
+        if (!selectedCategory) {
+            for (const cat of exploreCategoriesData) {
+                const found = (cat.subcategories || []).find(s => s.id == subId);
+                if (found) {
+                    selectedCategory = cat;
+                    selectedSubcategory = found;
+                    break;
+                }
+            }
+        } else {
+            selectedSubcategory = (selectedCategory.subcategories || []).find(s => s.id == subId);
+        }
         if (!selectedSubcategory) return;
 
+        renderTopicsList(selectedSubcategory);
+        goToExploreStep(2);
+    }
+
+    function renderTopicsList(subcategory) {
         const topicsGrid = document.getElementById('topicsGrid');
+        if (!topicsGrid) return;
 
-        if (topicsGrid) {
-            const topicsHtml = (selectedSubcategory.topics || []).map(topic => {
-                const chips = topic.suggested_chips || [];
-                let chipsHtml = '';
-                if (Array.isArray(chips) && chips.length > 0) {
-                    chipsHtml = `
-                        <div class="pt-3 mt-2 border-t border-[var(--border-clay)] space-y-2">
-                            <p class="text-xs font-medium text-[var(--text-secondary)]">Mungkin ini yang kamu rasakan:</p>
-                            <div class="grid grid-cols-1 gap-1.5">
-                                ${chips.slice(0, 3).map(chip => `
-                                    <p class="px-3 py-1.5 rounded-[14px] bg-[var(--surface-well)] border border-[var(--border-clay)] shadow-[var(--clay-well)] text-xs text-[var(--text-secondary)] truncate italic">&ldquo;${chip}&rdquo;</p>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
+        const topics = subcategory.topics || [];
+        if (topics.length === 0) {
+            topicsGrid.innerHTML = `
+                <div class="col-span-full p-8 text-center rounded-3xl bg-[var(--card-secondary)] border border-[var(--border-color)] space-y-2">
+                    <p class="text-sm font-semibold text-[var(--text-primary)]">{{ __('Belum ada topik aktif untuk subkategori ini.') }}</p>
+                    <p class="text-xs text-[var(--text-secondary)]">{{ __('Silakan kembali untuk memilih subkategori lain.') }}</p>
+                </div>
+            `;
+            return;
+        }
 
-                return `
-                    <div onclick="selectTopic('${topic.id}')" class="group relative rounded-3xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:-translate-y-1 hover:border-[#252525] dark:hover:border-white/50 overflow-hidden cursor-pointer shadow-xs">
-                        <div class="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-gradient-to-br from-sky-400/15 via-blue-300/10 to-transparent blur-2xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" aria-hidden="true"></div>
-                        <div class="space-y-3 flex-1 flex flex-col justify-start">
-                            <div class="space-y-1.5">
-                                <h2 class="text-base sm:text-lg font-bold text-[var(--txt-primary)] group-hover:text-[var(--brand-main)] transition line-clamp-2">
-                                    ${topic.name}
-                                </h2>
-                                <p class="text-xs sm:text-sm text-[var(--txt-secondary)] leading-relaxed">
-                                    ${topic.description || ''}
-                                </p>
-                            </div>
-                            ${chipsHtml}
+        topicsGrid.innerHTML = topics.map(topic => {
+            const chips = topic.suggested_chips || [];
+            let chipsHtml = '';
+            if (Array.isArray(chips) && chips.length > 0) {
+                chipsHtml = `
+                    <div class="pt-3 mt-2 border-t border-[var(--border-clay)] space-y-2">
+                        <p class="text-xs font-medium text-[var(--text-secondary)]">Mungkin ini yang kamu rasakan:</p>
+                        <div class="grid grid-cols-1 gap-1.5">
+                            ${chips.slice(0, 3).map(chip => `
+                                <p class="px-3 py-1.5 rounded-[14px] bg-[var(--surface-well)] border border-[var(--border-clay)] shadow-[var(--clay-well)] text-xs text-[var(--text-secondary)] truncate italic">&ldquo;${chip}&rdquo;</p>
+                            `).join('')}
                         </div>
                     </div>
                 `;
-            }).join('');
+            }
 
-            topicsGrid.innerHTML = topicsHtml;
-        }
-
-        goToExploreStep(3);
+            return `
+                <div onclick="selectTopic('${topic.id}')" class="group relative rounded-3xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:-translate-y-1 hover:border-[#252525] dark:hover:border-white/50 overflow-hidden cursor-pointer shadow-xs">
+                    <div class="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-gradient-to-br from-sky-400/15 via-blue-300/10 to-transparent blur-2xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" aria-hidden="true"></div>
+                    <div class="space-y-3 flex-1 flex flex-col justify-between">
+                        <div class="space-y-1.5">
+                            <h2 class="text-base sm:text-lg font-bold text-[var(--txt-primary)] group-hover:text-[var(--brand-main)] transition line-clamp-2">
+                                ${topic.name}
+                            </h2>
+                            <p class="text-xs sm:text-sm text-[var(--txt-secondary)] leading-relaxed">
+                                ${topic.description || ''}
+                            </p>
+                        </div>
+                        ${chipsHtml}
+                        <div class="pt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-accent)] transition">
+                            <p class="clay-arrow-cue">{{ __('Pilih Topik Ini') }}</p>
+                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1 text-[var(--brand-main)]" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
 
     function selectTopic(topicId) {
@@ -2214,7 +2352,23 @@
             if (ind) ind.classList.add('opacity-0');
         });
 
-        goToExploreStep(4);
+        // Update confirmation step topic context
+        const topicSummary = document.getElementById('selectedTopicSummary');
+        if (topicSummary) {
+            topicSummary.innerHTML = `
+                <div class="p-4 rounded-2xl bg-white dark:bg-[#1f1f1f] border border-[var(--border-color)] space-y-1.5 shadow-xs">
+                    <div class="flex items-center gap-2">
+                        <p class="clay-pill-blue text-[11px] font-semibold">${selectedCategory?.name || ''}</p>
+                        <p class="text-xs text-[var(--text-muted)]">/</p>
+                        <p class="clay-pill text-[11px] font-semibold text-[var(--text-primary)]">${selectedSubcategory?.name || ''}</p>
+                    </div>
+                    <h3 class="text-sm sm:text-base font-bold text-[var(--text-primary)]">${selectedTopic.name}</h3>
+                    ${selectedTopic.description ? `<p class="text-xs text-[var(--text-secondary)] leading-relaxed">${selectedTopic.description}</p>` : ''}
+                </div>
+            `;
+        }
+
+        goToExploreStep(3);
     }
 
     function selectRoomMood(moodKey) {
@@ -2246,8 +2400,10 @@
     window.openNewChatExplore = openNewChatExplore;
     window.closeNewChatExplore = closeNewChatExplore;
     window.goToExploreStep = goToExploreStep;
+    window.toggleCategoryAccordion = toggleCategoryAccordion;
     window.selectCategory = selectCategory;
     window.selectSubcategory = selectSubcategory;
+    window.selectSubcategoryFromDropdown = selectSubcategoryFromDropdown;
     window.selectTopic = selectTopic;
     window.selectRoomMood = selectRoomMood;
 

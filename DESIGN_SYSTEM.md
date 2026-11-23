@@ -27,7 +27,7 @@ Weisz feels like holding a smooth, warm-matte soft-blue pebble: approachable, ca
 
 - **Claymorphism (Soft Blue + Cloud Matte):** Chosen per product direction to replace cold flat corporate boxes with soft, comforting tactile affordances suited for stressed Gen Z users.
 - **Three-Tier Clay Discipline (Flat Canvas / Raised Clay / Recessed Well):** Prevents the common claymorphism flaw where everything floats equally. Inputs press *into* the page; interactive cards rise *above* it.
-- **Typography (`Nunito` + `Plus Jakarta Sans`):** `Nunito` brings calm, approachable rounded warmth to hero and section headings; `Plus Jakarta Sans` keeps body copy, navbar, buttons, chatbot, and metadata crisp and effortless to scan.
+- **Typography (`Poppins Rounded` + `Plus Jakarta Sans`):** `Poppins Rounded` brings calm, approachable rounded warmth to hero and section headings; `Plus Jakarta Sans` keeps body copy, navbar, buttons, chatbot, and metadata crisp and effortless to scan.
 - **Interactive Non-Rigid Cards:** Hover lift, press squish, inner icon nudge, and optional `±2.5deg` fine-pointer tilt communicate real responsiveness and playfulness while staying calm.
 - **Static vs. Interactive Separation:** Non-clickable cards never lift or tilt on hover, preventing false affordance.
 - **Restrained Iconography:** Minimal functional stroke icons nestled inside small soft-blue clay icon pills. No decorative sparkles, robots, or emojis.
@@ -156,15 +156,15 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.m
 
 ## 5. Typography
 
-- **Display / Heading (`--font-serif`):** `"Nunito", sans-serif` exclusively for hero headings and section/page headings.
+- **Display / Heading (`--font-serif`):** `"Poppins Rounded", "Poppins", sans-serif` exclusively for hero headings and section/page headings.
 - **UI & Conversation Sans (`--font-sans`):** `"Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif` for body text, navbar, buttons, chatbot, and metadata.
 
 ### Element Font Mapping
 
 | Element | Font |
 |---|---|
-| Hero heading | Nunito |
-| Section heading | Nunito |
+| Hero heading | Poppins Rounded |
+| Section heading | Poppins Rounded |
 | Body text | Plus Jakarta Sans |
 | Navbar | Plus Jakarta Sans |
 | Button | Plus Jakarta Sans |
@@ -175,9 +175,9 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.m
 
 | Level | Font | Size (Mobile / Desktop) | Weight | Line Height |
 |---|---|---|---|---|
-| Display (Hero) | Nunito | `30px` / `44px` | 500 | `1.16` |
-| Page Title (`h1`) | Nunito | `24px` / `30px` | 500 | `1.22` |
-| Section Heading (`h2`) | Nunito | `20px` / `24px` | 500 | `1.3` |
+| Display (Hero) | Poppins Rounded | `30px` / `44px` | 500 | `1.16` |
+| Page Title (`h1`) | Poppins Rounded | `24px` / `30px` | 500 | `1.22` |
+| Section Heading (`h2`) | Poppins Rounded | `20px` / `24px` | 500 | `1.3` |
 | Card Title (`h3`) | Plus Jakarta Sans | `15px` / `16px` | 600 | `1.4` |
 | Chat & Body | Plus Jakarta Sans | `15px` / `16px` | 400 | `1.68` |
 | Navbar / Button / Control | Plus Jakarta Sans | `14px` | 600 | `1.2` |
@@ -302,7 +302,7 @@ Copy-ready foundation for `resources/css/app.css`:
 
 ```css
 :root {
-  --font-serif: "Nunito", sans-serif;
+  --font-serif: "Poppins Rounded", "Poppins", sans-serif;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* Soft Blue Clay Scale */

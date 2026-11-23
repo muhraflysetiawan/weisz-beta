@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-    --font-serif: "Nunito", sans-serif;
+    --font-serif: "Poppins Rounded", "Poppins", sans-serif;
     --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --font-display: "Nunito", sans-serif;
+    --font-display: "Poppins Rounded", "Poppins", sans-serif;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-    --font-serif: "Nunito", sans-serif;
+    --font-serif: "Poppins Rounded", "Poppins", sans-serif;
     --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-display: "Poppins Rounded", "Poppins", sans-serif;
 
     /* Soft Blue Clay Scale */
     --sky-50: #f3f7fb;
@@ -275,36 +276,82 @@ html.dark .clay-book:focus-visible {
     top: 0;
     left: 0;
     position: absolute;
-    background-color: var(--surface-clay);
     width: 100%;
     height: 100%;
     border-radius: inherit;
     cursor: pointer;
     transform-origin: 0% 50%;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.cover-front,
+.clay-book-cover-front {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--surface-clay);
     border: 1px solid var(--border-clay);
     border-left: 5px solid var(--sky-600);
     box-shadow: var(--clay-rest);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease, border-color 0.3s ease;
-    z-index: 5;
     padding: 22px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotateY(0deg);
+    pointer-events: auto;
+    transition: border-color 0.3s ease, background-color 0.18s ease;
 }
 
-html.dark .cover,
-html.dark .clay-book-cover {
+html.dark .cover-front,
+html.dark .clay-book-cover-front {
     background-color: var(--surface-clay);
     border-color: var(--border-clay);
     border-left-color: var(--sky-400);
     box-shadow: var(--clay-rest);
 }
 
+/* Bagian Dalam Cover: Polos Seperti Buku Asli */
+.cover-back,
+.clay-book-cover-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--surface-well);
+    background-image: linear-gradient(to right, rgba(24, 36, 51, 0.05) 0%, transparent 15%);
+    border: 1px solid var(--border-clay);
+    border-right: 5px solid var(--sky-600);
+    box-shadow: inset 2px 0 6px rgba(24, 36, 51, 0.04);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotateY(180deg);
+    pointer-events: none;
+    transition: border-color 0.3s ease, background-color 0.18s ease;
+}
+
+html.dark .cover-back,
+html.dark .clay-book-cover-back {
+    background-color: var(--surface-well);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, transparent 15%);
+    border-color: var(--border-clay);
+    border-right-color: var(--sky-400);
+    box-shadow: inset 2px 0 6px rgba(0, 0, 0, 0.35);
+}
+
 .book:hover .cover,
 .clay-book:hover .clay-book-cover,
 .book:focus-visible .cover,
 .clay-book:focus-visible .clay-book-cover {
-    transform: rotateY(-90deg);
+    transform: rotateY(-85deg);
     box-shadow: -8px 12px 24px -4px rgba(43, 116, 174, 0.22);
 }
 
@@ -313,6 +360,22 @@ html.dark .clay-book:hover .clay-book-cover,
 html.dark .book:focus-visible .cover,
 html.dark .clay-book:focus-visible .clay-book-cover {
     box-shadow: -8px 12px 28px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* Chatbot Demo Message Animation */
+@keyframes demoFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-demo-message {
+    animation: demoFadeInUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Alur Terstruktur Step Icon Masks */
@@ -791,6 +854,10 @@ html.dark {
     .clay-book:focus-visible,
     .cover,
     .clay-book-cover,
+    .cover-front,
+    .clay-book-cover-front,
+    .cover-back,
+    .clay-book-cover-back,
     .book:hover .cover,
     .clay-book:hover .clay-book-cover,
     .book:focus-visible .cover,

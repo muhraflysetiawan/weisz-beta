@@ -30,17 +30,21 @@
                 </div>
 
                 <div class="lg:col-span-5 w-full">
-                    <div class="clay-card-static p-5 sm:p-6 space-y-5">
+                    <div class="clay-card-static p-5 sm:p-6 space-y-4">
                         <div class="flex items-center justify-between pb-3 border-b border-[var(--border-clay)]">
-                            <p class="text-xs font-medium text-[var(--text-muted)]">{{ __('Pratinjau Ruang Refleksi') }}</p>
-                            <p class="clay-pill-blue text-[11px]">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                                <p class="text-xs font-medium text-[var(--text-muted)]">{{ __('Pratinjau Ruang Refleksi') }}</p>
+                            </div>
+                            <p id="demoCategoryBadge" class="clay-pill-blue text-[11px] transition-all duration-300">
                                 {{ __('Tekanan Akademik') }}
                             </p>
                         </div>
 
-                        <div class="space-y-5">
+                        <!-- Chat stream container with stable height -->
+                        <div id="demoChatMessages" class="min-h-[260px] flex flex-col justify-end space-y-3.5 transition-opacity duration-300">
                             <div class="flex justify-end w-full">
-                                <div class="max-w-[86%] rounded-2xl rounded-tr-sm bg-[var(--sky-100)] dark:bg-[var(--surface-gentle)] border border-[var(--sky-200)] dark:border-[var(--border-gentle)] text-[var(--sky-800)] dark:text-[var(--text-primary)] px-4 py-3 text-xs sm:text-[13.5px] leading-relaxed">
+                                <div class="max-w-[86%] rounded-2xl rounded-tr-sm bg-[var(--sky-100)] dark:bg-[var(--surface-gentle)] border border-[var(--sky-200)] dark:border-[var(--border-gentle)] text-[var(--sky-800)] dark:text-[var(--text-primary)] px-4 py-3 text-xs sm:text-[13.5px] leading-relaxed shadow-xs">
                                     &ldquo;{{ __('Jujur aku kewalahan banget sama skripsi dan ekspektasi keluarga belakangan ini. Pengin istirahat tapi rasa bersalah terus muncul...') }}&rdquo;
                                 </div>
                             </div>
@@ -60,12 +64,15 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-2 pt-2 border-t border-[var(--border)] pointer-events-none select-none" aria-hidden="true">
-                            <div class="flex-1 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)] px-3.5 py-2.5 text-xs text-[var(--text-muted)]">
-                                {{ __('Ceritakan apa yang dirasa...') }}
+                        <!-- Simulated Interactive Input Bar -->
+                        <div class="flex items-center gap-2 pt-2 border-t border-[var(--border-clay)] select-none">
+                            <div class="flex-1 rounded-xl bg-[var(--surface-well)] border border-[var(--border-clay)] px-3.5 py-2.5 text-xs text-[var(--text-primary)] flex items-center min-h-[42px] overflow-hidden">
+                                <p id="demoInputPlaceholder" class="text-[var(--text-muted)] truncate">{{ __('Ceritakan apa yang dirasa...') }}</p>
+                                <p id="demoInputText" class="truncate text-[var(--text-primary)] font-normal hidden"></p>
+                                <div id="demoInputCursor" class="w-1.5 h-3.5 bg-[var(--sky-600)] dark:bg-[var(--sky-400)] ml-0.5 animate-pulse hidden"></div>
                             </div>
-                            <div class="w-9 h-9 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-300)] text-white dark:text-[#14181d] flex items-center justify-center shrink-0">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <div id="demoSendBtn" class="w-9 h-9 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-300)] text-white dark:text-[#14181d] flex items-center justify-center shrink-0 transition-all duration-200 shadow-xs">
+                                <svg class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                                 </svg>
                             </div>
@@ -194,36 +201,42 @@
                         </svg>
                     </div>
 
-                    <!-- 3D Book Cover: Membuka ke kiri -80deg saat hover -->
+                    <!-- 3D Book Cover: Membuka ke kiri saat hover -->
                     <div class="cover clay-book-cover">
-                        <div class="space-y-3.5">
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="clay-icon-pill w-10 h-10 rounded-[14px] bg-[var(--surface-clay-blue)] border border-[var(--border-clay)] flex items-center justify-center text-[var(--text-accent)]">
-                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-                                    </svg>
+                        <!-- Cover Front: Tampak Depan Buku -->
+                        <div class="cover-front clay-book-cover-front">
+                            <div class="space-y-3.5">
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="clay-icon-pill w-10 h-10 rounded-[14px] bg-[var(--surface-clay-blue)] border border-[var(--border-clay)] flex items-center justify-center text-[var(--text-accent)]">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                        </svg>
+                                    </div>
+                                    <p class="clay-pill-well text-[11px]">
+                                        {{ $category->subcategories_count }} {{ __('Subkategori') }}
+                                    </p>
                                 </div>
-                                <p class="clay-pill-well text-[11px]">
-                                    {{ $category->subcategories_count }} {{ __('Subkategori') }}
-                                </p>
+
+                                <div class="space-y-1.5">
+                                    <h3 class="font-semibold text-base text-[var(--text-primary)] transition line-clamp-1">
+                                        {{ $category->name }}
+                                    </h3>
+                                    <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] leading-relaxed line-clamp-3">
+                                        {{ $category->description }}
+                                    </p>
+                                </div>
                             </div>
 
-                            <div class="space-y-1.5">
-                                <h3 class="font-semibold text-base text-[var(--text-primary)] transition line-clamp-1">
-                                    {{ $category->name }}
-                                </h3>
-                                <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] leading-relaxed line-clamp-3">
-                                    {{ $category->description }}
-                                </p>
+                            <div class="pt-3.5 mt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs font-semibold text-[var(--text-accent)]">
+                                <p class="clay-arrow-cue text-[11px] text-[var(--text-secondary)]">{{ __('Arahkan kursor untuk membuka') }}</p>
+                                <svg class="w-4 h-4 text-[var(--text-accent)]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                                </svg>
                             </div>
                         </div>
 
-                        <div class="pt-3.5 mt-3 border-t border-[var(--border-clay)] flex items-center justify-between text-xs font-semibold text-[var(--text-accent)]">
-                            <p class="clay-arrow-cue text-[11px] text-[var(--text-secondary)]">{{ __('Arahkan kursor untuk membuka') }}</p>
-                            <svg class="w-4 h-4 text-[var(--text-accent)]" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                            </svg>
-                        </div>
+                        <!-- Cover Back: Bagian Dalam Cover Polos Seperti Buku Asli -->
+                        <div class="cover-back clay-book-cover-back" aria-hidden="true"></div>
                     </div>
                 </a>
                 @endforeach
@@ -341,6 +354,206 @@
                 item.addEventListener('click', () => setAlurStep(item.getAttribute('data-step')));
             });
             setAlurStep('2');
+        }
+
+        // Interactive Live Chatbot Demonstration Simulation
+        const demoMessagesContainer = document.getElementById('demoChatMessages');
+        const demoCategoryBadge = document.getElementById('demoCategoryBadge');
+        const demoInputPlaceholder = document.getElementById('demoInputPlaceholder');
+        const demoInputText = document.getElementById('demoInputText');
+        const demoInputCursor = document.getElementById('demoInputCursor');
+        const demoSendBtn = document.getElementById('demoSendBtn');
+
+        if (demoMessagesContainer && demoCategoryBadge) {
+            const scenarios = [
+                {
+                    category: @json(__('Tekanan Akademik')),
+                    userMessage: @json(__('Jujur aku kewalahan banget sama skripsi dan ekspektasi keluarga belakangan ini. Pengin istirahat tapi rasa bersalah terus muncul...')),
+                    aiResponse: @json(__('Wajar sekali merasa lelah saat menanggung dua beban besar sekaligus. Tarik napas sebentar ya. Pikiranmu yang butuh jeda bukanlah sebuah kegagalan.')),
+                    promptTitle: @json(__('Cek pelan-pelan:')),
+                    promptBody: @json(__('Apakah rasa sesak ini lebih terasa di pundak atau dadamu saat ini?'))
+                },
+                {
+                    category: @json(__('Kesehatan Mental & Emosional')),
+                    userMessage: @json(__('Akhir-akhir ini rasanya gampang banget cemas dan overthinking hal-hal kecil yang belum tentu terjadi...')),
+                    aiResponse: @json(__('Kecemasan sering kali bekerja seperti alarm yang terlalu sensitif. Terima kasih sudah menyadari pola ini dan tidak memendamnya sendirian.')),
+                    promptTitle: @json(__('Latihan menepi sejenak:')),
+                    promptBody: @json(__('Jika pikiran yang berputar itu ditaruh di luar kepalamu sebentar, hal apa yang paling ingin kamu istirahatkan?'))
+                },
+                {
+                    category: @json(__('Relasi & Batasan Diri')),
+                    userMessage: @json(__('Aku selalu takut nolak permintaan orang lain karena takut dijauhi, padahal energiku sendiri sudah habis...')),
+                    aiResponse: @json(__('Menjaga perasaan orang lain memang mulia, tapi bukan dengan mengorbankan dirimu. Batasan yang sehat justru menjaga hubungan tetap awet.')),
+                    promptTitle: @json(__('Refleksi diri:')),
+                    promptBody: @json(__('Kapan terakhir kali kamu memilih dirimu sendiri tanpa merasa bersalah?'))
+                }
+            ];
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (prefersReducedMotion) {
+                // Static rendering for accessibility
+                const s = scenarios[0];
+                demoCategoryBadge.textContent = s.category;
+                demoMessagesContainer.innerHTML = `
+                    <div class="flex justify-end w-full">
+                        <div class="max-w-[86%] rounded-2xl rounded-tr-sm bg-[var(--sky-100)] dark:bg-[var(--surface-gentle)] border border-[var(--sky-200)] dark:border-[var(--border-gentle)] text-[var(--sky-800)] dark:text-[var(--text-primary)] px-4 py-3 text-xs sm:text-[13.5px] leading-relaxed shadow-xs">
+                            &ldquo;${s.userMessage}&rdquo;
+                        </div>
+                    </div>
+                    <div class="space-y-3 pl-1">
+                        <p class="text-xs sm:text-[14px] leading-relaxed text-[var(--text-primary)]">
+                            ${s.aiResponse}
+                        </p>
+                        <div class="weisz-card-gentle p-3.5 space-y-1">
+                            <p class="text-sm font-semibold text-[var(--text-accent)]">
+                                ${s.promptTitle}
+                            </p>
+                            <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] leading-relaxed">
+                                ${s.promptBody}
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            let scenarioIndex = 0;
+
+            const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+            async function typeUserText(text) {
+                if (demoInputPlaceholder) demoInputPlaceholder.classList.add('hidden');
+                if (demoInputText) {
+                    demoInputText.classList.remove('hidden');
+                    demoInputText.textContent = '';
+                }
+                if (demoInputCursor) demoInputCursor.classList.remove('hidden');
+
+                const charDelay = Math.max(14, Math.min(32, Math.floor(1800 / text.length)));
+
+                for (let i = 0; i <= text.length; i++) {
+                    if (demoInputText) {
+                        demoInputText.textContent = text.slice(0, i);
+                    }
+                    await wait(charDelay);
+                }
+            }
+
+            async function runChatLoop() {
+                while (true) {
+                    const s = scenarios[scenarioIndex];
+
+                    // 1. Setup scenario
+                    demoCategoryBadge.textContent = s.category;
+                    demoMessagesContainer.innerHTML = '';
+                    if (demoInputPlaceholder) demoInputPlaceholder.classList.remove('hidden');
+                    if (demoInputText) {
+                        demoInputText.classList.add('hidden');
+                        demoInputText.textContent = '';
+                    }
+                    if (demoInputCursor) demoInputCursor.classList.add('hidden');
+
+                    await wait(600);
+
+                    // 2. User starts typing: Show user typing bubble in chat + typing in input bar
+                    demoMessagesContainer.innerHTML = `
+                        <div id="demoUserTypingBubble" class="flex justify-end w-full animate-demo-message">
+                            <div class="rounded-2xl rounded-tr-sm bg-[var(--sky-100)]/70 dark:bg-[var(--surface-gentle)] border border-[var(--sky-200)]/70 dark:border-[var(--border-gentle)] px-3.5 py-2.5 flex items-center gap-2 shadow-xs">
+                                <p class="text-[11px] text-[var(--sky-800)] dark:text-[var(--text-secondary)] font-medium">{{ __('Kamu sedang mengetik') }}</p>
+                                <div class="flex items-center gap-1">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] animate-bounce [animation-delay:-0.3s]"></div>
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] animate-bounce [animation-delay:-0.15s]"></div>
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] animate-bounce"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    await typeUserText(s.userMessage);
+
+                    await wait(350);
+
+                    // 3. User sends: Send button animation
+                    if (demoSendBtn) {
+                        demoSendBtn.classList.add('scale-110', 'ring-2', 'ring-[var(--sky-400)]');
+                    }
+                    await wait(180);
+                    if (demoSendBtn) {
+                        demoSendBtn.classList.remove('scale-110', 'ring-2', 'ring-[var(--sky-400)]');
+                    }
+
+                    // Reset input bar
+                    if (demoInputText) {
+                        demoInputText.textContent = '';
+                        demoInputText.classList.add('hidden');
+                    }
+                    if (demoInputCursor) demoInputCursor.classList.add('hidden');
+                    if (demoInputPlaceholder) demoInputPlaceholder.classList.remove('hidden');
+
+                    // Replace user typing bubble with user message
+                    demoMessagesContainer.innerHTML = `
+                        <div class="flex justify-end w-full animate-demo-message">
+                            <div class="max-w-[86%] rounded-2xl rounded-tr-sm bg-[var(--sky-100)] dark:bg-[var(--surface-gentle)] border border-[var(--sky-200)] dark:border-[var(--border-gentle)] text-[var(--sky-800)] dark:text-[var(--text-primary)] px-4 py-3 text-xs sm:text-[13.5px] leading-relaxed shadow-xs">
+                                &ldquo;${s.userMessage}&rdquo;
+                            </div>
+                        </div>
+                    `;
+
+                    await wait(550);
+
+                    // 4. AI typing indicator
+                    const aiTypingHtml = `
+                        <div id="demoAiTypingBubble" class="flex items-center gap-2 pl-1 animate-demo-message">
+                            <div class="w-7 h-7 rounded-xl bg-[var(--sky-600)] dark:bg-[var(--sky-400)] text-white dark:text-[#121821] flex items-center justify-center font-bold text-xs shadow-xs">W</div>
+                            <div class="rounded-2xl rounded-tl-sm bg-[var(--surface-well)] border border-[var(--border-clay)] px-3.5 py-2.5 flex items-center gap-2 shadow-xs">
+                                <p class="text-[11px] text-[var(--text-secondary)] font-medium">{{ __('Weisz sedang merespon') }}</p>
+                                <div class="flex items-center gap-1">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] animate-bounce [animation-delay:-0.3s]"></div>
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] animate-bounce [animation-delay:-0.15s]"></div>
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[var(--sky-600)] dark:bg-[var(--sky-400)] animate-bounce"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    demoMessagesContainer.insertAdjacentHTML('beforeend', aiTypingHtml);
+
+                    await wait(1300);
+
+                    // 5. Replace AI typing with AI response
+                    const aiBubble = document.getElementById('demoAiTypingBubble');
+                    if (aiBubble) aiBubble.remove();
+
+                    const aiResponseHtml = `
+                        <div class="space-y-3 pl-1 animate-demo-message">
+                            <p class="text-xs sm:text-[14px] leading-relaxed text-[var(--text-primary)]">
+                                ${s.aiResponse}
+                            </p>
+                            <div class="weisz-card-gentle p-3.5 space-y-1">
+                                <p class="text-sm font-semibold text-[var(--text-accent)]">
+                                    ${s.promptTitle}
+                                </p>
+                                <p class="text-xs sm:text-[13px] text-[var(--text-secondary)] leading-relaxed">
+                                    ${s.promptBody}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    demoMessagesContainer.insertAdjacentHTML('beforeend', aiResponseHtml);
+
+                    // 6. Pause for visitor to read (5.5s)
+                    await wait(5500);
+
+                    // 7. Fade out before next scenario
+                    demoMessagesContainer.classList.add('opacity-0');
+                    await wait(350);
+                    demoMessagesContainer.classList.remove('opacity-0');
+
+                    scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+                }
+            }
+
+            runChatLoop();
         }
     });
 </script>
